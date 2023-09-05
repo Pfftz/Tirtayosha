@@ -5,15 +5,15 @@ using namespace std;
 int main()
 {
     //luas segitiga
-    int p, l;
+    int t, a;
     float luas;
 
-    cout << "panjang = ";
-    cin >> p;
-    cout << "lebar = ";
-    cin >> l;
+    cout << " alas = ";
+    cin >> a;
+    cout << " tinggi = ";
+    cin >> t;
 
-    luas = 0.5 * p * l;
+    luas = 0.5 * t * a;
 
     cout << "\n luas = " << luas << endl;
 
