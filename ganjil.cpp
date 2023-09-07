@@ -4,7 +4,7 @@ using namespace std;
 
 int main()
 {
-    //luas segitiga
+    // luas segitiga
     int t, a;
     float luas;
 

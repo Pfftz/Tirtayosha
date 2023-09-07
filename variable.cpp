@@ -11,6 +11,6 @@ int main()
     k = 2 * phi * r;
     l = phi * r * r;
 
-    cout << "luas = "<< l << "\nkeliling = "<< k << endl;
+    cout << "luas = " << l << "\nkeliling = " << k << endl;
     return 0;
 }
