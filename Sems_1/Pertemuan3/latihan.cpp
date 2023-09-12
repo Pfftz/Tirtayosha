@@ -12,17 +12,20 @@ void input()
     cout << "Masukkan NIM: ";
     cout << "NIM = A1B2C3010" << endl;
     nim = 'A1B2C3010';
-    if (hasil_nim = (int) (nim - '0') % 2 == 0){
+    if (hasil_nim = (int)(nim - '0') % 2 == 0)
+    {
         cout << "Nim Genap" << endl;
-    }else{
+    }
+    else
+    {
         cout << "Nim Ganjil" << endl;
     }
 
-    cout << "Masukkan Nama: "; 
-    getline(cin, nama);
+    cout << "Masukkan Nama: ";
+    cin >> nama;
     cout << "Masukkan Nilai UTS: ";
     cin >> uts;
-    cout << "Masukkan Nilai UAS: "; 
+    cout << "Masukkan Nilai UAS: ";
     cin >> uas;
     cout << "Masukkan Nilai Tugas: ";
     cin >> tugas;
@@ -70,7 +73,8 @@ int main()
     cout << "===============================" << endl;
     input();
     cout << "===============================" << endl;
-    cout << "NIM: " << "A1B2C3009" << endl;
+    cout << "NIM: "
+         << "A1B2C3009" << endl;
     cout << "Nama: " << nama << endl;
     cout << endl;
     if (uts <= uas && uts <= tugas)
