@@ -137,6 +137,18 @@ void cabang6()
         cout << "Nilai terbesar adalah: " << c << endl;
 }
 
+void cabang7()
+{
+    char jawab;
+    cout << "Apakah anda ingin keluar? (Y/N): ";
+    cin >> jawab;
+
+    if (jawab == 'Y' || jawab == 'y')
+        cout << "Anda keluar dari program" << endl;
+    else
+        cout << "Maaf, anda uncertain..." << endl;
+}
+
 int main()
 {
     // cabang();
@@ -148,6 +160,7 @@ int main()
     // cabang4();
     // cout << endl;
     // cabang5();
-    cabang6();
+    // cabang6();
+    cabang7();
     return 0;
 }
