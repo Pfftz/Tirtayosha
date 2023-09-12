@@ -196,7 +196,7 @@ void cabang11(){
 }
 
 void cabang12(){
-    int m = 26, n = 82;
+    int m = 100, n = 4;
 
     int max = (m > n) ? m : n;
     cout << "Nilai terbesar adalah: " << max << endl;
@@ -225,7 +225,7 @@ int main()
     // cabang10();
     // cabang11();
     // cout << endl;
-    cabang12();
+    // cabang12();
 
     return 0;
 }
