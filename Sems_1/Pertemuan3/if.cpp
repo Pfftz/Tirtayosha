@@ -29,7 +29,7 @@ void cabang2()
     // IF
     int nilai;
 
-    cout << "\n\nMasukkan nilai: ";
+    cout << "\nMasukkan nilai: ";
     cin >> nilai;
 
     if (nilai % 2 == 0)
@@ -46,7 +46,7 @@ void cabang3()
 {
     // SWITCH
     int gol;
-    cout << "Masukkan golongan: ";
+    cout << "\nMasukkan golongan: ";
     cin >> gol;
 
     switch (gol)
@@ -70,7 +70,7 @@ void cabang3()
 void cabang4()
 {
     int a, b, c, max;
-    cout << "Masukkan nilai a: ";
+    cout << "\nMasukkan nilai a: ";
     cin >> a;
     cout << "Masukkan nilai b: ";
     cin >> b;
@@ -96,7 +96,7 @@ void cabang4()
 void cabang5()
 {
     int a, b, c, min;
-    cout << "Masukkan nilai a: ";
+    cout << "\nMasukkan nilai a: ";
     cin >> a;
     cout << "Masukkan nilai b: ";
     cin >> b;
@@ -122,7 +122,7 @@ void cabang5()
 void cabang6()
 {
     int a, b, c;
-    cout << "Masukkan nilai a: ";
+    cout << "\nMasukkan nilai a: ";
     cin >> a;
     cout << "Masukkan nilai b: ";
     cin >> b;
@@ -140,13 +140,66 @@ void cabang6()
 void cabang7()
 {
     char jawab;
-    cout << "Apakah anda ingin keluar? (Y/N): ";
+    cout << "\nApakah anda ingin keluar? (Y/N): ";
     cin >> jawab;
 
     if (jawab == 'Y' || jawab == 'y')
         cout << "Anda keluar dari program" << endl;
     else
         cout << "Maaf, anda uncertain..." << endl;
+}
+
+void cabang8()
+{
+    string jawab;
+    cout << "\nApakah anda ingin keluar? (Y/N): ";
+    cin >> jawab;
+
+    if (jawab == "Yakin" || jawab == "yakin")
+        cout << "OK, anda yakin" << endl;
+    else
+        cout << "Maaf, anda uncertain..." << endl;
+}
+
+void cabang9()
+{
+    // cara simple if else
+    char status;
+    int grade;
+    cout << "\nMasukkan nilai: ";
+    cin >> grade;
+
+    // mendapatkan status pelajar
+    status = (grade >= 60) ? 'L' : 'G'; // ? = if, : = else
+    // print status
+    cout << "Status: " << status << endl;
+}
+
+void cabang10(){
+    // cara simple if else
+    string status;
+    int grade;
+    cout << "\nMasukkan nilai: ";
+    cin >> grade;
+
+    // mendapatkan status pelajar
+    status = (grade >= 60) ? "L" : "G"; // ? = if, : = else
+    // print status
+    cout << "Status: " << status << endl;
+}
+
+void cabang11(){
+    int m = 26, n = 82;
+
+    int min = (m < n) ? m : n;
+    cout << "Nilai terkecil adalah: " << min << endl;
+}
+
+void cabang12(){
+    int m = 26, n = 82;
+
+    int max = (m > n) ? m : n;
+    cout << "Nilai terbesar adalah: " << max << endl;
 }
 
 int main()
@@ -160,7 +213,19 @@ int main()
     // cabang4();
     // cout << endl;
     // cabang5();
+    // cout << endl;
     // cabang6();
-    cabang7();
+    // cout << endl;
+    // cabang7();
+    // cout << endl;
+    // cabang8();
+    // cout << endl;
+    // cabang9();
+    // cout << endl;
+    // cabang10();
+    // cabang11();
+    // cout << endl;
+    cabang12();
+
     return 0;
 }
