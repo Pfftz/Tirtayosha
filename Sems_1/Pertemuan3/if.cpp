@@ -175,7 +175,8 @@ void cabang9()
     cout << "Status: " << status << endl;
 }
 
-void cabang10(){
+void cabang10()
+{
     // cara simple if else
     string status;
     int grade;
@@ -188,14 +189,16 @@ void cabang10(){
     cout << "Status: " << status << endl;
 }
 
-void cabang11(){
+void cabang11()
+{
     int m = 26, n = 82;
 
     int min = (m < n) ? m : n;
     cout << "Nilai terkecil adalah: " << min << endl;
 }
 
-void cabang12(){
+void cabang12()
+{
     int m = 100, n = 4;
 
     int max = (m > n) ? m : n;
