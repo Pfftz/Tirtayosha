@@ -1,14 +1,6 @@
 #include <iostream>
 using namespace std;
 
-int factorial(int n)
-{
-    if (n == 0)
-        return 1;
-    else
-        return n * factorial(n - 1);
-}
-
 int main()
 {
     double alas, tinggi, luasSegitiga, panjang, lebar, luasPersegiPanjang;
@@ -58,16 +50,23 @@ int main()
             cout << endl;
             break;
         case 2:
-            cout << " Masukkan bilangan bulat positif untuk menghitung faktorial: ";
+        {
+            long double factorial = 1.0;
+            cout << " Masukkan Bilangan: ";
             cin >> n;
-
             if (n < 0)
-                cout << " Faktorial hanya didefinisikan untuk bilangan bulat positif." << endl;
+                cout << " Faktorial hanya didefinisikan untuk bilangan bulat positif.";
             else
-                cout << " Faktorial dari " << n << " adalah " << factorial(n) << endl;
-
+            {
+                for (int i = 1; i <= n; ++i)
+                {
+                    factorial *= i;
+                }
+                cout << " Factorial dari " << n << " = " << factorial;
+            }
             cout << endl;
             break;
+        }
         case 3:
             cout << " Masukkan panjang: ";
             cin >> panjang;
