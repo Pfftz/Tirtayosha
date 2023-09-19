@@ -42,11 +42,12 @@ void ulang4()
 }
 void ulang5()
 {
-    int b = 0;
+    int b = 5;
     do{
-
+        cout << "Data ke: " << b << endl;
+        b++;
     }
-    while (b = 0);
+    while (b > 10);
 }
 void ulang6()
 {
@@ -60,6 +61,8 @@ int main()
     // ulang1();
     // ulang2();
     // ulang3();
-    ulang4();
+    // ulang4();
+    // ulang5();
+    ulang6();
     return 0;
 }
