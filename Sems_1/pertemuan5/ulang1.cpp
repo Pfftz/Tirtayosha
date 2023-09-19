@@ -8,7 +8,7 @@ int main()
     bool menu = true;
 
     cout << "\n====================================" << endl;
-    cout << " Menu:" << endl;
+    cout << " Main Menu" << endl;
     cout << " 1. Menghitung Bilangan Prima" << endl;
     cout << " 2. Menghitung faktorial" << endl;
     cout << " 3. Menghitung luas persegi panjang" << endl;
@@ -51,7 +51,7 @@ int main()
             break;
         case 2:
         {
-            long double factorial = 1.0;
+            long double factorial = 1;
             cout << " Masukkan Bilangan: ";
             cin >> n;
             if (n < 0)
