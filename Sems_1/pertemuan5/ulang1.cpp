@@ -21,7 +21,10 @@ int main()
     cout << " 2. Menghitung faktorial" << endl;
     cout << " 3. Menghitung luas persegi panjang" << endl;
     cout << " 4. Menghitung luas segitiga" << endl;
-    cout << " 5. Keluar" << endl;
+    cout << " 5. Nested Loop" << endl;
+    cout << " 6. Nested Loop Terbalik" << endl;
+    cout << " 7. Prima Checker" << endl;
+    cout << " 8. Keluar" << endl;
     cout << "====================================" << endl;
 
     while (menu)
@@ -90,6 +93,64 @@ int main()
             cout << endl;
             break;
         case 5:
+            cout << " Bintang Kecil ke besar" << endl;
+            cout << " Masukkan Panjang Bintang: ";
+            cin >> n;
+            cout << endl;
+            for (int x = 0; x <= n; x++)
+            {
+                for (int y = 0; y < x; y++)
+                {
+                    cout << " *";
+                }
+                cout << endl;
+            }
+            cout << endl;
+            break;
+        case 6:
+        {
+            int b;
+            cout << "Masukkan bintang: ";
+            cin >> b;
+            cout << endl;
+            for (int i = b; i >= 1; i--)
+            {
+                for (int j = 1; j <= i; j++)
+                {
+                    cout << " * ";
+                }
+                cout << endl;
+            }
+            cout << endl;
+            break;
+        }
+        case 7:
+        {
+            int n;
+            bool isPrime = true;
+            cout << " Masukkan Bilangan : ";
+            cin >> n;
+            cout << endl;
+            for (int i = 2; i <= n - 1; i++)
+            {
+                if (n % i == 0)
+                {
+                    isPrime = false;
+                    break;
+                }
+            }
+            if (isPrime)
+            {
+                cout << " " << n << " adalah bilangan prima" << endl;
+            }
+            else
+            {
+                cout << " " << n << " bukan bilangan prima" << endl;
+            }
+            cout << endl;
+            break;
+        }
+        case 8:
             cout << " <<program selesai>>" << endl;
             exit(0);
         default:
