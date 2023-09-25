@@ -4,7 +4,7 @@ using namespace std;
 
 int main()
 {
-    int x, y, z;
+    int x, y, kpk = 0;
 
     cout << "Masukkan Bilangan ke-1\t: ";
     cin >> x;
@@ -12,10 +12,10 @@ int main()
     cin >> y;
     for (int r = 1; r <= y; r++)
     {
-        z = z + x;
-        if (z % y == 0)
+        kpk += x;
+        if (kpk % y == 0)
         {
-            cout << "\nKPK: " << z << endl;
+            cout << "\nKPK: " << kpk << endl;
             break;
         }
     }
