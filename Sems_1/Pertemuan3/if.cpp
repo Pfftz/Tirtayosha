@@ -83,9 +83,7 @@ void cabang4()
         else
             max = c;
 
-    else
-
-        if (b > c)
+    else if (b > c)
         max = b;
     else
         max = c;
