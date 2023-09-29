@@ -127,8 +127,45 @@ void latihan5()
     }
 }
 
+void latihan6()
+{
+    char grade;
+    int sks;
+    int angka_mutu = 0;
+
+    printf("Masukkan grade : ");
+    grade = getchar();
+    printf("Masukkan sks : ");
+    scanf("%i", &sks);
+
+    switch (grade)
+    {
+    case 'A':
+        angka_mutu = 4 * sks;
+        break;
+    case 'B':
+        angka_mutu = 3 * sks;
+        break;
+    case 'C':
+        angka_mutu = 2 * sks;
+        break;
+    case 'D':
+        angka_mutu = 1 * sks;
+        break;
+    case 'E':
+        angka_mutu = 0 * sks;
+        break;
+    default:
+        angka_mutu = 0;
+        break;
+    }
+    printf("\nGrade : %c\n", grade);
+    printf("\nSKS : %i\n", sks);
+    printf("\nAngka Mutu : %i\n", angka_mutu);
+}
+
 int main()
 {
-    latihan5();
+    latihan6();
     return 0;
 }
