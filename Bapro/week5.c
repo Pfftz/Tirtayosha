@@ -51,7 +51,8 @@ void latihan3()
     printf("%i\n", max);
 }
 
-void latihan4(){
+void latihan4()
+{
     int x;
     printf(" 1. Mau Ke Mana?\n");
     printf(" 2. Mau Apa?\n");
@@ -71,8 +72,63 @@ void latihan4(){
     }
 }
 
+void latihan5()
+{
+    int x;
+    printf(" 1. Mau Ke Mana?\n");
+    printf(" 2. Mau Apa?\n");
+    printf(" Pilih 1 atau 2? ");
+    scanf("%i", &x);
+    switch (x)
+    {
+    case 1:
+        printf("\n Anda akan Ke Yogya\n");
+        printf(" 1. Wisata belanja\n");
+        printf(" 2. Wisata kuliner\n");
+        printf(" 3. Wisata budaya\n");
+        printf(" Pilih 1, 2, atau 3? ");
+        scanf("%i", &x);
+        switch (x)
+        {
+        case 1:
+            printf(" Anda akan belanja di Malioboro\n");
+            break;
+        case 2:
+            printf(" Anda akan kuliner di Gudeg Yu Djum\n");
+            break;
+        case 3:
+            printf(" Anda akan budaya di Candi Borobodur\n");
+            break;
+        }
+        break;
+    case 2:
+        printf("\n Anda akan makan nasi gudeg \n");
+        printf(" 1. Sate-satean\n");
+        printf(" 2. Minuman\n");
+        printf(" 3. Camilan\n");
+        printf(" Pilih 1, 2, atau 3? ");
+        scanf("%i", &x);
+        switch (x)
+        {
+        case 1:
+            printf(" Anda akan makan Nasi Kucing\n");
+            break;
+        case 2:
+            printf(" Anda akan minum Kopi bara\n");
+            break;
+        case 3:
+            printf(" Anda akan makan ampiyang cokelat\n");
+            break;
+        }
+        break;
+    default:
+        printf(" Kurang Aqua\n");
+        break;
+    }
+}
+
 int main()
 {
-    latihan4();
+    latihan5();
     return 0;
 }
