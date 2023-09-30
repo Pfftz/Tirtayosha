@@ -4,30 +4,25 @@ using namespace std;
 void hitung_gaji(int golongan, int jam_lembur)
 {
     // Deklarasi variabel
-    int gaji_pokok, transport, lembur, total_gaji;
+    int gaji_pokok, transport, lembur, total_gaji, lembar;
 
     // Hitung gaji pokok dan transport
     switch (golongan)
     {
     case 1:
-        gaji_pokok = 3000000;
-        transport = 1000000;
+        gaji_pokok = 5500000;
+        transport = 900000;
+        lembar = 150000;
         break;
     case 2:
-        gaji_pokok = 4000000;
-        transport = 1500000;
+        gaji_pokok = 6500000;
+        transport = 1200000;
+        lembar = 180000;
         break;
     case 3:
-        gaji_pokok = 5000000;
-        transport = 2000000;
-        break;
-    case 4:
-        gaji_pokok = 6000000;
-        transport = 2500000;
-        break;
-    case 5:
-        gaji_pokok = 7000000;
-        transport = 3000000;
+        gaji_pokok = 7500000;
+        transport = 1500000;
+        lembar = 200000;
         break;
     default:
         cout << "Golongan tidak valid" << endl;
@@ -35,7 +30,15 @@ void hitung_gaji(int golongan, int jam_lembur)
     }
 
     // Hitung lembur
-    lembur = jam_lembur * 50000;
+    if (jam_lembur > 4)
+    {
+        cout << "Jam lembur tidak boleh lebih dari 4" << endl;
+        return;
+    }
+    else
+    {
+        lembur = jam_lembur * lembar;
+    }
 
     // Hitung total gaji
     total_gaji = gaji_pokok + transport + lembur;
