@@ -74,21 +74,22 @@ void arr6()
 void arr7()
 {
     int n;
-    int data[n];
     cout << "Masukkan jumlah data : ";
     cin >> n;
+
+    int data[n];
 
     for (int i = 0; i < n; i++)
     {
         cout << "Masukkan data ke-" << i + 1 << " : ";
         cin >> data[i];
     }
+
+    for (int i = 0; i < n; i++)
+    {
+        cout << "Data Ke-" << i + 1 << ": " << data[i] << endl;
+    }
 }
-void arr8() {}
-void arr9() {}
-void arr10() {}
-void arr11() {}
-void arr12() {}
 
 int main()
 {
