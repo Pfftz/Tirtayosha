@@ -1,13 +1,19 @@
 #include <iostream>
 
 using namespace std;
+int harga;
+float diskon, total, rate;
+char kode;
+
+void hitung(int harga, float rate){
+    diskon = rate * harga;
+    total = harga - diskon;
+    cout << "\nharga asli = " << harga << "\ndiskon = " << diskon << "\nTotal harga: " << total << endl;
+}
 
 int main()
 {
-    int harga;
-    float diskon, total;
-    char kode;
-
+    cout << "Program diskon" << endl;
     cout << "Masukkan harga barang: ";
     cin >> harga;
     cout << "Masukkan kode diskon: ";
@@ -16,27 +22,23 @@ int main()
     switch (kode)
     {
     case 'H':
-        diskon = 0.5 * harga;
-        total = harga - diskon;
-        cout << "\nharga asli = " << harga << "\ndiskon = " << diskon << "\nTotal harga: " << total << endl;
+        rate = 0.5;
+        hitung(harga, rate);
         break;
 
     case 'F':
-        diskon = 0.4 * harga;
-        total = harga - diskon;
-        cout << "\nharga asli = " << harga << "\ndiskon = " << diskon << "\nTotal harga: " << total << endl;
+        rate = 0.4;
+        hitung(harga, rate);
         break;
 
     case 'T':
-        diskon = 0.33 * harga;
-        total = harga - diskon;
-        cout << "\nharga asli = " << harga << "\ndiskon = " << diskon << "\nTotal harga: " << total << endl;
+        rate = 0.33;
+        hitung(harga, rate);
         break;
 
     case 'Q':
-        diskon = 0.25 * harga;
-        total = harga - diskon;
-        cout << "\nharga asli = " << harga << "\ndiskon = " << diskon << "\nTotal harga: " << total << endl;
+        rate = 0.25;
+        hitung(harga, rate);
         break;
 
     case 'Z':
