@@ -165,8 +165,69 @@ void menu5()
     cout << endl;
 }
 
-void menu6(){
+void menu6()
+{
+    int length;
+    cout << " Masukkan panjang array: ";
+    cin >> length;
 
+    char databelumurut[length];
+    for (int i = 0; i < length; i++)
+    {
+        cout << " Data ke-" << i + 1 << " : ";
+        cin >> databelumurut[i];
+    }
+
+    for (int i = 0; i < length; i++)
+    {
+        for (int j = 0; j < length - i - 1; j++)
+        {
+            if (databelumurut[j] < databelumurut[j + 1])
+            {
+                char temp = databelumurut[j];
+                databelumurut[j] = databelumurut[j + 1];
+                databelumurut[j + 1] = temp;
+            }
+        }
+    }
+    cout << "\n Angka setelah diurutkan: ";
+    for (int i = 0; i < length; i++)
+    {
+        cout << " " << databelumurut[i] << " ";
+    }
+    cout << endl;
+}
+
+void menu7()
+{
+    int split, length;
+cout << " Masukkan panjang array: ";
+cin >> length;
+cout << " Masukkan split: ";
+cin >> split;
+int arr1[length];
+for (int i = 0; i < length; i++)
+{
+    cout << " Data ke-" << i + 1 << " : ";
+    cin >> arr1[i];
+}
+int arr2[length - split];
+for (int i = split; i < length; i++)
+{
+    arr2[i - split] = arr1[i];
+}
+cout << " Array 1: ";
+for (int i = 0; i < split; i++)
+{
+    cout << arr1[i] << " ";
+}
+cout << endl;
+cout << " Array 2: ";
+for (int i = 0; i < length - split; i++)
+{
+    cout << arr2[i] << " ";
+}
+cout << endl;
 }
 
 int main()
@@ -182,7 +243,9 @@ int main()
         cout << " 3. Bubble sorting dinamis" << endl;
         cout << " 4. Bubble sorting dinamis terbalik" << endl;
         cout << " 5. Bubble sorting dinamis Huruf" << endl;
-        cout << " 6. Exit" << endl;
+        cout << " 6. Bubble sorting dinamis Huruf terbalik" << endl;
+        cout << " 7. Split array" << endl;
+        cout << " 8. Exit" << endl;
         cout << " Silahkan pilih menu: ";
         cin >> pilihan;
         cout << endl;
@@ -214,13 +277,21 @@ int main()
             system("cls");
             break;
         case 5:
+            // ascending
             menu5();
             cout << endl;
             system("pause");
             system("cls");
             break;
         case 6:
+            // descending
             menu6();
+            cout << endl;
+            system("pause");
+            system("cls");
+            break;
+        case 7:
+            menu7();
             cout << endl;
             system("pause");
             system("cls");
