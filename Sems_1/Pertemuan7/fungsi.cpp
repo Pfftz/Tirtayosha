@@ -201,33 +201,33 @@ void menu6()
 void menu7()
 {
     int split, length;
-cout << " Masukkan panjang array: ";
-cin >> length;
-cout << " Masukkan split: ";
-cin >> split;
-int arr1[length];
-for (int i = 0; i < length; i++)
-{
-    cout << " Data ke-" << i + 1 << " : ";
-    cin >> arr1[i];
-}
-int arr2[length - split];
-for (int i = split; i < length; i++)
-{
-    arr2[i - split] = arr1[i];
-}
-cout << " Array 1: ";
-for (int i = 0; i < split; i++)
-{
-    cout << arr1[i] << " ";
-}
-cout << endl;
-cout << " Array 2: ";
-for (int i = 0; i < length - split; i++)
-{
-    cout << arr2[i] << " ";
-}
-cout << endl;
+    cout << " Masukkan panjang array: ";
+    cin >> length;
+    cout << " Masukkan split: ";
+    cin >> split;
+    int arr1[length];
+    for (int i = 0; i < length; i++)
+    {
+        cout << " Data ke-" << i + 1 << " : ";
+        cin >> arr1[i];
+    }
+    int arr2[length - split];
+    for (int i = split; i < length; i++)
+    {
+        arr2[i - split] = arr1[i];
+    }
+    cout << "\n Array 1: ";
+    for (int i = 0; i < split; i++)
+    {
+        cout << arr1[i] << " ";
+    }
+    cout << endl;
+    cout << " Array 2: ";
+    for (int i = 0; i < length - split; i++)
+    {
+        cout << arr2[i] << " ";
+    }
+    cout << endl;
 }
 
 int main()
@@ -295,6 +295,9 @@ int main()
             cout << endl;
             system("pause");
             system("cls");
+            break;
+        case 8:
+            exit(0);
             break;
         default:
             cout << " Menu tidak tersedia" << endl;
