@@ -4,7 +4,8 @@
         "iostream": "cpp",
         "limits": "cpp",
         "random": "cpp",
-        "C1.C": "cpp"
+        "C1.C": "cpp",
+        "cmath": "cpp"
     },
     "editor.tokenColorCustomizations": {
         "[*Light*]": {
