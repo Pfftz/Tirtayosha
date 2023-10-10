@@ -205,24 +205,27 @@ void menu7()
     cin >> length;
     cout << " Masukkan split: ";
     cin >> split;
+
     int arr1[length];
     for (int i = 0; i < length; i++)
     {
         cout << " Data ke-" << i + 1 << " : ";
         cin >> arr1[i];
     }
+
     int arr2[length - split];
     for (int i = split; i < length; i++)
     {
         arr2[i - split] = arr1[i];
     }
+    
     cout << "\n Array 1: ";
     for (int i = 0; i < split; i++)
     {
         cout << arr1[i] << " ";
     }
-    cout << endl;
-    cout << " Array 2: ";
+    
+    cout << "\n Array 2: ";
     for (int i = 0; i < length - split; i++)
     {
         cout << arr2[i] << " ";
