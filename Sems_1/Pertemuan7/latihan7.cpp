@@ -25,13 +25,13 @@ float diskriminan(int a, int b, int c)
 {
     double hasil;
     hasil = sqrt((b * b) - (4 * a * c));
-    if (diskriminan > 0)
+    if (hasil > 0.0f)
     {
         hasil = sqrt((b * b) - (4 * a * c));
     }
     else
     {
-        hasil = 0;
+        hasil = 0.0f;
     }
     return hasil;
 }

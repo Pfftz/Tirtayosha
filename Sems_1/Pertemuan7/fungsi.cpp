@@ -1,5 +1,5 @@
 #include <iostream>
-#include <cmath>
+#include <math.h>
 
 using namespace std;
 
@@ -218,14 +218,53 @@ void menu7()
     {
         arr2[i - split] = arr1[i];
     }
-    
+
     cout << "\n Array 1: ";
     for (int i = 0; i < split; i++)
     {
         cout << arr1[i] << " ";
     }
-    
+
+    for (int i = 0; i < split; i++)
+    {
+        for (int j = 0; j < split - i - 1; j++)
+        {
+            if (arr1[j] > arr1[j + 1])
+            {
+                int temp = arr1[j];
+                arr1[j] = arr1[j + 1];
+                arr1[j + 1] = temp;
+            }
+        }
+    }
+
+    cout << "\n Array 1 terurut: ";
+    for (int i = 0; i < split; i++)
+    {
+        cout << arr1[i] << " ";
+    }
+
     cout << "\n Array 2: ";
+    for (int i = 0; i < length - split; i++)
+    {
+        cout << arr2[i] << " ";
+    }
+    cout << endl;
+
+    for (int i = 0; i < length - split; i++)
+    {
+        for (int j = 0; j < (length - split) - i - 1; j++)
+        {
+            if (arr2[j] > arr2[j + 1])
+            {
+                int temp = arr2[j];
+                arr2[j] = arr2[j + 1];
+                arr2[j + 1] = temp;
+            }
+        }
+    }
+
+    cout << "\n Array 2 terurut: ";
     for (int i = 0; i < length - split; i++)
     {
         cout << arr2[i] << " ";
