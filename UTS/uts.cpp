@@ -2,14 +2,39 @@
 int main()
 {
     int N;
-    int tabel[100];
     scanf("%d", &N);
+    int D[N][N], G[N][N], hasil[N][N];
     for (int i = 0; i < N; i++)
     {
-        scanf("%d", &tabel[i]);
+        for (int j = 0; j < N; j++)
+        {
+            scanf("%d", &D[i][j]);
+        }
     }
-    for (int i = N - 1; i >= 0; i--)
+    for (int i = 0; i < N; i++)
     {
-        printf("%d\n", tabel[i]);
+        for (int j = 0; j < N; j++)
+        {
+            scanf("%d", &G[i][j]);
+        }
+    }
+    for (int i = 0; i < N; i++)
+    {
+        for (int j = 0; j < N; j++)
+        {
+            hasil[i][j] = D[i][j] + G[i][j];
+        }
+    }
+    for (int i = 0; i < N; i++)
+    {
+        for (int j = 0; j < N; j++)
+        {
+            printf("%d", hasil[i][j]);
+            if (j + 1 < N)
+            {
+                printf(" ");
+            }
+        }
+        printf("\n");
     }
 }
