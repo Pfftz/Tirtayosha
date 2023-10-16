@@ -1,7 +1,10 @@
 #include <iostream>
 #include <iomanip>
 #include <cstdlib>
+#include <windows.h>
 using namespace std;
+
+HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
 
 void input(int xyz, string nama[], int kode[], string jenis[])
 {
@@ -66,7 +69,8 @@ void output(int xyz, string nama[], int kode[], string jenis[])
     cout << endl
          << "\n\tDaftar Data Hewan Peliharaan" << endl;
     cout << " ==============================================" << endl;
-    cout << " No\tNama                " << "Kode\tJenis" << endl;
+    cout << " No\tNama                "
+         << "Kode\tJenis" << endl;
     cout << " ==============================================" << endl;
     for (int g = 0; g < xyz; g++)
     {
@@ -79,8 +83,20 @@ void output(int xyz, string nama[], int kode[], string jenis[])
 int main()
 {
     int xyz;
-    cout << "\t<<<Program Penitipan Hewan>>>" << endl;
-    cout << "\t <<<Pet Care Synchro>>>" << endl;
+    string opening = R"(
+       _______    _______  ___________       ______        __        _______    _______      ___  ___  ___  ___  ________   
+      |   __ "\  /"     "|("     _   ")     /" _  "\      /""\      /"      \  /"     "|    |"  \/"  ||"  \/"  |("      "\  
+      (. |__) :)(: ______) )__/  \\__/     (: ( \___)    /    \    |:        |(: ______)     \   \  /  \   \  /  \___/   :) 
+      |:  ____/  \/    |      \\_ /         \/ \        /' /\  \   |_____/   ) \/    |        \\  \/    \\  \/     /  ___/  
+      (|  /      // ___)_     |.  |         //  \ _    //  __'  \   //      /  // ___)_       /\.  \    /   /     //  \__   
+     /|__/ \    (:      "|    \:  |        (:   _) \  /   /  \\  \ |:  __   \ (:      "|     /  \   \  /   /     (:   / "\  
+    (_______)    \_______)     \__|         \_______)(___/    \___)|__|  \___) \_______)    |___/\___||___/       \_______) 
+                                                                                                                            
+    )";
+    SetConsoleTextAttribute(h, 3); // biru
+    cout << endl
+         << opening << endl;
+    SetConsoleTextAttribute(h, 7); // putih
     cout << "\n\n Input Data Hewan yang Akan Dititipkan: ";
     cin >> xyz;
     string nama[xyz];
