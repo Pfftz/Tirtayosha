@@ -5,7 +5,8 @@
         "limits": "cpp",
         "random": "cpp",
         "C1.C": "cpp",
-        "cmath": "cpp"
+        "cmath": "cpp",
+        "iomanip": "cpp"
     },
     "editor.tokenColorCustomizations": {
         "[*Light*]": {

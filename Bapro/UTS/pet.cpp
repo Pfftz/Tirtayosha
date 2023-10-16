@@ -3,8 +3,6 @@
 #include <cstdlib>
 using namespace std;
 
-int xyz;
-
 void input(int xyz, string nama[], int kode[], string jenis[])
 {
     for (int o = 0; o < xyz; o++)
@@ -67,19 +65,20 @@ void output(int xyz, string nama[], int kode[], string jenis[])
 {
     cout << endl
          << "\n\tDaftar Data Hewan Peliharaan" << endl;
-    cout << " =============================================" << endl;
-    cout << " No\tNama               Kode \tJenis" << endl;
-    cout << " =============================================" << endl;
+    cout << " ==============================================" << endl;
+    cout << " No\tNama                " << "Kode\tJenis" << endl;
+    cout << " ==============================================" << endl;
     for (int g = 0; g < xyz; g++)
     {
-        cout << " " << g + 1 << "\t" << setw(15) << nama[g] << "\t" << kode[g] << "\t" << jenis[g]
+        cout << " " << g + 1 << "\t" << setw(20) << left << nama[g] << right << kode[g] << "\t    " << setw(10) << right << jenis[g]
              << endl;
     }
-    cout << "=============================================" << endl;
+    cout << " ==============================================" << endl;
 }
 
 int main()
 {
+    int xyz;
     cout << "\t<<<Program Penitipan Hewan>>>" << endl;
     cout << "\t <<<Pet Care Synchro>>>" << endl;
     cout << "\n\n Input Data Hewan yang Akan Dititipkan: ";
