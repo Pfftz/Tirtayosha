@@ -8,6 +8,7 @@ HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
 
 void input(int xyz, string nama[], int kode[], string jenis[])
 {
+    int pilih;
     for (int o = 0; o < xyz; o++)
     {
         cout << endl;
@@ -28,7 +29,6 @@ void input(int xyz, string nama[], int kode[], string jenis[])
         cout << "\t  7. Reptil" << endl;
         cout << "\t  8. Dragon" << endl;
         cout << "\t  Pilih Jenis Hewan : ";
-        int pilih;
         cin >> pilih;
         switch (pilih)
         {
