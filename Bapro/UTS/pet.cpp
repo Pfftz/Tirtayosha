@@ -1,11 +1,13 @@
 #include <iostream>
 #include <iomanip>
 #include <cstdlib>
-#include <windows.h>
+#include <windows.h> // Windows-specific library, may not work on all platforms
 using namespace std;
 
+// Get a handle for console output
 HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
 
+// Function to input pet data
 void input(int xyz, string nama[], int kode[], string jenis[])
 {
     int pilih;
@@ -17,7 +19,7 @@ void input(int xyz, string nama[], int kode[], string jenis[])
         cout << "\tNama Hewan " << o + 1 << ": ";
         cin >> nama[o];
         cout << "\tKode\t    : ";
-        kode[o] = rand() % (100 - 0 + 1) + 0;
+        kode[o] = rand() % (100 - 0 + 1) + 0; // Generate a random code for the pet
         cout << kode[o] << endl;
         cout << "\tJenis Hewan : " << endl;
         cout << "\t  1. Kucing" << endl;
@@ -64,6 +66,7 @@ void input(int xyz, string nama[], int kode[], string jenis[])
     }
 }
 
+// Function to output pet data in a table
 void output(int xyz, string nama[], int kode[], string jenis[])
 {
     cout << endl
@@ -93,10 +96,10 @@ int main()
     (_______)    \_______)     \__|         \_______)(___/    \___)|__|  \___) \_______)    |___/\___||___/       \_______) 
                                                                                                                             
     )";
-    SetConsoleTextAttribute(h, 3); // biru
+    SetConsoleTextAttribute(h, 3); // Set console text color to blue
     cout << endl
          << opening << endl;
-    SetConsoleTextAttribute(h, 7); // putih
+    SetConsoleTextAttribute(h, 7); // Set console text color to white
     cout << "\n\n Input Data Hewan yang Akan Dititipkan: ";
     cin >> xyz;
     string nama[xyz];
