@@ -2,7 +2,7 @@
 
 using namespace std;
 
-string hitungbonus(int total, int goods)
+void hitungbonus(int total, int goods)
 {
     string bonus;
     if (total >= 1000000 && goods >= 5)
@@ -21,7 +21,7 @@ string hitungbonus(int total, int goods)
     {
         bonus = "Tidak Ada";
     }
-    return bonus;
+    cout << "Bonus: " << bonus << endl;
 }
 int main()
 {
@@ -30,7 +30,7 @@ int main()
     cin >> total;
     cout << "Jumlah barang: ";
     cin >> goods;
-    cout << "Bonus: " << hitungbonus(total, goods) << endl;
+    hitungbonus(total, goods);
 
     return 0;
 }
