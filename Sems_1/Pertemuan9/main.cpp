@@ -31,16 +31,22 @@ void menu2(int *pn)
     cout << " Masukan nilai n: ";
     cin >> *pn;
 
-    for (int i = *pn; i >= 1; i--)
+    if (*pn % 2 == 0)
     {
-        if (i % 2 == 0)
+        cout << " ";
+        for (int i = *pn; i >= 2; i -= 2)
         {
-            *psum *= i;
             cout << i << " * ";
+            sum *= i;
         }
+        cout << endl;
+        cout << " Hasil: " << *psum << endl;
     }
-    cout << endl;
-    cout << "Hasil: " << *psum << endl;
+    else
+    {
+        cout << " Bukan bilangan genap" << endl;
+    }
+
     cout << endl;
     system("pause");
     system("cls");
@@ -67,7 +73,7 @@ void menu3(int *pn)
     {
         if (jumlah[i] > 0)
         {
-            cout << " Jumlah huruf " << (char)(i + 'a') << " adalah " << jumlah[i] << endl;
+            cout << " " << (char)(i + 'a') << " = " << jumlah[i] << endl;
         }
     }
     cout << endl;
@@ -79,7 +85,8 @@ void menu4(int *pn)
 {
     cout << " Masukkan nilai n: ";
     cin >> *pn;
-    string nama[*pn], temp2, nim[*pn], temp;
+    int nim[*pn], temp; 
+    string nama[*pn], temp2;
     for (int i = 0; i < *pn; i++)
     {
         cout << " Masukkan data mahasiswa ke-" << i + 1 << ": " << endl;
