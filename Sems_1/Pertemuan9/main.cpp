@@ -56,8 +56,8 @@ void menu3(int *pn)
 {
     cout << " Masukkan nilai n: ";
     cin >> *pn;
-    char huruf[*pn];
-    int jumlah[26];
+    char *huruf = new char[*pn];
+    int *jumlah = new int[26];
     for (int i = 0; i < 26; i++)
     {
         jumlah[i] = 0;
@@ -76,6 +76,9 @@ void menu3(int *pn)
             cout << " " << (char)(i + 'a') << " = " << jumlah[i] << endl;
         }
     }
+    delete[] huruf;
+    delete[] jumlah;
+
     cout << endl;
     system("pause");
     system("cls");
@@ -85,8 +88,10 @@ void menu4(int *pn)
 {
     cout << " Masukkan nilai n: ";
     cin >> *pn;
-    int nim[*pn], temp; 
-    string nama[*pn], temp2;
+    int *nim = new int[*pn];
+    string *nama = new string[*pn];
+    int temp;
+    string temp2;
     for (int i = 0; i < *pn; i++)
     {
         cout << " Masukkan data mahasiswa ke-" << i + 1 << ": " << endl;
@@ -120,6 +125,10 @@ void menu4(int *pn)
         cout << " (NIM: " << nim[i];
         cout << " Nama: " << nama[i] << ") " << endl;
     }
+
+    delete[] nim;
+    delete[] nama;
+
     cout << endl;
     system("pause");
     system("cls");
