@@ -34,7 +34,6 @@ int main()
     point1();
     cout << endl;
     int x = 10;
-    int *ptrX = &x; 
-    fungsiPtr(ptrX); 
+    fungsiPtr(&x); 
     return 0;
 }

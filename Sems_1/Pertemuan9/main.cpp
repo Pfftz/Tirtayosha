@@ -108,13 +108,13 @@ void menu4(int *pn)
         {
             if (nim[i] < nim[j])
             {
-                temp = nim[i];
-                nim[i] = nim[j];
-                nim[j] = temp;
+                temp = *(nim + i); // nim[i]
+                *(nim + i) = *(nim + j); // nim[i] = nim[j]
+                *(nim + j) = temp; // nim[j] = temp
 
-                temp2 = nama[i];
-                nama[i] = nama[j];
-                nama[j] = temp2;
+                temp2 = *(nama + i); // nama[i]
+                *(nama + i) = *(nama + j); // nama[i] = nama[j]
+                *(nama + j) = temp2; // nama[j] = temp2
             }
         }
     }
@@ -143,7 +143,7 @@ void menu5()
 int main()
 {
     int pilih, n;
-    int *ppil = &pilih, *pn = &n;
+    int *ppil = &pilih;
     bool menu = true;
     while (menu)
     {
@@ -165,13 +165,13 @@ int main()
             menu1();
             break;
         case 2:
-            menu2(pn);
+            menu2(&n);
             break;
         case 3:
-            menu3(pn);
+            menu3(&n);
             break;
         case 4:
-            menu4(pn);
+            menu4(&n);
             break;
         case 5:
             menu5();
