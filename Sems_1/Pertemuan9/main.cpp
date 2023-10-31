@@ -3,10 +3,6 @@
 
 using namespace std;
 
-int pilih, n;
-int *ppil = &pilih, *pn = &n;
-bool menu = true;
-
 void menu1()
 {
     float x1, x2, y1, y2, hasil;
@@ -28,7 +24,7 @@ void menu1()
     system("cls");
 }
 
-void menu2()
+void menu2(int *pn)
 {
     double sum = 1;
     double *psum = &sum;
@@ -50,7 +46,7 @@ void menu2()
     system("cls");
 }
 
-void menu3()
+void menu3(int *pn)
 {
     cout << " Masukkan nilai n: ";
     cin >> *pn;
@@ -79,18 +75,17 @@ void menu3()
     system("cls");
 }
 
-void menu4()
+void menu4(int *pn)
 {
     cout << " Masukkan nilai n: ";
     cin >> *pn;
-    int nim[*pn], temp;
-    string nama[*pn], temp2;
+    string nama[*pn], temp2, nim[*pn], temp;
     for (int i = 0; i < *pn; i++)
     {
         cout << " Masukkan data mahasiswa ke-" << i + 1 << ": " << endl;
-        cout << " NIM[" << i + 1 << "]    : ";
+        cout << " NIM[0]    : ";
         cin >> nim[i];
-        cout << " Nama[" << i + 1 << "]   : ";
+        cout << " Nama[1]   : ";
         cin >> nama[i];
         cout << endl;
     }
@@ -131,6 +126,9 @@ void menu5()
 
 int main()
 {
+    int pilih, n;
+    int *ppil = &pilih, *pn = &n;
+    bool menu = true;
     while (menu)
     {
         cout << "\n====================================" << endl;
@@ -143,21 +141,21 @@ int main()
         cout << "====================================" << endl;
         cout << endl;
         cout << " Masukkan pilihan: ";
-        cin >> pilih;
+        cin >> *ppil;
         cout << endl;
-        switch (pilih)
+        switch (*ppil)
         {
         case 1:
             menu1();
             break;
         case 2:
-            menu2();
+            menu2(pn);
             break;
         case 3:
-            menu3();
+            menu3(pn);
             break;
         case 4:
-            menu4();
+            menu4(pn);
             break;
         case 5:
             menu5();
