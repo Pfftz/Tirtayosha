@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 
 using namespace std;
 
@@ -105,8 +106,15 @@ void menu2()
         exit(0);
     }
 
-    cout << " Arrived time = " << arrived.jam << ":" << arrived.menit << ":" << arrived.detik << endl;
-    cout << " Departure time = " << departure.jam << ":" << departure.menit << ":" << departure.detik << endl;
+    cout << " Arrived time = "
+         << std::setw(2) << std::setfill('0') << arrived.jam << ":"
+         << std::setw(2) << std::setfill('0') << arrived.menit << ":"
+         << std::setw(2) << std::setfill('0') << arrived.detik << endl;
+
+    cout << " Departure time = "
+         << std::setw(2) << std::setfill('0') << departure.jam << ":"
+         << std::setw(2) << std::setfill('0') << departure.menit << ":"
+         << std::setw(2) << std::setfill('0') << departure.detik << endl;
     departure.jam -= arrived.jam;
     departure.menit -= arrived.menit;
     departure.detik -= arrived.detik;
@@ -116,10 +124,11 @@ void menu2()
     {
         departure.biaya = 3000;
     }
-    else if (departure.selisih > 3600)
+    else
     {
         departure.biaya = 3000;
-        departure.biaya += 3000; 
+        int extraHours = departure.selisih / 3600; // calculate the number of extra hours
+        departure.biaya += extraHours * 3000;      // add 3000 for each extra hour
     }
 
     cout << " Parking fee = " << departure.biaya << endl;
