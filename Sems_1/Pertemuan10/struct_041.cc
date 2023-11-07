@@ -65,6 +65,9 @@ void menu1(int *pn)
 
 void menu2()
 {
+    cout << " Program menghitung biaya parkir" << endl;
+    cout << endl;
+    cout << " +--------------------------------+" << endl;
     parkir arrived, departure;
     cout << " Input arrived time" << endl;
     cout << " Hour: ";
@@ -73,7 +76,9 @@ void menu2()
     cin >> arrived.menit;
     cout << " Second: ";
     cin >> arrived.detik;
+    cout << " +--------------------------------+" << endl;
     cout << endl;
+    cout << " +--------------------------------+" << endl;
     cout << " Input departure time" << endl;
     cout << " Hour: ";
     cin >> departure.jam;
@@ -81,6 +86,7 @@ void menu2()
     cin >> departure.menit;
     cout << " Second: ";
     cin >> departure.detik;
+    cout << " +--------------------------------+" << endl;
     cout << endl;
 
     if (departure.detik < arrived.detik)
