@@ -1,7 +1,11 @@
+// Abdulhadi Muntashir (3337230041)
 #include <iostream>
 #include <iomanip>
+#include <windows.h>
 
 using namespace std;
+
+HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
 
 struct mahasiswa
 {
@@ -58,6 +62,8 @@ void menu1(int *pn)
         cout << " Nama: " << data[i].nama << ") " << endl;
     }
 
+    delete[] data;
+
     cout << endl;
     system("pause");
     system("cls");
@@ -113,14 +119,14 @@ void menu2()
     }
 
     cout << " Arrived time = "
-         << std::setw(2) << std::setfill('0') << arrived.jam << ":"
-         << std::setw(2) << std::setfill('0') << arrived.menit << ":"
-         << std::setw(2) << std::setfill('0') << arrived.detik << endl;
+         << setw(2) << setfill('0') << arrived.jam << ":"
+         << setw(2) << setfill('0') << arrived.menit << ":"
+         << setw(2) << setfill('0') << arrived.detik << endl;
 
     cout << " Departure time = "
-         << std::setw(2) << std::setfill('0') << departure.jam << ":"
-         << std::setw(2) << std::setfill('0') << departure.menit << ":"
-         << std::setw(2) << std::setfill('0') << departure.detik << endl;
+         << setw(2) << setfill('0') << departure.jam << ":"
+         << setw(2) << setfill('0') << departure.menit << ":"
+         << setw(2) << setfill('0') << departure.detik << endl;
     departure.jam -= arrived.jam;
     departure.menit -= arrived.menit;
     departure.detik -= arrived.detik;
@@ -146,6 +152,14 @@ void menu2()
 void menu3()
 {
     cout << " Terima kasih telah menggunakan program ini" << endl;
+    SetConsoleTextAttribute(h, 15);
+    cout << "   ______    __          __        ______    " << endl;
+    cout << "  /\" _  \"\\  |\" \\        /\"\"\\      /    \" \\   " << endl;
+    cout << " (: ( \\___) ||  |      /    \\    // ____  \\  " << endl;
+    cout << "  \\/ \\      |:  |     /' /\\  \\  /  /    ) :) " << endl;
+    cout << "  //  \\ _   |.  |    //  __'  \\(: (____/ //  " << endl;
+    cout << " (:   _) \\  /\\  |\\  /   /  \\\\  \\        /   " << endl;
+    cout << "  \\_______)(__\\_|_)(___/    \\___)\"_____/    " << endl;
     exit(0);
 }
 
@@ -155,15 +169,17 @@ int main()
     bool menu = true;
     while (menu)
     {
+        SetConsoleTextAttribute(h, 11);
         cout << "\n====================================" << endl;
         cout << " Main Menu" << endl;
         cout << " 1. Mengurutkan nim mahasiswa descending" << endl;
-        cout << " 2. Mencari Jumlah biaya parkir dari selisih datang dan pergi" << endl;
+        cout << " 2. Menghitung biaya parkir" << endl;
         cout << " 3. Keluar" << endl;
         cout << "====================================" << endl;
         cout << endl;
         cout << " Masukkan pilihan: ";
         cin >> pilih;
+        SetConsoleTextAttribute(h, 7);
         cout << endl;
         switch (pilih)
         {
