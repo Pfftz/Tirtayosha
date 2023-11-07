@@ -1,4 +1,3 @@
-// Abdulhadi Muntashir (3337230041)
 #include <iostream>
 #include <iomanip>
 #include <windows.h>
@@ -18,6 +17,30 @@ struct parkir
     int jam, menit, detik;
     int selisih, biaya;
 };
+
+void welcome()
+{
+    string opening = R"(
+  ________  ___________  _______   ____  ____   ______  ___________  
+ /"       )("     _   ")/"      \ ("  _||_ " | /" _  "\("     _   ") 
+(:   \___/  )__/  \\__/|:        ||   (  ) : |(: ( \___))__/  \\__/  
+ \___  \       \\_ /   |_____/   )(:  |  | . ) \/ \        \\_ /     
+  __/  \\      |.  |    //      /  \\ \__/ //  //  \ _     |.  |     
+ /" \   :)     \:  |   |:  __   \  /\\ __ //\ (:   _) \    \:  |     
+(_______/       \__|   |__|  \___)(__________) \_______)    \__|     
+                                                                     
+)";
+    SetConsoleTextAttribute(h, 12);
+    cout << opening << endl;
+    SetConsoleTextAttribute(h, 7);
+    cout << "====================================" << endl;
+    cout << " Nama: Abdulhadi Muntashir" << endl;
+    cout << " NIM: 3337230041" << endl;
+    cout << "====================================" << endl;
+    cout << endl;
+    system("pause");
+    system("cls");
+}
 
 void menu1(int *pn)
 {
@@ -71,10 +94,11 @@ void menu1(int *pn)
 
 void menu2()
 {
+    parkir arrived, departure;
+    int diffJam, diffMenit, diffDetik;
     cout << " Program menghitung biaya parkir" << endl;
     cout << endl;
     cout << " +--------------------------------+" << endl;
-    parkir arrived, departure;
     cout << " Input arrived time" << endl;
     cout << " Hour: ";
     cin >> arrived.jam;
@@ -82,9 +106,7 @@ void menu2()
     cin >> arrived.menit;
     cout << " Second: ";
     cin >> arrived.detik;
-    cout << " +--------------------------------+" << endl;
     cout << endl;
-    cout << " +--------------------------------+" << endl;
     cout << " Input departure time" << endl;
     cout << " Hour: ";
     cin >> departure.jam;
@@ -95,29 +117,6 @@ void menu2()
     cout << " +--------------------------------+" << endl;
     cout << endl;
 
-    if (departure.detik < arrived.detik)
-    {
-        departure.detik += 60;
-        departure.menit--;
-    }
-    else if (departure.menit < arrived.menit)
-    {
-        departure.menit += 60;
-        departure.jam--;
-    }
-    else if (departure.jam < arrived.jam)
-    {
-        departure.jam += 24;
-    }
-    else if (departure.jam == arrived.jam && departure.menit == arrived.menit && departure.detik == arrived.detik)
-    {
-        cout << " Arrived time = " << arrived.jam << ":" << arrived.menit << ":" << arrived.detik << endl;
-        cout << " Departure time = " << departure.jam << ":" << departure.menit << ":" << departure.detik << endl;
-        cout << " Parking time = 0:0:0" << endl;
-        cout << " Parking fee = 0" << endl;
-        exit(0);
-    }
-
     cout << " Arrived time = "
          << setw(2) << setfill('0') << arrived.jam << ":"
          << setw(2) << setfill('0') << arrived.menit << ":"
@@ -127,11 +126,37 @@ void menu2()
          << setw(2) << setfill('0') << departure.jam << ":"
          << setw(2) << setfill('0') << departure.menit << ":"
          << setw(2) << setfill('0') << departure.detik << endl;
-    departure.jam -= arrived.jam;
-    departure.menit -= arrived.menit;
-    departure.detik -= arrived.detik;
-    cout << " Parking time = " << departure.jam << ":" << departure.menit << ":" << departure.detik << endl;
-    departure.selisih = departure.jam * 3600 + departure.menit * 60 + departure.detik;
+
+    if (departure.detik < arrived.detik)
+    {
+        departure.detik += 60;
+        departure.menit--;
+    }
+
+    diffDetik = departure.detik - arrived.detik;
+
+    if (departure.menit < arrived.menit)
+    {
+        departure.menit += 60;
+        departure.jam--;
+    }
+
+    diffMenit = departure.menit - arrived.menit;
+
+    if (departure.jam < arrived.jam)
+    {
+        departure.jam += 24;
+    }
+
+    diffJam = departure.jam - arrived.jam;
+
+    cout << " Parking time = "
+         << setw(2) << setfill('0') << diffJam << ":"
+         << setw(2) << setfill('0') << diffMenit << ":"
+         << setw(2) << setfill('0') << diffDetik << endl;
+
+    departure.selisih = diffJam * 3600 + diffMenit * 60 + diffDetik;
+
     if (departure.selisih <= 3600)
     {
         departure.biaya = 3000;
@@ -152,7 +177,7 @@ void menu2()
 void menu3()
 {
     cout << " Terima kasih telah menggunakan program ini" << endl;
-    SetConsoleTextAttribute(h, 15);
+    SetConsoleTextAttribute(h, 5);
     cout << "   ______    __          __        ______    " << endl;
     cout << "  /\" _  \"\\  |\" \\        /\"\"\\      /    \" \\   " << endl;
     cout << " (: ( \\___) ||  |      /    \\    // ____  \\  " << endl;
@@ -167,6 +192,7 @@ int main()
 {
     int pilih, n;
     bool menu = true;
+    welcome();
     while (menu)
     {
         SetConsoleTextAttribute(h, 11);
