@@ -150,12 +150,12 @@ void menu2()
 
     diffJam = departure.jam - arrived.jam;
 
-    cout << " Parking time = "
+    cout << " Parking time  = "
          << setw(2) << setfill('0') << diffJam << ":"
          << setw(2) << setfill('0') << diffMenit << ":"
          << setw(2) << setfill('0') << diffDetik << endl;
 
-    departure.selisih = diffJam * 3600 + diffMenit * 60 + diffDetik;
+    departure.selisih = diffJam * 3600 + diffMenit * 60 + diffDetik; // calculate the difference in seconds
 
     if (departure.selisih <= 3600)
     {
@@ -168,7 +168,7 @@ void menu2()
         departure.biaya += extraHours * 3000;      // add 3000 for each extra hour
     }
 
-    cout << " Parking fee = " << departure.biaya << endl;
+    cout << " Parking fee   = Rp." << departure.biaya << endl;
     cout << endl;
     system("pause");
     system("cls");
