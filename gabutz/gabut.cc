@@ -89,10 +89,18 @@ void mencarichardarikalimat(){
 int main()
 {
    
-    menghitungchardarikalimat();
-    cout << endl;
-    mencarichardarikalimat();
-    cout << endl;
-    gj();
+    // menghitungchardarikalimat();
+    // cout << endl;
+    // mencarichardarikalimat();
+    // cout << endl;
+    // gj();
+    string sentence;
+    cout << "Masukkan kalimat: ";
+    getline(cin, sentence);
+    string hasil(sentence);
+    cout << hasil << endl;
+    reverse(hasil.begin(), hasil.end());
+    cout << hasil << endl;
+
     return 0;
 }
