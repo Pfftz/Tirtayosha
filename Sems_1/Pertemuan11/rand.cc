@@ -1,4 +1,5 @@
 #include <iostream>
+#include <queue>
 
 using namespace std;
 
@@ -8,51 +9,43 @@ struct mahasiswa
     string nama;
 };
 
+struct compareNim
+{
+    bool operator()(const mahasiswa &a, const mahasiswa &b)
+    {
+        return a.nim > b.nim;
+    }
+};
+
 int main()
 {
     int n;
     cout << " Masukkan nilai n: ";
     cin >> n;
 
-    mahasiswa *data = new mahasiswa[n];
+    priority_queue<mahasiswa, vector<mahasiswa>, compareNim> data;
 
-    int temp;
-    string temp2;
     for (int i = 0; i < n; i++)
     {
+        mahasiswa mhs;
         cout << " Masukkan data mahasiswa ke-" << i + 1 << ": " << endl;
         cout << " NIM[0]    : ";
-        cin >> data[i].nim;
+        cin >> mhs.nim;
         cout << " Nama[1]   : ";
-        cin >> data[i].nama;
+        cin >> mhs.nama;
         cout << endl;
-    }
-
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = i + 1; j < n; j++)
-        {
-            if (data[i].nim < data[j].nim)
-            {
-                temp = data[i].nim;        // nim[i]
-                data[i].nim = data[j].nim; // nim[i] = nim[j]
-                data[j].nim = temp;        // nim[j] = temp
-
-                temp2 = data[i].nama;        // nama[i]
-                data[i].nama = data[j].nama; // nama[i] = nama[j]
-                data[j].nama = temp2;        // nama[j] = temp2
-            }
-        }
+        data.push(mhs);
     }
 
     cout << " Hasil akhir setelah diurutkan berdasarkan NIM adalah: " << endl;
-    for (int i = 0; i < n; i++)
+    while (!data.empty())
     {
-        cout << " (NIM: " << data[i].nim;
-        cout << " Nama: " << data[i].nama << ") " << endl;
+        mahasiswa mhs = data.top();
+        data.pop();
+        cout << " (NIM: " << mhs.nim;
+        cout << " Nama: " << mhs.nama << ") " << endl;
     }
 
-    delete[] data;
-
     cout << endl;
+    return 0;
 }
