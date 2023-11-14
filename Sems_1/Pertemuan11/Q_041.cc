@@ -65,15 +65,36 @@ void enqueue(int n)
     }
 }
 
+void dequeue()
+{
+    if (value.empty())
+    {
+        cout << "Queue is empty" << endl;
+        return;
+    }
+
+    value.pop();
+    cout << endl;
+}
+
 void tampil()
 {
     cout << " Hasil akhir setelah diurutkan berdasarkan NIM adalah: " << endl;
-    while (!value.empty())
+    auto copy = value; // Create a copy of the priority queue
+    if (copy.empty())
     {
-        mahasiswa mhs = value.top();
-        value.pop();
-        cout << " (NIM: " << mhs.nim;
+        cout << " Queue is empty\n\n"
+             << endl;
+        return;
+    }
+    int i = 1;
+    while (!copy.empty())
+    {
+        mahasiswa mhs = copy.top();
+        copy.pop();
+        cout << i << ". (NIM: " << mhs.nim;
         cout << " Nama: " << mhs.nama << ") " << endl;
+        i++;
     }
     cout << endl;
 }
@@ -81,10 +102,46 @@ void tampil()
 int main()
 {
     welcome();
-    int n;
-    cout << " Masukkan nilai n: ";
+    int n, menu;
+    bool loop = true;
+
+    cout << "\n\n Masukkan nilai n: ";
     cin >> n;
-    enqueue(n);
-    tampil();
+    cout << endl;
+    while (loop)
+    {
+        system("cls");
+        tampil();
+        cout << " 1. Menu enqueue" << endl; // Memasukkan data ke antrian
+        cout << " 2. Menu dequeue" << endl; // Menghapus top dari data antrian
+        cout << " 3. Exit" << endl;         // Keluar dari program
+        cout << " Silahkan masukkan menu: ";
+        cin >> menu;
+        cout << endl;
+        switch (menu)
+        {
+        case 1:
+            system("cls");
+            enqueue(n);
+            break;
+        case 2:
+            system("cls");
+            dequeue();
+            break;
+        case 3:
+            SetConsoleTextAttribute(h, 5);
+            cout << "   ______    __          __        ______    " << endl;
+            cout << "  /\" _  \"\\  |\" \\        /\"\"\\      /    \" \\   " << endl;
+            cout << " (: ( \\___) ||  |      /    \\    // ____  \\  " << endl;
+            cout << "  \\/ \\      |:  |     /' /\\  \\  /  /    ) :) " << endl;
+            cout << "  //  \\ _   |.  |    //  __'  \\(: (____/ //  " << endl;
+            cout << " (:   _) \\  /\\  |\\  /   /  \\\\  \\        /   " << endl;
+            cout << "  \\_______)(__\\_|_)(___/    \\___)\"_____/    " << endl;
+            exit(0);
+        default:
+            cout << "Menu tidak tersedia" << endl;
+            break;
+        }
+    }
     return 0;
 }
