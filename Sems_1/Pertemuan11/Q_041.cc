@@ -23,8 +23,7 @@ struct compareNim
     }
 };
 
-priority_queue<mahasiswa, vector<mahasiswa>, compareNim> value;
-;
+queue<mahasiswa> value;
 
 void welcome()
 {
@@ -52,17 +51,20 @@ void welcome()
 
 void enqueue(int n)
 {
-    for (int i = 0; i < n; i++)
+    if (value.size() >= n)
     {
-        mahasiswa mhs;
-        cout << " Masukkan data mahasiswa ke-" << i + 1 << ": " << endl;
-        cout << " NIM[0]    : ";
-        cin >> mhs.nim;
-        cout << " Nama[1]   : ";
-        cin >> mhs.nama;
-        cout << endl;
-        value.push(mhs);
+        cout << "Queue is full" << endl;
+        return;
+        system("pause");
     }
+    mahasiswa mhs;
+    cout << " Masukkan data mahasiswa: " << endl;
+    cout << " NIM[0]    : ";
+    cin >> mhs.nim;
+    cout << " Nama[1]   : ";
+    cin >> mhs.nama;
+    cout << endl;
+    value.push(mhs);
 }
 
 void dequeue()
@@ -71,14 +73,35 @@ void dequeue()
     {
         cout << "Queue is empty" << endl;
         return;
+        system("pause");
     }
 
     value.pop();
     cout << endl;
 }
 
-void tampil()
+void tampil(int n)
 {
+    mahasiswa *data = new mahasiswa[n];
+    int temp;
+    string temp2;
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = i + 1; j < n; j++)
+        {
+            if (data[i].nim < data[j].nim)
+            {
+                temp = data[i].nim;        // nim[i]
+                data[i].nim = data[j].nim; // nim[i] = nim[j]
+                data[j].nim = temp;        // nim[j] = temp
+
+                temp2 = data[i].nama;        // nama[i]
+                data[i].nama = data[j].nama; // nama[i] = nama[j]
+                data[j].nama = temp2;        // nama[j] = temp2
+            }
+        }
+    }
+
     cout << " Hasil akhir setelah diurutkan berdasarkan NIM adalah: " << endl;
     auto copy = value; // Create a copy of the priority queue
     if (copy.empty())
@@ -86,17 +109,32 @@ void tampil()
         cout << " Queue is empty\n\n"
              << endl;
         return;
+        system("pause");
     }
     int i = 1;
     while (!copy.empty())
     {
-        mahasiswa mhs = copy.top();
+        mahasiswa mhs = copy.front();
         copy.pop();
-        cout << i << ". (NIM: " << mhs.nim;
+        cout << " " << i << ". (NIM: " << mhs.nim;
         cout << " Nama: " << mhs.nama << ") " << endl;
         i++;
     }
     cout << endl;
+    delete[] data;
+}
+
+void menu3()
+{
+    cout << "--- Front, back, size ---\n\n";
+    cout << " Front: \n"
+         << " (NIM: " << value.front().nim << " Nama: " << value.front().nama << ") " << endl;
+    cout << " Back: \n"
+         << " (NIM: " << value.back().nim << " Nama: " << value.back().nama << ") " << endl;
+    cout << " Size: " << value.size() << endl;
+    cout << "------------------------\n\n";
+    cout << endl;
+    system("pause");
 }
 
 int main()
@@ -111,10 +149,11 @@ int main()
     while (loop)
     {
         system("cls");
-        tampil();
+        tampil(n);
         cout << " 1. Menu enqueue" << endl; // Memasukkan data ke antrian
         cout << " 2. Menu dequeue" << endl; // Menghapus top dari data antrian
-        cout << " 3. Exit" << endl;         // Keluar dari program
+        cout << " 3. Front, back, size" << endl;
+        cout << " 4. Exit" << endl; // Keluar dari program
         cout << " Silahkan masukkan menu: ";
         cin >> menu;
         cout << endl;
@@ -129,6 +168,10 @@ int main()
             dequeue();
             break;
         case 3:
+            system("cls");
+
+            break;
+        case 4:
             SetConsoleTextAttribute(h, 5);
             cout << "   ______    __          __        ______    " << endl;
             cout << "  /\" _  \"\\  |\" \\        /\"\"\\      /    \" \\   " << endl;
@@ -140,6 +183,7 @@ int main()
             exit(0);
         default:
             cout << "Menu tidak tersedia" << endl;
+            system("pause");
             break;
         }
     }
