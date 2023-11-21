@@ -90,7 +90,9 @@ void push(mahasiswa value[], int n)
     }
     else
     {
-        cout << "Stack Penuh" << endl;
+        cout << "\n\n +----------------------------------------------+" << endl;
+        cout << "                   Stack Penuh" << endl;
+        cout << " +----------------------------------------------+" << endl;
         system("pause");
     }
 }
