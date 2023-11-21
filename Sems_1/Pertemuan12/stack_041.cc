@@ -14,19 +14,31 @@ struct mahasiswa
     string nama;
 };
 
-mahasiswa *value;
-
 void welcome()
 {
     string opening = R"(
-:'#######::'##::::'##:'########:'##::::'##:'########:
-'##.... ##: ##:::: ##: ##.....:: ##:::: ##: ##.....::
- ##:::: ##: ##:::: ##: ##::::::: ##:::: ##: ##:::::::
- ##:::: ##: ##:::: ##: ######::: ##:::: ##: ######:::
- ##:'## ##: ##:::: ##: ##...:::: ##:::: ##: ##...::::
- ##:.. ##:: ##:::: ##: ##::::::: ##:::: ##: ##:::::::
-. ##### ##:. #######:: ########:. #######:: ########:
-:.....:..:::.......:::........:::.......:::........::
+          _____                _____                    _____                    _____                    _____          
+         /\    \              /\    \                  /\    \                  /\    \                  /\    \         
+        /::\    \            /::\    \                /::\    \                /::\    \                /::\____\        
+       /::::\    \           \:::\    \              /::::\    \              /::::\    \              /:::/    /        
+      /::::::\    \           \:::\    \            /::::::\    \            /::::::\    \            /:::/    /         
+     /:::/\:::\    \           \:::\    \          /:::/\:::\    \          /:::/\:::\    \          /:::/    /          
+    /:::/__\:::\    \           \:::\    \        /:::/__\:::\    \        /:::/  \:::\    \        /:::/____/           
+    \:::\   \:::\    \          /::::\    \      /::::\   \:::\    \      /:::/    \:::\    \      /::::\    \           
+  ___\:::\   \:::\    \        /::::::\    \    /::::::\   \:::\    \    /:::/    / \:::\    \    /::::::\____\________  
+ /\   \:::\   \:::\    \      /:::/\:::\    \  /:::/\:::\   \:::\    \  /:::/    /   \:::\    \  /:::/\:::::::::::\    \ 
+/::\   \:::\   \:::\____\    /:::/  \:::\____\/:::/  \:::\   \:::\____\/:::/____/     \:::\____\/:::/  |:::::::::::\____\
+\:::\   \:::\   \::/    /   /:::/    \::/    /\::/    \:::\  /:::/    /\:::\    \      \::/    /\::/   |::|~~~|~~~~~     
+ \:::\   \:::\   \/____/   /:::/    / \/____/  \/____/ \:::\/:::/    /  \:::\    \      \/____/  \/____|::|   |          
+  \:::\   \:::\    \      /:::/    /                    \::::::/    /    \:::\    \                    |::|   |          
+   \:::\   \:::\____\    /:::/    /                      \::::/    /      \:::\    \                   |::|   |          
+    \:::\  /:::/    /    \::/    /                       /:::/    /        \:::\    \                  |::|   |          
+     \:::\/:::/    /      \/____/                       /:::/    /          \:::\    \                 |::|   |          
+      \::::::/    /                                    /:::/    /            \:::\    \                |::|   |          
+       \::::/    /                                    /:::/    /              \:::\____\               \::|   |          
+        \::/    /                                     \::/    /                \::/    /                \:|   |          
+         \/____/                                       \/____/                  \/____/                  \|___|          
+                                                                                                                         
 )";
     SetConsoleTextAttribute(h, 13);
     cout << opening << endl;
@@ -52,7 +64,7 @@ bool isEmpty()
     }
 }
 
-bool isFull(int &max)
+bool isFull(int max)
 {
     if (top >= max)
     {
@@ -64,7 +76,7 @@ bool isFull(int &max)
     }
 }
 
-void push(int n)
+void push(mahasiswa value[], int n)
 {
     if (!isFull(n))
     {
@@ -87,8 +99,6 @@ void pop()
 {
     if (!isEmpty())
     {
-        cout << " Data mahasiswa yang dihapus adalah: " << endl;
-        cout << " (NIM: " << value[top - 1].nim << " Nama: " << value[top - 1].nama << ") " << endl; // change this to value[top - 1].nim and value[top - 1].nama
         top--;
     }
     else
@@ -98,12 +108,8 @@ void pop()
     }
 }
 
-void tampil(int n)
+void tampil(mahasiswa value[])
 {
-    mahasiswa *data = new mahasiswa[n];
-    int temp, i = 0;
-    string temp2;
-
     if (isEmpty())
     {
         cout << " Stack is empty" << endl;
@@ -111,56 +117,42 @@ void tampil(int n)
     }
     else
     {
-        // Create a copy of the stack
-        mahasiswa *copy = new mahasiswa[n];
-        for (int j = 0; j < n; j++)
-        {
-            copy[j] = value[j];
-        }
-
-        // Copy elements from the "stack" to the array
-        while (i < n)
-        {
-            data[i] = copy[top - 1 - i]; // top of the stack is the end of the array
-            i++;
-        }
-
         cout << " Stack sebelum diurutkan berdasarkan NIM adalah: " << endl;
-        for (int k = 0; k < i; k++)
+        for (int k = top - 1; k >= 0; k--)
         {
-            cout << " " << (k + 1) << ". (NIM: " << data[k].nim;
-            cout << " Nama: " << data[k].nama << ") " << endl;
+            cout << " " << (k + 1) << ". (NIM: " << value[k].nim;
+            cout << " Nama: " << value[k].nama << ") " << endl;
         }
         cout << endl;
 
         // Sort the array
-        for (int k = 0; k < i; k++)
+        mahasiswa *sorted = new mahasiswa[top];
+        for (int i = 0; i < top; i++)
         {
-            for (int j = k + 1; j < i; j++)
+            sorted[i] = value[i];
+        }
+        for (int i = 0; i < top; i++)
+        {
+            for (int j = i + 1; j < top; j++)
             {
-                if (data[k].nim < data[j].nim)
+                if (sorted[i].nim > sorted[j].nim)
                 {
-                    temp = data[k].nim;
-                    data[k].nim = data[j].nim;
-                    data[j].nim = temp;
-
-                    temp2 = data[k].nama;
-                    data[k].nama = data[j].nama;
-                    data[j].nama = temp2;
+                    mahasiswa temp = sorted[i];
+                    sorted[i] = sorted[j];
+                    sorted[j] = temp;
                 }
             }
         }
 
         // Print the sorted elements
         cout << " Stack setelah diurutkan berdasarkan NIM adalah: " << endl;
-        for (int k = 0; k < i; k++)
+        for (int k = top - 1; k >= 0; k--)
         {
-            cout << " " << (k + 1) << ". (NIM: " << data[k].nim;
-            cout << " Nama: " << data[k].nama << ") " << endl;
+            cout << " " << (top - k) << ". (NIM: " << sorted[k].nim;
+            cout << " Nama: " << sorted[k].nama << ") " << endl;
         }
+        delete[] sorted;
     }
-
-    delete[] data;
 }
 
 int main()
@@ -172,7 +164,7 @@ int main()
     cout << "\n\n ================================================" << endl;
     cout << " Masukkan jumlah mahasiswa yang ingin diinput : ";
     cin >> n;
-    value = new mahasiswa[n];
+    mahasiswa value[n];
     cout << " ================================================" << endl;
     cout << endl;
     system("pause");
@@ -181,7 +173,7 @@ int main()
         system("cls");
         SetConsoleTextAttribute(h, 9);
         cout << " +----------------------------------------------+" << endl;
-        tampil(n);
+        tampil(value);
         cout << " +----------------------------------------------+\n"
              << endl;
         cout << " 1. Push" << endl; // Memasukkan data ke antrian
@@ -194,7 +186,7 @@ int main()
         {
         case 1:
             system("cls");
-            push(n);
+            push(value, n);
             break;
         case 2:
             system("cls");
