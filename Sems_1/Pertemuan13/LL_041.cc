@@ -12,33 +12,46 @@ struct Node
     struct Node *next;
 };
 
-void tambahData(Node **head)
+void tambahData(Node **head, int *ptrN)
 {
-    // membuat node baru
-    Node *nodeBaru = new Node();
-    cout << " Masukkan no.rekening : ";
-    cin >> nodeBaru->rekening;
-    cout << " Masukkan nama : ";
-    cin >> nodeBaru->nama;
-    cout << " Masukkan alamat : ";
-    cin >> nodeBaru->alamat;
-    cout << " Masukkan saldo : ";
-    cin >> nodeBaru->saldo;
-    nodeBaru->next = NULL;
-    // jika linkedlist kosong, ditambahkan ke node.
-    if (*head == NULL)
-    {
-        (*head) = nodeBaru;
-        return;
-    }
-    //
-    Node *temp = (*head);
-    while (temp->next != NULL)
+    Node *temp = *head;
+    while (temp != NULL && temp->next != NULL)
     {
         temp = temp->next;
     }
-    temp->next = nodeBaru;
 
+    for (int i = 0; i < *ptrN; i++)
+    {
+        // membuat node baru
+        Node *nodeBaru = new Node();
+
+        cout << " Masukkan data nasabah baru : " << endl;
+        cout << endl;
+        cout << "   Masukkan no.rekening : ";
+        cin >> nodeBaru->rekening;
+        cout << "   Masukkan nama        : ";
+        cin >> nodeBaru->nama;
+        cout << "   Masukkan alamat      : ";
+        cin >> nodeBaru->alamat;
+        cout << "   Masukkan saldo       : ";
+        cin >> nodeBaru->saldo;
+        cout << endl;
+        nodeBaru->next = NULL;
+
+        if (temp == NULL)
+        {
+            *head = nodeBaru;
+        }
+        else
+        {
+            temp->next = nodeBaru;
+        }
+
+        temp = nodeBaru;
+    }
+    cout << " Data berhasil ditambahkan!!!" << endl;
+    cout << endl;
+    cout << " +-------------------------------------------------------------+" << endl;
     cout << endl;
     system("pause");
     system("cls");
@@ -57,13 +70,19 @@ void displayData(Node *head)
         return;
     }
     // jelajahi sampai node terakhir
+    int i = 1;
     while (temp != NULL)
     {
-        cout << temp->rekening << " ";
-        cout << temp->nama << " ";
-        cout << temp->alamat << " ";
-        cout << temp->saldo << " ";
+        cout << " Data Nasabah ke - " << i << endl;
+        cout << " +-------------------------------------------------------------+" << endl;
+        cout << " | No.rekening : " << temp->rekening << "                      |" << endl;
+        cout << " | Nama        : " << temp->nama << "                          |" << endl;
+        cout << " | Alamat      : " << temp->alamat << "                        |" << endl;
+        cout << " | Saldo       : " << temp->saldo << "                         |" << endl;
+        cout << " +-------------------------------------------------------------+" << endl;
+        cout << endl;
         temp = temp->next;
+        i++;
     }
     cout << endl;
     system("pause");
@@ -87,6 +106,10 @@ void hapusData(Node **head)
         Node *temp = (*head);
         (*head) = NULL;
         free(temp);
+        cout << " Node terlah terhapus" << endl;
+        cout << endl;
+        system("pause");
+        system("cls");
         return;
     }
 
@@ -220,10 +243,18 @@ void transaksi(Node **head)
     cin >> temp->saldo;
 }
 
+auto input = [](int *ptrN)
+{
+    cout << " Masukkan jumlah data yang ingin diinput : ";
+    cin >> *ptrN;
+    cout << endl;
+    return ptrN;
+};
+
 int main()
 {
     Node *head = NULL;
-    int pilih;
+    int pilih, n;
     bool loop = true;
     while (loop)
     {
@@ -246,7 +277,8 @@ int main()
         switch (pilih)
         {
         case 1:
-            tambahData(&head);
+            input(&n);
+            tambahData(&head, &n);
             break;
         case 2:
             hapusData(&head);
