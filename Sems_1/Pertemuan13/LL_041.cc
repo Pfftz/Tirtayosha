@@ -89,9 +89,8 @@ void displayData(Node *head)
     system("cls");
 }
 
-void hapusData(Node **head)
+auto hapusData = [](Node **head)
 {
-
     if (*head == NULL)
     {
         cout << " Linked list nya masih kosong" << endl;
@@ -106,7 +105,7 @@ void hapusData(Node **head)
         Node *temp = (*head);
         (*head) = NULL;
         free(temp);
-        cout << " Node terlah terhapus" << endl;
+        cout << " Node telah terhapus" << endl;
         cout << endl;
         system("pause");
         system("cls");
@@ -121,11 +120,7 @@ void hapusData(Node **head)
     Node *temp2 = temp->next;
     temp->next = NULL;
     free(temp2);
-
-    cout << endl;
-    system("pause");
-    system("cls");
-}
+};
 
 void ubahData(Node **head)
 {
@@ -164,25 +159,30 @@ void cariData(Node **head)
         return;
     }
 
-    if ((*head)->next == NULL)
-    {
-        cout << " Linked list nya hanya 1" << endl;
-        return;
-    }
+    int cariRekening;
+    cout << " Masukkan no.rekening yang dicari: ";
+    cin >> cariRekening;
 
-    Node *temp = (*head);
-    while (temp->next->next != NULL)
+    Node *temp = *head;
+    while (temp != NULL)
     {
+        if (temp->rekening == cariRekening)
+        {
+            cout << " Data ditemukan!!!" << endl;
+            cout << endl;
+            cout << " +-------------------------------------------------------------+" << endl;
+            cout << " | No.rekening : " << temp->rekening << "                      |" << endl;
+            cout << " | Nama        : " << temp->nama << "                          |" << endl;
+            cout << " | Alamat      : " << temp->alamat << "                        |" << endl;
+            cout << " | Saldo       : " << temp->saldo << "                         |" << endl;
+            cout << " +-------------------------------------------------------------+" << endl;
+            cout << endl;
+            return;
+        }
         temp = temp->next;
     }
-    cout << " Masukkan no.rekening : ";
-    cin >> temp->rekening;
-    cout << " Masukkan nama : ";
-    cin >> temp->nama;
-    cout << " Masukkan alamat : ";
-    cin >> temp->alamat;
-    cout << " Masukkan saldo : ";
-    cin >> temp->saldo;
+
+    cout << " Data dengan no.rekening " << cariRekening << " tidak ditemukan." << endl;
 }
 
 void cekSaldo(Node **head)
@@ -193,25 +193,22 @@ void cekSaldo(Node **head)
         return;
     }
 
-    if ((*head)->next == NULL)
-    {
-        cout << " Linked list nya hanya 1" << endl;
-        return;
-    }
+    int cariRekening;
+    cout << " Masukkan no.rekening yang dicari: ";
+    cin >> cariRekening;
 
-    Node *temp = (*head);
-    while (temp->next->next != NULL)
+    Node *temp = *head;
+    while (temp != NULL)
     {
+        if (temp->rekening == cariRekening)
+        {
+            cout << " Saldo untuk no.rekening " << cariRekening << " adalah: " << temp->saldo << endl;
+            return;
+        }
         temp = temp->next;
     }
-    cout << " Masukkan no.rekening : ";
-    cin >> temp->rekening;
-    cout << " Masukkan nama : ";
-    cin >> temp->nama;
-    cout << " Masukkan alamat : ";
-    cin >> temp->alamat;
-    cout << " Masukkan saldo : ";
-    cin >> temp->saldo;
+
+    cout << " Data dengan no.rekening " << cariRekening << " tidak ditemukan." << endl;
 }
 
 void transaksi(Node **head)
