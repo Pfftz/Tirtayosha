@@ -215,29 +215,51 @@ void transaksi(Node **head)
 {
     if (*head == NULL)
     {
-        cout << "linked list nya masih kosong" << endl;
+        cout << "Linked list nya masih kosong" << endl;
         return;
     }
 
-    if ((*head)->next == NULL)
-    {
-        cout << "linked list nya hanya 1" << endl;
-        return;
-    }
+    int cariRekening, pilih, transaksi;
+    cout << "Masukkan no.rekening yang dicari: ";
+    cin >> cariRekening;
 
-    Node *temp = (*head);
-    while (temp->next->next != NULL)
+    Node *temp = *head;
+    while (temp != NULL)
     {
+        if (temp->rekening == cariRekening)
+        {
+            cout << " 1. Tarik Tunai" << endl;
+            cout << " 2. Deposit" << endl;
+            cout << " Pilih transaksi: ";
+            cin >> pilih;
+            switch (pilih)
+            {
+            case 1:
+                cout << "Masukkan jumlah transaksi: ";
+                cin >> transaksi;
+                if (transaksi > temp->saldo)
+                {
+                    cout << "Saldo tidak cukup untuk transaksi ini." << endl;
+                    return;
+                }
+                temp->saldo -= transaksi; // subtract the transaction amount from the balance
+                cout << "Transaksi berhasil! Saldo sekarang: " << temp->saldo << endl;
+                return;
+            case 2:
+                cout << "Masukkan jumlah transaksi: ";
+                cin >> transaksi;
+                temp->saldo += transaksi; // add the transaction amount to the balance
+                cout << "Transaksi berhasil! Saldo sekarang: " << temp->saldo << endl;
+                return;
+            default:
+                cout << "Pilihan tidak tersedia" << endl;
+                return;
+            }
+        }
         temp = temp->next;
     }
-    cout << "Masukkan no.rekening : ";
-    cin >> temp->rekening;
-    cout << "Masukkan nama : ";
-    cin >> temp->nama;
-    cout << "Masukkan alamat : ";
-    cin >> temp->alamat;
-    cout << "Masukkan saldo : ";
-    cin >> temp->saldo;
+
+    cout << "Data dengan no.rekening " << cariRekening << " tidak ditemukan." << endl;
 }
 
 auto input = [](int *ptrN)
