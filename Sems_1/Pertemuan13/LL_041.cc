@@ -52,9 +52,6 @@ void tambahData(Node **head, int *ptrN)
     cout << "  Data berhasil ditambahkan!!!" << endl;
     cout << endl;
     cout << " +-------------------------------------------------------------+" << endl;
-    cout << endl;
-    system("pause");
-    system("cls");
 }
 
 void displayData(Node *head)
@@ -82,16 +79,13 @@ void displayData(Node *head)
         temp = temp->next;
         i++;
     }
-    cout << endl;
-    system("pause");
-    system("cls");
 }
 
 auto hapusData = [](Node **head)
 {
     if (*head == NULL)
     {
-        cout << " Linked list nya masih kosong" << endl;
+        cout << "  Linked list nya masih kosong" << endl;
         return;
     }
 
@@ -99,8 +93,8 @@ auto hapusData = [](Node **head)
     {
         Node *temp = (*head);
         (*head) = NULL;
-        free(temp);
-        cout << " Node telah terhapus" << endl;
+        delete temp;
+        cout << "  Node telah terhapus" << endl;
         return;
     }
 
@@ -111,7 +105,8 @@ auto hapusData = [](Node **head)
     }
     Node *temp2 = temp->next;
     temp->next = NULL;
-    free(temp2);
+    delete temp2;
+    cout << "  Node telah terhapus" << endl;
 };
 
 void ubahData(Node **head)
@@ -314,16 +309,17 @@ int main()
     while (loop)
     {
         cout << " +-------------------------------------------------------------+" << endl;
-        cout << " |                      PT. Bank Riba                          |" << endl;
+        cout << " |                        PT. Bank Riba                        |" << endl;
         cout << " +-------------------------------------------------------------+" << endl;
         cout << " |Menu :                                                       |" << endl;
         cout << " |1. Input Data Nasabah(Input no.rekening, nama, alamat, saldo)|" << endl;
         cout << " |2. Hapus Data Nasabah(Hapus data berdasarkan no.rekening)    |" << endl;
-        cout << " |3. Transaksi(Deposit dan tarik tunai)                        |" << endl;
-        cout << " |4. Cek Saldo                                                 |" << endl;
+        cout << " |3. Update Data Nasabah                                       |" << endl;
+        cout << " |4. Transaksi(Deposit dan tarik tunai)                        |" << endl;
         cout << " |5. Tampilkan Daftar Nasabah                                  |" << endl;
-        cout << " |6. Cari Data Nasabah                                         |" << endl;
-        cout << " |7. Keluar                                                    |" << endl;
+        cout << " |6. Cek Saldo                                                 |" << endl;
+        cout << " |7. Cari Data Nasabah                                         |" << endl;
+        cout << " |8. Keluar                                                    |" << endl;
         cout << " +-------------------------------------------------------------+" << endl;
         cout << "  Pilih Menu : ";
         cin >> pilih;
@@ -345,13 +341,13 @@ int main()
             system("cls");
             break;
         case 3:
-            transaksi(&head);
+            ubahData(&head);
             cout << endl;
             system("pause");
             system("cls");
             break;
         case 4:
-            cekSaldo(&head);
+            transaksi(&head);
             cout << endl;
             system("pause");
             system("cls");
@@ -363,12 +359,18 @@ int main()
             system("cls");
             break;
         case 6:
-            cariData(&head);
+            cekSaldo(&head);
             cout << endl;
             system("pause");
             system("cls");
             break;
         case 7:
+            cariData(&head);
+            cout << endl;
+            system("pause");
+            system("cls");
+            break;
+        case 8:
             cout << endl;
             SetConsoleTextAttribute(h, 5);
             cout << "   ______    __          __        ______    " << endl;
