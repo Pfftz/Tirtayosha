@@ -1,6 +1,9 @@
 #include <iostream>
+#include <windows.h>
 
 using namespace std;
+
+HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
 
 struct Node
 {
@@ -13,13 +16,13 @@ void tambahData(Node **head)
 {
     // membuat node baru
     Node *nodeBaru = new Node();
-    cout << "Masukkan no.rekening : ";
+    cout << " Masukkan no.rekening : ";
     cin >> nodeBaru->rekening;
-    cout << "Masukkan nama : ";
+    cout << " Masukkan nama : ";
     cin >> nodeBaru->nama;
-    cout << "Masukkan alamat : ";
+    cout << " Masukkan alamat : ";
     cin >> nodeBaru->alamat;
-    cout << "Masukkan saldo : ";
+    cout << " Masukkan saldo : ";
     cin >> nodeBaru->saldo;
     nodeBaru->next = NULL;
     // jika linkedlist kosong, ditambahkan ke node.
@@ -35,6 +38,10 @@ void tambahData(Node **head)
         temp = temp->next;
     }
     temp->next = nodeBaru;
+
+    cout << endl;
+    system("pause");
+    system("cls");
 }
 
 void displayData(Node *head)
@@ -43,7 +50,10 @@ void displayData(Node *head)
 
     if (temp == NULL)
     {
-        cout << "Linkedlist masih kosong" << endl;
+        cout << " Linkedlist masih kosong" << endl;
+        cout << endl;
+        system("pause");
+        system("cls");
         return;
     }
     // jelajahi sampai node terakhir
@@ -56,6 +66,8 @@ void displayData(Node *head)
         temp = temp->next;
     }
     cout << endl;
+    system("pause");
+    system("cls");
 }
 
 void hapusData(Node **head)
@@ -63,7 +75,10 @@ void hapusData(Node **head)
 
     if (*head == NULL)
     {
-        cout << "linked list nya masih kosong" << endl;
+        cout << " Linked list nya masih kosong" << endl;
+        cout << endl;
+        system("pause");
+        system("cls");
         return;
     }
 
@@ -83,19 +98,23 @@ void hapusData(Node **head)
     Node *temp2 = temp->next;
     temp->next = NULL;
     free(temp2);
+
+    cout << endl;
+    system("pause");
+    system("cls");
 }
 
 void ubahData(Node **head)
 {
     if (*head == NULL)
     {
-        cout << "linked list nya masih kosong" << endl;
+        cout << " Linked list nya masih kosong" << endl;
         return;
     }
 
     if ((*head)->next == NULL)
     {
-        cout << "linked list nya hanya 1" << endl;
+        cout << " Linked list nya hanya 1" << endl;
         return;
     }
 
@@ -104,13 +123,13 @@ void ubahData(Node **head)
     {
         temp = temp->next;
     }
-    cout << "Masukkan no.rekening : ";
+    cout << " Masukkan no.rekening : ";
     cin >> temp->rekening;
-    cout << "Masukkan nama : ";
+    cout << " Masukkan nama : ";
     cin >> temp->nama;
-    cout << "Masukkan alamat : ";
+    cout << " Masukkan alamat : ";
     cin >> temp->alamat;
-    cout << "Masukkan saldo : ";
+    cout << " Masukkan saldo : ";
     cin >> temp->saldo;
 }
 
@@ -118,13 +137,13 @@ void cariData(Node **head)
 {
     if (*head == NULL)
     {
-        cout << "linked list nya masih kosong" << endl;
+        cout << " Linked list nya masih kosong" << endl;
         return;
     }
 
     if ((*head)->next == NULL)
     {
-        cout << "linked list nya hanya 1" << endl;
+        cout << " Linked list nya hanya 1" << endl;
         return;
     }
 
@@ -133,13 +152,13 @@ void cariData(Node **head)
     {
         temp = temp->next;
     }
-    cout << "Masukkan no.rekening : ";
+    cout << " Masukkan no.rekening : ";
     cin >> temp->rekening;
-    cout << "Masukkan nama : ";
+    cout << " Masukkan nama : ";
     cin >> temp->nama;
-    cout << "Masukkan alamat : ";
+    cout << " Masukkan alamat : ";
     cin >> temp->alamat;
-    cout << "Masukkan saldo : ";
+    cout << " Masukkan saldo : ";
     cin >> temp->saldo;
 }
 
@@ -147,13 +166,13 @@ void cekSaldo(Node **head)
 {
     if (*head == NULL)
     {
-        cout << "linked list nya masih kosong" << endl;
+        cout << " Linked list nya masih kosong" << endl;
         return;
     }
 
     if ((*head)->next == NULL)
     {
-        cout << "linked list nya hanya 1" << endl;
+        cout << " Linked list nya hanya 1" << endl;
         return;
     }
 
@@ -162,13 +181,13 @@ void cekSaldo(Node **head)
     {
         temp = temp->next;
     }
-    cout << "Masukkan no.rekening : ";
+    cout << " Masukkan no.rekening : ";
     cin >> temp->rekening;
-    cout << "Masukkan nama : ";
+    cout << " Masukkan nama : ";
     cin >> temp->nama;
-    cout << "Masukkan alamat : ";
+    cout << " Masukkan alamat : ";
     cin >> temp->alamat;
-    cout << "Masukkan saldo : ";
+    cout << " Masukkan saldo : ";
     cin >> temp->saldo;
 }
 
@@ -203,9 +222,10 @@ void transaksi(Node **head)
 
 int main()
 {
+    Node *head = NULL;
     int pilih;
-    bool menu = true;
-    while (menu)
+    bool loop = true;
+    while (loop)
     {
         cout << " +-------------------------------------------------------------+" << endl;
         cout << " |                        PT. Bank Riba                        |" << endl;
@@ -218,40 +238,48 @@ int main()
         cout << " |5. Tampilkan Daftar Nasabah                                  |" << endl;
         cout << " |6. Cari Data Nasabah                                         |" << endl;
         cout << " |7. Keluar                                                    |" << endl;
-        cout << " |Pilih Menu : ";
-        cin >> pilih;
-        cout << " |                                                             |" << endl;
-        cout << endl;
         cout << " +-------------------------------------------------------------+" << endl;
+        cout << "  Pilih Menu : ";
+        cin >> pilih;
+        cout << " +-------------------------------------------------------------+" << endl;
+        cout << endl;
         switch (pilih)
         {
         case 1:
-            cout << "Input Data Nasabah" << endl;
+            tambahData(&head);
             break;
         case 2:
-            cout << "Hapus Data Nasabah" << endl;
+            hapusData(&head);
             break;
         case 3:
-            cout << "Transaksi" << endl;
+            transaksi(&head);
             break;
         case 4:
-            cout << "Cek Saldo" << endl;
+            cekSaldo(&head);
             break;
         case 5:
-            cout << "Tampilkan Daftar Nasabah" << endl;
+            displayData(head);
             break;
         case 6:
-            cout << "Cari Data Nasabah" << endl;
+            cariData(&head);
             break;
         case 7:
-            cout << "Keluar" << endl;
-            menu = false;
+            cout << endl;
+            SetConsoleTextAttribute(h, 5);
+            cout << "   ______    __          __        ______    " << endl;
+            cout << "  /\" _  \"\\  |\" \\        /\"\"\\      /    \" \\   " << endl;
+            cout << " (: ( \\___) ||  |      /    \\    // ____  \\  " << endl;
+            cout << "  \\/ \\      |:  |     /' /\\  \\  /  /    ) :) " << endl;
+            cout << "  //  \\ _   |.  |    //  __'  \\(: (____/ //  " << endl;
+            cout << " (:   _) \\  /\\  |\\  /   /  \\\\  \\        /   " << endl;
+            cout << "  \\_______)(__\\_|_)(___/    \\___)\"_____/    " << endl;
+            loop = false;
             break;
         default:
-            cout << "Menu tidak tersedia" << endl;
+            cout << " Menu tidak tersedia" << endl;
             break;
         }
-        cout << endl;
-        return 0;
     }
+    cout << endl;
+    return 0;
 }
