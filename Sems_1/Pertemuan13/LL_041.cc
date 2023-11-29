@@ -354,13 +354,13 @@ void transaksi(Node **head)
                 }
                 temp->saldo -= transaksi; // subtract the transaction amount from the balance
                 cout << "  Transaksi berhasil! Saldo sekarang: Rp" << temp->saldo << endl;
-                break;
+                return;
             case 2:
                 cout << "  Masukkan jumlah transaksi: ";
                 cin >> transaksi;
                 temp->saldo += transaksi; // add the transaction amount to the balance
                 cout << "  Transaksi berhasil! Saldo sekarang: Rp" << temp->saldo << endl;
-                break;
+                return;
             default:
                 cout << "  Pilihan tidak tersedia" << endl;
                 break;
