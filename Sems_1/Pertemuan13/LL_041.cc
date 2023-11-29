@@ -77,7 +77,7 @@ void tambahData(Node **head, int *ptrN)
         cin >> nodeBaru->nama;
         cout << "    Masukkan alamat      : ";
         cin >> nodeBaru->alamat;
-        cout << "    Masukkan saldo       : ";
+        cout << "    Masukkan saldo       : Rp";
         cin >> nodeBaru->saldo;
         cout << endl;
         nodeBaru->next = NULL;
@@ -118,7 +118,7 @@ void displayData(Node *head)
         cout << "  No.rekening : " << temp->rekening << endl;
         cout << "  Nama        : " << temp->nama << endl;
         cout << "  Alamat      : " << temp->alamat << endl;
-        cout << "  Saldo       : " << temp->saldo << endl;
+        cout << "  Saldo       : Rp" << temp->saldo << endl;
         cout << " +-------------------------------------------------------------+" << endl;
         cout << endl;
         temp = temp->next;
@@ -227,7 +227,7 @@ void ubahData(Node **head)
         cin >> temp->alamat;
         break;
     case 4:
-        cout << "  Masukkan saldo baru: ";
+        cout << "  Masukkan saldo baru: Rp";
         cin >> temp->saldo;
         break;
     case 5:
@@ -237,7 +237,7 @@ void ubahData(Node **head)
         cin >> temp->nama;
         cout << "  Masukkan alamat baru: ";
         cin >> temp->alamat;
-        cout << "  Masukkan saldo baru: ";
+        cout << "  Masukkan saldo baru: Rp";
         cin >> temp->saldo;
         break;
     default:
@@ -274,7 +274,7 @@ void cariData(Node **head)
             cout << "  No.rekening : " << temp->rekening << endl;
             cout << "  Nama        : " << temp->nama << endl;
             cout << "  Alamat      : " << temp->alamat << endl;
-            cout << "  Saldo       : " << temp->saldo << endl;
+            cout << "  Saldo       : Rp" << temp->saldo << endl;
             cout << " +-------------------------------------------------------------+" << endl;
             cout << endl;
             return;
@@ -306,7 +306,7 @@ void cekSaldo(Node **head)
     {
         if (temp->rekening == cariRekening)
         {
-            cout << "  Saldo untuk no.rekening " << cariRekening << " adalah: " << temp->saldo << endl;
+            cout << "  Saldo untuk no.rekening " << cariRekening << " adalah: Rp" << temp->saldo << endl;
             cout << endl;
             cout << " +-------------------------------------------------------------+" << endl;
             return;
@@ -353,13 +353,13 @@ void transaksi(Node **head)
                     return;
                 }
                 temp->saldo -= transaksi; // subtract the transaction amount from the balance
-                cout << "  Transaksi berhasil! Saldo sekarang: " << temp->saldo << endl;
+                cout << "  Transaksi berhasil! Saldo sekarang: Rp" << temp->saldo << endl;
                 break;
             case 2:
                 cout << "  Masukkan jumlah transaksi: ";
                 cin >> transaksi;
                 temp->saldo += transaksi; // add the transaction amount to the balance
-                cout << "  Transaksi berhasil! Saldo sekarang: " << temp->saldo << endl;
+                cout << "  Transaksi berhasil! Saldo sekarang: Rp" << temp->saldo << endl;
                 break;
             default:
                 cout << "  Pilihan tidak tersedia" << endl;
