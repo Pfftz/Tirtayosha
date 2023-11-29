@@ -113,12 +113,12 @@ void ubahData(Node **head)
 {
     if (*head == NULL)
     {
-        cout << "Linked list nya masih kosong" << endl;
+        cout << "  Linked list nya masih kosong" << endl;
         return;
     }
 
     int pos;
-    cout << "Masukkan posisi node yang ingin diubah: ";
+    cout << "  Masukkan posisi node yang ingin diubah: ";
     cin >> pos;
 
     Node *temp = *head;
@@ -129,49 +129,49 @@ void ubahData(Node **head)
 
     if (temp == NULL)
     {
-        cout << "Posisi tidak valid" << endl;
+        cout << "  Posisi tidak valid" << endl;
         return;
     }
 
     int pilih;
-    cout << "1. Ubah no.rekening" << endl;
-    cout << "2. Ubah nama" << endl;
-    cout << "3. Ubah alamat" << endl;
-    cout << "4. Ubah saldo" << endl;
-    cout << "5. Ubah semua data" << endl;
-    cout << "Pilih opsi: ";
+    cout << "  1. Ubah no.rekening" << endl;
+    cout << "  2. Ubah nama" << endl;
+    cout << "  3. Ubah alamat" << endl;
+    cout << "  4. Ubah saldo" << endl;
+    cout << "  5. Ubah semua data" << endl;
+    cout << "  Pilih opsi: ";
     cin >> pilih;
 
     switch (pilih)
     {
     case 1:
-        cout << "Masukkan no.rekening baru: ";
+        cout << "  Masukkan no.rekening baru: ";
         cin >> temp->rekening;
         break;
     case 2:
-        cout << "Masukkan nama baru: ";
+        cout << "  Masukkan nama baru: ";
         cin >> temp->nama;
         break;
     case 3:
-        cout << "Masukkan alamat baru: ";
+        cout << "  Masukkan alamat baru: ";
         cin >> temp->alamat;
         break;
     case 4:
-        cout << "Masukkan saldo baru: ";
+        cout << "  Masukkan saldo baru: ";
         cin >> temp->saldo;
         break;
     case 5:
-        cout << "Masukkan no.rekening baru: ";
+        cout << "  Masukkan no.rekening baru: ";
         cin >> temp->rekening;
-        cout << "Masukkan nama baru: ";
+        cout << "  Masukkan nama baru: ";
         cin >> temp->nama;
-        cout << "Masukkan alamat baru: ";
+        cout << "  Masukkan alamat baru: ";
         cin >> temp->alamat;
-        cout << "Masukkan saldo baru: ";
+        cout << "  Masukkan saldo baru: ";
         cin >> temp->saldo;
         break;
     default:
-        cout << "Pilihan tidak valid" << endl;
+        cout << "  Pilihan tidak valid" << endl;
         break;
     }
 }
@@ -237,6 +237,7 @@ void cekSaldo(Node **head)
     }
 
     cout << "  Data dengan no.rekening " << cariRekening << " tidak ditemukan." << endl;
+    cout << endl;
     cout << " +-------------------------------------------------------------+" << endl;
 }
 
@@ -273,23 +274,25 @@ void transaksi(Node **head)
                 }
                 temp->saldo -= transaksi; // subtract the transaction amount from the balance
                 cout << "  Transaksi berhasil! Saldo sekarang: " << temp->saldo << endl;
-                return;
+                break;
             case 2:
                 cout << "  Masukkan jumlah transaksi: ";
                 cin >> transaksi;
                 temp->saldo += transaksi; // add the transaction amount to the balance
                 cout << "  Transaksi berhasil! Saldo sekarang: " << temp->saldo << endl;
-                return;
+                break;
             default:
                 cout << "  Pilihan tidak tersedia" << endl;
-                return;
+                break;
             }
+            cout << endl;
             cout << " +-------------------------------------------------------------+" << endl;
         }
         temp = temp->next;
     }
 
     cout << "  Data dengan no.rekening " << cariRekening << " tidak ditemukan." << endl;
+    cout << endl;
     cout << " +-------------------------------------------------------------+" << endl;
 }
 
@@ -309,7 +312,7 @@ int main()
     while (loop)
     {
         cout << " +-------------------------------------------------------------+" << endl;
-        cout << " |                        PT. Bank Riba                        |" << endl;
+        cout << " |                      PT. Bank Riba                          |" << endl;
         cout << " +-------------------------------------------------------------+" << endl;
         cout << " |Menu :                                                       |" << endl;
         cout << " |1. Input Data Nasabah(Input no.rekening, nama, alamat, saldo)|" << endl;
@@ -371,7 +374,6 @@ int main()
             system("cls");
             break;
         case 8:
-            cout << endl;
             SetConsoleTextAttribute(h, 5);
             cout << "   ______    __          __        ______    " << endl;
             cout << "  /\" _  \"\\  |\" \\        /\"\"\\      /    \" \\   " << endl;
