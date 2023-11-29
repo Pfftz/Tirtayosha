@@ -145,6 +145,7 @@ auto hapusData = [](Node **head)
         Node *temp = (*head);
         (*head) = (*head)->next;
         delete temp;
+        temp = nullptr; // prevent dangling pointer
         cout << "  Node telah terhapus" << endl;
         cout << endl;
         cout << " +-------------------------------------------------------------+" << endl;
@@ -168,6 +169,7 @@ auto hapusData = [](Node **head)
     Node *temp2 = temp->next;
     temp->next = temp2->next;
     delete temp2;
+    temp2 = nullptr; // prevent dangling pointer
     cout << "  Node telah terhapus" << endl;
     cout << endl;
     cout << " +-------------------------------------------------------------+" << endl;
