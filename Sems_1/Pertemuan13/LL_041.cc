@@ -12,6 +12,50 @@ struct Node
     struct Node *next;
 };
 
+void welcome()
+{
+    string opening = R"(
+   ,--,                                                                  ,--,                                  
+,---.'|                                                               ,---.'|                                  
+|   | :                              ,-.                              |   | :                          ___     
+:   : |     ,--,                 ,--/ /|                 ,---,        :   : |     ,--,               ,--.'|_   
+|   ' :   ,--.'|         ,---, ,--. :/ |               ,---.'|        |   ' :   ,--.'|               |  | :,'  
+;   ; '   |  |,      ,-+-. /  |:  : ' /                |   | :        ;   ; '   |  |,      .--.--.   :  : ' :  
+'   | |__ `--'_     ,--.'|'   ||  '  /      ,---.      |   | |        '   | |__ `--'_     /  /    '.;__,'  /   
+|   | :.'|,' ,'|   |   |  ,"' |'  |  :     /     \   ,--.__| |        |   | :.'|,' ,'|   |  :  /`./|  |   |    
+'   :    ;'  | |   |   | /  | ||  |   \   /    /  | /   ,'   |        '   :    ;'  | |   |  :  ;_  :__,'| :    
+|   |  ./ |  | :   |   | |  | |'  : |. \ .    ' / |.   '  /  |        |   |  ./ |  | :    \  \    `. '  : |__  
+;   : ;   '  : |__ |   | |  |/ |  | ' \ \'   ;   /|'   ; |:  |        ;   : ;   '  : |__   `----.   \|  | '.'| 
+|   ,/    |  | '.'||   | |--'  '  : |--' '   |  / ||   | '/  '        |   ,/    |  | '.'| /  /`--'  /;  :    ; 
+'---'     ;  :    ;|   |/      ;  |,'    |   :    ||   :    :|        '---'     ;  :    ;'--'.     / |  ,   /  
+          |  ,   / '---'       '--'       \   \  /  \   \  /                    |  ,   /   `--'---'   ---`-'   
+           ---`-'                          `----'    `----'                      ---`-'                        
+                                                                                                               
+)";
+    SetConsoleTextAttribute(h, 13);
+    cout << opening << endl;
+    cout << " ";
+    for (int i = 0; i < 40; i++)
+    {
+        Sleep(100);
+        cout << "-";
+    }
+    cout << endl;
+    cout << " Nama : Abdulhadi Muntashir" << endl;
+    cout << " NIM  : 3337230041" << endl;
+    cout << " ";
+    for (int i = 0; i < 40; i++)
+    {
+        Sleep(100);
+        cout << "-";
+    }
+    cout << endl;
+    SetConsoleTextAttribute(h, 7);
+    cout << endl;
+    system("pause");
+    system("cls");
+}
+
 void tambahData(Node **head, int *ptrN)
 {
     Node *temp = *head;
@@ -62,6 +106,7 @@ void displayData(Node *head)
     {
         cout << " Linkedlist masih kosong" << endl;
         cout << endl;
+        cout << " +-------------------------------------------------------------+" << endl;
         return;
     }
     // jelajahi sampai node terakhir
@@ -86,27 +131,46 @@ auto hapusData = [](Node **head)
     if (*head == NULL)
     {
         cout << "  Linked list nya masih kosong" << endl;
+        cout << endl;
+        cout << " +-------------------------------------------------------------+" << endl;
         return;
     }
 
-    if ((*head)->next == NULL)
+    int cariRekening;
+    cout << " Masukkan no.rekening yang dicari: ";
+    cin >> cariRekening;
+
+    if ((*head)->rekening == cariRekening)
     {
         Node *temp = (*head);
-        (*head) = NULL;
+        (*head) = (*head)->next;
         delete temp;
         cout << "  Node telah terhapus" << endl;
+        cout << endl;
+        cout << " +-------------------------------------------------------------+" << endl;
         return;
     }
 
     Node *temp = (*head);
-    while (temp->next->next != NULL)
+    while (temp->next != NULL && temp->next->rekening != cariRekening)
     {
         temp = temp->next;
     }
+
+    if (temp->next == NULL)
+    {
+        cout << "  Data dengan no.rekening " << cariRekening << " tidak ditemukan." << endl;
+        cout << endl;
+        cout << " +-------------------------------------------------------------+" << endl;
+        return;
+    }
+
     Node *temp2 = temp->next;
-    temp->next = NULL;
+    temp->next = temp2->next;
     delete temp2;
     cout << "  Node telah terhapus" << endl;
+    cout << endl;
+    cout << " +-------------------------------------------------------------+" << endl;
 };
 
 void ubahData(Node **head)
@@ -114,6 +178,8 @@ void ubahData(Node **head)
     if (*head == NULL)
     {
         cout << "  Linked list nya masih kosong" << endl;
+        cout << endl;
+        cout << " +-------------------------------------------------------------+" << endl;
         return;
     }
 
@@ -130,6 +196,8 @@ void ubahData(Node **head)
     if (temp == NULL)
     {
         cout << "  Posisi tidak valid" << endl;
+        cout << endl;
+        cout << " +-------------------------------------------------------------+" << endl;
         return;
     }
 
@@ -174,6 +242,8 @@ void ubahData(Node **head)
         cout << "  Pilihan tidak valid" << endl;
         break;
     }
+    cout << endl;
+    cout << " +-------------------------------------------------------------+" << endl;
 }
 
 void cariData(Node **head)
@@ -181,6 +251,8 @@ void cariData(Node **head)
     if (*head == NULL)
     {
         cout << " Linked list nya masih kosong" << endl;
+        cout << endl;
+        cout << " +-------------------------------------------------------------+" << endl;
         return;
     }
 
@@ -209,6 +281,8 @@ void cariData(Node **head)
     }
 
     cout << " Data dengan no.rekening " << cariRekening << " tidak ditemukan." << endl;
+    cout << endl;
+    cout << " +-------------------------------------------------------------+" << endl;
 }
 
 void cekSaldo(Node **head)
@@ -216,6 +290,8 @@ void cekSaldo(Node **head)
     if (*head == NULL)
     {
         cout << " Linked list nya masih kosong" << endl;
+        cout << endl;
+        cout << " +-------------------------------------------------------------+" << endl;
         return;
     }
 
@@ -246,6 +322,8 @@ void transaksi(Node **head)
     if (*head == NULL)
     {
         cout << "  Linked list nya masih kosong" << endl;
+        cout << endl;
+        cout << " +-------------------------------------------------------------+" << endl;
         return;
     }
 
@@ -309,6 +387,8 @@ int main()
     Node *head = NULL;
     int pilih, n;
     bool loop = true;
+    welcome();
+    SetConsoleTextAttribute(h, 5);
     while (loop)
     {
         cout << " +-------------------------------------------------------------+" << endl;
@@ -374,7 +454,6 @@ int main()
             system("cls");
             break;
         case 8:
-            SetConsoleTextAttribute(h, 5);
             cout << "   ______    __          __        ______    " << endl;
             cout << "  /\" _  \"\\  |\" \\        /\"\"\\      /    \" \\   " << endl;
             cout << " (: ( \\___) ||  |      /    \\    // ____  \\  " << endl;
