@@ -32,7 +32,7 @@ void welcome()
            ---`-'                          `----'    `----'                      ---`-'                        
                                                                                                                
 )";
-    SetConsoleTextAttribute(h, 13);
+    SetConsoleTextAttribute(h, 14);
     cout << opening << endl;
     cout << " ";
     for (int i = 0; i < 40; i++)
@@ -104,7 +104,7 @@ void displayData(Node *head)
 
     if (temp == NULL)
     {
-        cout << " Linkedlist masih kosong" << endl;
+        cout << "  Linkedlist masih kosong" << endl;
         cout << endl;
         cout << " +-------------------------------------------------------------+" << endl;
         return;
@@ -137,7 +137,7 @@ auto hapusData = [](Node **head)
     }
 
     int cariRekening;
-    cout << " Masukkan no.rekening yang dicari: ";
+    cout << "  Masukkan no.rekening yang dicari: ";
     cin >> cariRekening;
 
     if ((*head)->rekening == cariRekening)
@@ -250,14 +250,14 @@ void cariData(Node **head)
 {
     if (*head == NULL)
     {
-        cout << " Linked list nya masih kosong" << endl;
+        cout << "  Linked list nya masih kosong" << endl;
         cout << endl;
         cout << " +-------------------------------------------------------------+" << endl;
         return;
     }
 
     int cariRekening;
-    cout << " Masukkan no.rekening yang dicari: ";
+    cout << "  Masukkan no.rekening yang dicari: ";
     cin >> cariRekening;
 
     Node *temp = *head;
@@ -280,7 +280,7 @@ void cariData(Node **head)
         temp = temp->next;
     }
 
-    cout << " Data dengan no.rekening " << cariRekening << " tidak ditemukan." << endl;
+    cout << "  Data dengan no.rekening " << cariRekening << " tidak ditemukan." << endl;
     cout << endl;
     cout << " +-------------------------------------------------------------+" << endl;
 }
@@ -289,7 +289,7 @@ void cekSaldo(Node **head)
 {
     if (*head == NULL)
     {
-        cout << " Linked list nya masih kosong" << endl;
+        cout << "  Linked list nya masih kosong" << endl;
         cout << endl;
         cout << " +-------------------------------------------------------------+" << endl;
         return;
@@ -376,7 +376,7 @@ void transaksi(Node **head)
 
 auto input = [](int *ptrN)
 {
-    cout << " Masukkan jumlah data yang ingin diinput : ";
+    cout << "  Masukkan jumlah data yang ingin diinput : ";
     cin >> *ptrN;
     cout << endl;
     return ptrN;
@@ -388,7 +388,7 @@ int main()
     int pilih, n;
     bool loop = true;
     welcome();
-    SetConsoleTextAttribute(h, 5);
+    SetConsoleTextAttribute(h, 13);
     while (loop)
     {
         cout << " +-------------------------------------------------------------+" << endl;
