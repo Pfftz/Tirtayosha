@@ -33,6 +33,11 @@ int main()
     { tuple<int, int, int, int, int, int> t3 = tuple_cat(t, t2); 
       cout << get<0>(t3) << " " << get<1>(t3) << " " << get<2>(t3) << " " << get<3>(t3) << " " << get<4>(t3) << " " << get<5>(t3) << endl; };
 
+    auto tukar = [&t, &t2]()
+    {
+        t.swap(t2);
+    };
+
     f();
     urut();
     cout << endl;
@@ -43,6 +48,8 @@ int main()
     cout << endl;
     tambah();
     cout << endl;
+    tukar();
+    f();
 
     return 0;
 }
