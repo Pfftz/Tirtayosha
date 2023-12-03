@@ -68,7 +68,6 @@ void tambahData(Node **head, int *ptrN)
     {
         // membuat node baru
         Node *nodeBaru = new Node();
-
         cout << "  Masukkan data nasabah baru : " << endl;
         cout << endl;
         cout << "    Masukkan no.rekening : ";
@@ -82,11 +81,12 @@ void tambahData(Node **head, int *ptrN)
         cout << endl;
         nodeBaru->next = NULL;
 
+        // jika list kosong, ditambahkan ke node.
         if (temp == NULL)
         {
             *head = nodeBaru;
         }
-        else
+        else // jika list tidak kosong, tambahkan node baru ke akhir linkedlist
         {
             temp->next = nodeBaru;
         }

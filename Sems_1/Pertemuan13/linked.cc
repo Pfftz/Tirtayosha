@@ -8,7 +8,25 @@ struct Node
     struct Node *next;
 };
 
-void tambahData(Node **head)
+void tambahDataAwal(Node **head)
+{
+    // membuat node baru
+    Node *nodeBaru = new Node();
+    cout << "Masukkan angka : ";
+    cin >> nodeBaru->data;
+    nodeBaru->next = NULL;
+    // jika linkedlist kosong, ditambahkan ke node.
+    if (*head == NULL)
+    {
+        (*head) = nodeBaru;
+        return;
+    }
+    // jika linkedlist tidak kosong, tambahkan node baru ke awal linkedlist
+    nodeBaru->next = (*head);
+    (*head) = nodeBaru;
+}
+
+void tambahDataEnd(Node **head)
 {
     // membuat node baru
     Node *nodeBaru = new Node();
@@ -122,7 +140,8 @@ int main()
         switch (menu)
         {
         case 1:
-            tambahData(&HEAD);
+            tambahDataAwal(&HEAD);
+            tambahDataEnd(&HEAD);
             break;
         case 2:
             ubahData(&HEAD);
