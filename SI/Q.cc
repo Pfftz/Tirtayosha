@@ -71,18 +71,35 @@ void view(Node *head)
     }
     cout << endl;
 }
+void total(Node *head)
+{
+    Node *temp = head;
+    if (temp == NULL)
+    {
+        cout << "Antrian kosong" << endl;
+        return;
+    }
+    while (temp != NULL)
+    {
+        cout << temp->namaTeller.size() << " ";
+        temp = temp->next;
+    }
+    cout << endl;
+}
 
 int main()
 {
     Node *head = NULL;
     int pilihan;
+    bool isExit = true;
     do
     {
         cout << "1. Enqueue" << endl;
         cout << "2. Dequeue" << endl;
         cout << "3. Clear" << endl;
         cout << "4. View" << endl;
-        cout << "5. Exit" << endl;
+        cout << "5. Total" << endl;
+        cout << "0. Exit" << endl;
         cout << "Masukkan pilihan : ";
         cin >> pilihan;
         switch (pilihan)
@@ -100,13 +117,17 @@ int main()
             view(head);
             break;
         case 5:
+            total(head);
+            break;
+        case 0:
             cout << "Terima kasih" << endl;
+            isExit = false;
             break;
         default:
             cout << "Pilihan salah" << endl;
             break;
         }
-    } while (pilihan != 5);
+    } while (isExit);
 
     return 0;
 }
