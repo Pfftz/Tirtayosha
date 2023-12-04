@@ -33,12 +33,20 @@ void dequeue(Node **head)
         cout << "Antrian kosong" << endl;
         return;
     }
-    Node *temp = (*head);
-    while (temp->next != NULL)
+    Node *temp = *head;
+    Node *lastNodeWithNonEmptyQueue = NULL;
+    while (temp != NULL)
     {
+        if (!temp->namaTeller.empty())
+        {
+            lastNodeWithNonEmptyQueue = temp;
+        }
         temp = temp->next;
     }
-    temp->namaTeller.pop();
+    if (lastNodeWithNonEmptyQueue != NULL)
+    {
+        lastNodeWithNonEmptyQueue->namaTeller.pop();
+    }
 }
 
 void clearQueue(Node **head)
@@ -48,12 +56,15 @@ void clearQueue(Node **head)
         cout << "Antrian kosong" << endl;
         return;
     }
-    Node *temp = (*head);
-    while (temp->next != NULL)
+    Node *temp = *head;
+    while (temp != NULL)
     {
+        while (!temp->namaTeller.empty())
+        {
+            temp->namaTeller.pop();
+        }
         temp = temp->next;
     }
-    temp->namaTeller.pop();
 }
 
 void view(Node *head)
@@ -66,11 +77,15 @@ void view(Node *head)
     }
     while (temp != NULL)
     {
-        cout << temp->namaTeller.front() << " ";
+        if (!temp->namaTeller.empty())
+        {
+            cout << temp->namaTeller.front() << " ";
+        }
         temp = temp->next;
     }
     cout << endl;
 }
+
 void total(Node *head)
 {
     Node *temp = head;
@@ -92,7 +107,8 @@ int main()
     Node *head = NULL;
     int pilihan;
     bool isExit = true;
-    do
+
+    while (isExit)
     {
         cout << "1. Enqueue" << endl;
         cout << "2. Dequeue" << endl;
@@ -127,7 +143,7 @@ int main()
             cout << "Pilihan salah" << endl;
             break;
         }
-    } while (isExit);
+    }
 
     return 0;
 }
