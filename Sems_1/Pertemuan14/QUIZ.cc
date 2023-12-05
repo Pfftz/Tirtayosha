@@ -2,23 +2,24 @@
 
 using namespace std;
 
-struct item
+struct buku
 {
     string nama;
     int harga, stock, kode;
-    item *next;
+    bool status;
+    buku *next;
 };
 
-void tambahDataAwal(item **head)
+void tambahDataAwal(buku **head)
 {
-    item *nodeBaru = new item();
-    cout << "Masukkan kode barang: ";
+    buku *nodeBaru = new buku();
+    cout << "Masukkan kode buku: ";
     cin >> nodeBaru->kode;
-    cout << "Masukkan nama barang: ";
+    cout << "Masukkan nama buku: ";
     cin >> nodeBaru->nama;
-    cout << "Masukkan harga barang: ";
+    cout << "Masukkan harga buku: ";
     cin >> nodeBaru->harga;
-    cout << "Masukkan stock barang: ";
+    cout << "Masukkan stock buku: ";
     cin >> nodeBaru->stock;
     nodeBaru->next = NULL;
 
@@ -32,16 +33,16 @@ void tambahDataAwal(item **head)
     (*head) = nodeBaru;
 }
 
-void tambahDataEnd(item **head)
+void tambahDataEnd(buku **head)
 {
-    item *nodeBaru = new item();
-    cout << "Masukkan kode barang: ";
+    buku *nodeBaru = new buku();
+    cout << "Masukkan kode buku: ";
     cin >> nodeBaru->kode;
-    cout << "Masukkan nama barang: ";
+    cout << "Masukkan nama buku: ";
     cin >> nodeBaru->nama;
-    cout << "Masukkan harga barang: ";
+    cout << "Masukkan harga buku: ";
     cin >> nodeBaru->harga;
-    cout << "Masukkan stock barang: ";
+    cout << "Masukkan stock buku: ";
     cin >> nodeBaru->stock;
     nodeBaru->next = NULL;
 
@@ -51,7 +52,7 @@ void tambahDataEnd(item **head)
         return;
     }
 
-    item *temp = (*head);
+    buku *temp = (*head);
     while (temp->next != NULL)
     {
         temp = temp->next;
@@ -59,9 +60,9 @@ void tambahDataEnd(item **head)
     temp->next = nodeBaru;
 }
 
-void displayData(item *head)
+void displayData(buku *head)
 {
-    item *temp = head;
+    buku *temp = head;
 
     if (temp == NULL)
     {
@@ -71,43 +72,43 @@ void displayData(item *head)
 
     while (temp != NULL)
     {
-        cout << "Kode barang: " << temp->kode << endl;
-        cout << "Nama barang: " << temp->nama << endl;
-        cout << "Harga barang: " << temp->harga << endl;
-        cout << "Stock barang: " << temp->stock << endl;
+        cout << "Kode buku: " << temp->kode << endl;
+        cout << "Nama buku: " << temp->nama << endl;
+        cout << "Harga buku: " << temp->harga << endl;
+        cout << "Stock buku: " << temp->stock << endl;
         cout << endl;
         temp = temp->next;
     }
 }
 
-void ubahData(item **head)
+void ubahData(buku **head)
 {
     int kode;
-    cout << "Masukkan kode barang yang ingin diubah: ";
+    cout << "Masukkan kode buku yang ingin diubah: ";
     cin >> kode;
 
-    item *temp = (*head);
+    buku *temp = (*head);
     while (temp != NULL)
     {
         if (temp->kode == kode)
         {
-            cout << "Masukkan kode barang: ";
+            cout << "Masukkan kode buku: ";
             cin >> temp->kode;
-            cout << "Masukkan nama barang: ";
+            cout << "Masukkan nama buku: ";
             cin >> temp->nama;
-            cout << "Masukkan harga barang: ";
+            cout << "Masukkan harga buku: ";
             cin >> temp->harga;
-            cout << "Masukkan stock barang: ";
+            cout << "Masukkan stock buku: ";
             cin >> temp->stock;
             cout << endl;
             return;
         }
         temp = temp->next;
     }
-    cout << "Kode barang tidak ditemukan" << endl;
+    cout << "Kode buku tidak ditemukan" << endl;
 }
 
-void hapusData(item **head)
+void hapusData(buku **head)
 {
     if (*head == NULL)
     {
@@ -122,7 +123,7 @@ void hapusData(item **head)
         return;
     }
 
-    item *temp = (*head);
+    buku *temp = (*head);
     while (temp->next->next != NULL)
     {
         temp = temp->next;
@@ -131,44 +132,59 @@ void hapusData(item **head)
     cout << "Node berhasil dihapus" << endl;
 }
 
-void transaksi(item **head)
+void transaksi(buku **head)
 {
     if (*head == NULL)
     {
         cout << "linked list nya masih kosong" << endl;
         return;
     }
-    item *temp = (*head);
-    int kode, jumlah, total;
-    cout << "Masukkan kode barang: ";
+    buku *temp = (*head);
+    int kode, total;
+    string tanggal_awal, tanggal_akhir;
+
+    cout << "Masukkan kode buku: ";
     cin >> kode;
-    cout << "Masukkan jumlah barang: ";
-    cin >> jumlah;
+
     while (temp != NULL)
     {
         if (temp->kode == kode)
         {
-            if (temp->stock >= jumlah)
+            if (temp->stock > 0)
             {
-                total = temp->harga * jumlah;
-                temp->stock -= jumlah;
-                cout << "Total harga: " << total << endl;
+                temp->stock--;
+                if (temp->stock == 0)
+                {
+                    temp->status = "Tidak tersedia";
+                }
+                cout << "Masukkan tanggal peminjaman (format: dd-mm-yyyy): ";
+                cin >> tanggal_awal;
+                cout << "Masukkan tanggal pengembalian (format: dd-mm-yyyy): ";
+                cin >> tanggal_akhir;
+
+                // Assuming the dates are in the format "dd-mm-yyyy"
+                int day_awal = stoi(tanggal_awal.substr(0, 2));
+                int day_akhir = stoi(tanggal_akhir.substr(0, 2));
+                int total_days = day_akhir - day_awal;
+
+                total = total_days * 5000;
+                cout << "Total biaya peminjaman: " << total << endl;
                 return;
             }
             else
             {
-                cout << "Stock barang tidak cukup" << endl;
+                cout << "Buku tidak tersedia" << endl;
                 return;
             }
         }
         temp = temp->next;
     }
-    cout << "Kode barang tidak ditemukan" << endl;
+    cout << "Kode buku tidak ditemukan" << endl;
 }
 
 int main()
 {
-    item *HEAD = NULL;
+    buku *HEAD = NULL;
     int menu;
     bool isMenu = true;
     while (isMenu)
