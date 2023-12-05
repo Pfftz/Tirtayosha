@@ -188,7 +188,7 @@ int main()
         {
         case 1:
             tambahDataAwal(&HEAD);
-            tambahDataEnd(&HEAD);
+            // tambahDataEnd(&HEAD);
             break;
         case 2:
             ubahData(&HEAD);
@@ -203,7 +203,8 @@ int main()
             transaksi(&HEAD);
             break;
         case 9:
-            continue;
+            isMenu = false;
+            break;
         default:
             cout << "Pilihan tdk ada !" << endl;
         }
