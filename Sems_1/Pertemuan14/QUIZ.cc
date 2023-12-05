@@ -5,7 +5,7 @@ using namespace std;
 struct buku
 {
     string nama, kode;
-    int stock;
+    int stock, total;
     buku *next;
 };
 
@@ -73,9 +73,22 @@ void displayData(buku *head)
         cout << " Nama buku: " << temp->nama << endl;
         cout << " Stock buku: " << temp->stock << endl;
         if (temp->stock > 0)
+        {
             cout << " Status buku: Tersedia" << endl;
+        }
         else
+        {
             cout << " Status buku: tidak tersedia" << endl;
+        }
+        if (temp->total == 0)
+        {
+            cout << " Biaya buku: belum ada" << endl;
+        }
+        else
+        {
+            cout << " Biaya buku: " << temp->total << endl;
+        }
+
         cout << endl;
         temp = temp->next;
     }
@@ -127,7 +140,6 @@ void transaksi(buku **head)
         return;
     }
     buku *temp = (*head);
-    int total;
     string tanggal_awal, tanggal_akhir, kode;
 
     cout << " Masukkan kode buku: ";
@@ -156,8 +168,8 @@ void transaksi(buku **head)
                 int day_akhir = stoi(tanggal_akhir.substr(0, 2));
                 int total_days = day_akhir - day_awal;
 
-                total = total_days * 5000;
-                cout << " Total biaya peminjaman: " << total << endl;
+                temp->total = total_days * 5000;
+                cout << " Total biaya peminjaman: " << temp->total << endl;
                 return;
             }
             else
