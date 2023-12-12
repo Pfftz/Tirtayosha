@@ -1,4 +1,7 @@
 #include <iostream>
+#include <ctime>
+#include <sstream>
+#include <iomanip>
 
 using namespace std;
 
@@ -163,10 +166,20 @@ void transaksi(buku **head)
                 cout << " Masukkan tanggal pengembalian (format: dd-mm-yyyy): ";
                 cin >> tanggal_akhir;
 
-                // Assuming the dates are in the format "dd-mm-yyyy"
-                int day_awal = stoi(tanggal_awal.substr(0, 2));
-                int day_akhir = stoi(tanggal_akhir.substr(0, 2));
-                int total_days = day_akhir - day_awal;
+                // Parse the dates into std::tm objects
+                std::tm tm_awal = {}, tm_akhir = {};
+                std::istringstream ss_awal(tanggal_awal);
+                std::istringstream ss_akhir(tanggal_akhir);
+
+                ss_awal >> std::get_time(&tm_awal, "%d-%m-%Y");
+                ss_akhir >> std::get_time(&tm_akhir, "%d-%m-%Y");
+
+                // Convert the std::tm objects to std::time_t
+                std::time_t time_awal = std::mktime(&tm_awal);
+                std::time_t time_akhir = std::mktime(&tm_akhir);
+
+                // Calculate the difference in days
+                double total_days = std::difftime(time_akhir, time_awal) / (60 * 60 * 24);
 
                 temp->total = total_days * 5000;
                 cout << " Total biaya peminjaman: " << temp->total << endl;
