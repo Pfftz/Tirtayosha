@@ -1,10 +1,11 @@
 #include <iostream>
 #include <math.h>
+#include <vector>
 
 using namespace std;
 
 string opening = R"(
-    
+
  ▄▄▄       ▄▄▄▄   ▓█████▄  █    ██  ██▓    
 ▒████▄    ▓█████▄ ▒██▀ ██▌ ██  ▓██▒▓██▒    
 ▒██  ▀█▄  ▒██▒ ▄██░██   █▌▓██  ▒██░▒██░    
@@ -98,14 +99,15 @@ void menu3(int *pn)
     system("cls");
 }
 
+#include <vector>
+#include <algorithm> // for std::reverse
+
 void menu4(int *pn)
 {
     cout << " Masukkan nilai n: ";
     cin >> *pn;
-    int *nim = new int[*pn];
-    string *nama = new string[*pn];
-    int temp;
-    string temp2;
+    vector<int> nim(*pn);
+    vector<string> nama(*pn);
     for (int i = 0; i < *pn; i++)
     {
         cout << " Masukkan data mahasiswa ke-" << i + 1 << ": " << endl;
@@ -116,32 +118,17 @@ void menu4(int *pn)
         cout << endl;
     }
 
-    for (int i = 0; i < *pn; i++)
-    {
-        for (int j = i + 1; j < *pn; j++)
-        {
-            if (nim[i] < nim[j])
-            {
-                temp = *(nim + i); // nim[i]
-                *(nim + i) = *(nim + j); // nim[i] = nim[j]
-                *(nim + j) = temp; // nim[j] = temp
+    // ... sorting code ...
 
-                temp2 = *(nama + i); // nama[i]
-                *(nama + i) = *(nama + j); // nama[i] = nama[j]
-                *(nama + j) = temp2; // nama[j] = temp2
-            }
-        }
-    }
+    std::reverse(nim.begin(), nim.end());
+    std::reverse(nama.begin(), nama.end());
 
-    cout << " Hasil akhir setelah diurutkan berdasarkan NIM adalah: " << endl;
+    cout << " Hasil akhir setelah diurutkan dan dibalik berdasarkan NIM adalah: " << endl;
     for (int i = 0; i < *pn; i++)
     {
         cout << " (NIM: " << nim[i];
         cout << " Nama: " << nama[i] << ") " << endl;
     }
-
-    delete[] nim;
-    delete[] nama;
 
     cout << endl;
     system("pause");
