@@ -71,6 +71,7 @@ int main()
     cout << endl;
     string sentence;
     cout << "Masukkan kalimat: ";
+    cin.ignore();
     getline(cin, sentence);
     string hasil(sentence);
     cout << hasil << endl;
