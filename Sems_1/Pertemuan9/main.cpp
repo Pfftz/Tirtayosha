@@ -120,8 +120,8 @@ void menu4(int *pn)
 
     // ... sorting code ...
 
-    std::reverse(nim.begin(), nim.end());
     std::reverse(nama.begin(), nama.end());
+    std::reverse(nim.begin(), nim.end());
 
     cout << " Hasil akhir setelah diurutkan dan dibalik berdasarkan NIM adalah: " << endl;
     for (int i = 0; i < *pn; i++)
