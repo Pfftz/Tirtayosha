@@ -3,30 +3,6 @@
 
 using namespace std;
 
-void gj()
-{
-    int arr[] = {1, 2, 3, 4, 5};
-    int n = sizeof(arr) / sizeof(arr[0]);
-
-    cout << "Array: ";
-    for (int i = 0; i < n; i++)
-    {
-        cout << arr[i] << " ";
-    }
-
-    cout << endl;
-
-    reverse(arr, arr + n);
-
-    cout << "Array: ";
-    for (int i = 0; i < n; i++)
-    {
-        cout << arr[i] << " ";
-    }
-
-    cout << endl;
-}
-
 void menghitungchardarikalimat(){
     std::string sentence;
     int jumlah[26] = {0}; // Array to store the count of each letter
@@ -89,11 +65,10 @@ void mencarichardarikalimat(){
 int main()
 {
    
-    // menghitungchardarikalimat();
-    // cout << endl;
-    // mencarichardarikalimat();
-    // cout << endl;
-    // gj();
+    menghitungchardarikalimat();
+    cout << endl;
+    mencarichardarikalimat();
+    cout << endl;
     string sentence;
     cout << "Masukkan kalimat: ";
     getline(cin, sentence);
