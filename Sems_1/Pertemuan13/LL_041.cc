@@ -130,49 +130,39 @@ auto hapusData = [](Node **head)
 {
     if (*head == NULL)
     {
-        cout << "  Linked list nya masih kosong" << endl;
-        cout << endl;
-        cout << " +-------------------------------------------------------------+" << endl;
+        cout << "Linked list is empty." << endl;
         return;
     }
 
     int cariRekening;
-    cout << "  Masukkan no.rekening yang dicari: ";
+    cout << "Enter the account number to delete: ";
     cin >> cariRekening;
 
-    if ((*head)->rekening == cariRekening)
-    {
-        Node *temp = (*head);
-        (*head) = (*head)->next;
-        delete temp;
-        temp = nullptr; // prevent dangling pointer
-        cout << "  Node telah terhapus" << endl;
-        cout << endl;
-        cout << " +-------------------------------------------------------------+" << endl;
-        return;
-    }
+    Node *temp = *head, *prev = NULL;
 
-    Node *temp = (*head);
-    while (temp->next != NULL && temp->next->rekening != cariRekening)
+    while (temp != NULL && temp->rekening != cariRekening)
     {
+        prev = temp;
         temp = temp->next;
     }
 
-    if (temp->next == NULL)
+    if (temp == NULL)
     {
-        cout << "  Data dengan no.rekening " << cariRekening << " tidak ditemukan." << endl;
-        cout << endl;
-        cout << " +-------------------------------------------------------------+" << endl;
+        cout << "Account number " << cariRekening << " not found." << endl;
         return;
     }
 
-    Node *temp2 = temp->next;
-    temp->next = temp2->next;
-    delete temp2;
-    temp2 = nullptr; // prevent dangling pointer
-    cout << "  Node telah terhapus" << endl;
-    cout << endl;
-    cout << " +-------------------------------------------------------------+" << endl;
+    if (prev == NULL)
+    {
+        *head = temp->next;
+    }
+    else
+    {
+        prev->next = temp->next;
+    }
+
+    delete temp;
+    cout << "Node deleted." << endl;
 };
 
 void ubahData(Node **head)
