@@ -1,5 +1,6 @@
 #include <iostream>
 #include <queue>
+#include <stack>
 
 using namespace std;
 
@@ -23,7 +24,7 @@ int main()
     cout << " Masukkan nilai n: ";
     cin >> n;
 
-    priority_queue<mahasiswa, vector<mahasiswa>, compareNim> data;
+    stack <mahasiswa> data;
 
     for (int i = 0; i < n; i++)
     {
