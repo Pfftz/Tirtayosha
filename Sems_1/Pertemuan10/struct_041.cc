@@ -117,15 +117,15 @@ void menu2()
     cout << " +--------------------------------+" << endl;
     cout << endl;
 
-    cout << " Arrived time = "
-         << setw(2) << setfill('0') << arrived.jam << ":"
-         << setw(2) << setfill('0') << arrived.menit << ":"
-         << setw(2) << setfill('0') << arrived.detik << endl;
-
     cout << " Departure time = "
          << setw(2) << setfill('0') << departure.jam << ":"
          << setw(2) << setfill('0') << departure.menit << ":"
          << setw(2) << setfill('0') << departure.detik << endl;
+
+    cout << " Arrived time = "
+         << setw(2) << setfill('0') << arrived.jam << ":"
+         << setw(2) << setfill('0') << arrived.menit << ":"
+         << setw(2) << setfill('0') << arrived.detik << endl;
 
     if (departure.detik < arrived.detik)
     {
