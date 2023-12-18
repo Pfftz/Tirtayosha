@@ -135,6 +135,14 @@ bool isBookAvailable(buku **head, string kode)
     return false;
 }
 
+std::time_t parseDate(const std::string &date)
+{
+    std::tm tm = {};
+    std::istringstream ss(date);
+    ss >> std::get_time(&tm, "%d-%m-%Y");
+    return std::mktime(&tm);
+}
+
 void transaksi(buku **head)
 {
     if (*head == NULL)
@@ -166,19 +174,9 @@ void transaksi(buku **head)
                 cout << " Masukkan tanggal pengembalian (format: dd-mm-yyyy): ";
                 cin >> tanggal_akhir;
 
-                // Parse the dates into std::tm objects
-                std::tm tm_awal = {}, tm_akhir = {};
-                std::istringstream ss_awal(tanggal_awal);
-                std::istringstream ss_akhir(tanggal_akhir);
+                std::time_t time_awal = parseDate(tanggal_awal);
+                std::time_t time_akhir = parseDate(tanggal_akhir);
 
-                ss_awal >> std::get_time(&tm_awal, "%d-%m-%Y");
-                ss_akhir >> std::get_time(&tm_akhir, "%d-%m-%Y");
-
-                // Convert the std::tm objects to std::time_t
-                std::time_t time_awal = std::mktime(&tm_awal);
-                std::time_t time_akhir = std::mktime(&tm_akhir);
-
-                // Calculate the difference in days
                 double total_days = std::difftime(time_akhir, time_awal) / (60 * 60 * 24);
 
                 temp->total = total_days * 5000;
