@@ -106,8 +106,8 @@ void menu4(int *pn)
 {
     cout << " Masukkan nilai n: ";
     cin >> *pn;
-    vector<int> nim(*pn);
-    vector<string> nama(*pn);
+    int nim[*pn];
+    string nama[*pn];
     for (int i = 0; i < *pn; i++)
     {
         cout << " Masukkan data mahasiswa ke-" << i + 1 << ": " << endl;
@@ -118,10 +118,25 @@ void menu4(int *pn)
         cout << endl;
     }
 
-    // ... sorting code ...
+    // Bubble Sort in descending order
+    for (int i = 0; i < *pn - 1; i++)
+    {
+        for (int j = 0; j < *pn - i - 1; j++)
+        {
+            if (nim[j] < nim[j + 1])
+            {
+                // Swap NIM
+                int tempNim = nim[j];
+                nim[j] = nim[j + 1];
+                nim[j + 1] = tempNim;
 
-    std::reverse(nama.begin(), nama.end());
-    std::reverse(nim.begin(), nim.end());
+                // Swap Nama
+                string tempNama = nama[j];
+                nama[j] = nama[j + 1];
+                nama[j + 1] = tempNama;
+            }
+        }
+    }
 
     cout << " Hasil akhir setelah diurutkan dan dibalik berdasarkan NIM adalah: " << endl;
     for (int i = 0; i < *pn; i++)

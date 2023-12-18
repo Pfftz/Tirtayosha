@@ -1,6 +1,8 @@
 #include <iostream>
 #include <iomanip>
 #include <windows.h>
+#include <algorithm>
+#include <vector>
 
 using namespace std;
 
@@ -47,10 +49,8 @@ void menu1(int *pn)
     cout << " Masukkan nilai n: ";
     cin >> *pn;
 
-    mahasiswa *data = new mahasiswa[*pn];
+    vector<mahasiswa> data(*pn);
 
-    int temp;
-    string temp2;
     for (int i = 0; i < *pn; i++)
     {
         cout << " Masukkan data mahasiswa ke-" << i + 1 << ": " << endl;
@@ -61,22 +61,9 @@ void menu1(int *pn)
         cout << endl;
     }
 
-    for (int i = 0; i < *pn; i++)
-    {
-        for (int j = i + 1; j < *pn; j++)
-        {
-            if (data[i].nim < data[j].nim)
-            {
-                temp = data[i].nim;        // nim[i]
-                data[i].nim = data[j].nim; // nim[i] = nim[j]
-                data[j].nim = temp;        // nim[j] = temp
-
-                temp2 = data[i].nama;        // nama[i]
-                data[i].nama = data[j].nama; // nama[i] = nama[j]
-                data[j].nama = temp2;        // nama[j] = temp2
-            }
-        }
-    }
+    // ... sorting code ...
+    std::sort(data.begin(), data.end(), [](const mahasiswa &a, const mahasiswa &b)
+              { return a.nim > b.nim; });
 
     cout << " Hasil akhir setelah diurutkan berdasarkan NIM adalah: " << endl;
     for (int i = 0; i < *pn; i++)
@@ -84,8 +71,6 @@ void menu1(int *pn)
         cout << " (NIM: " << data[i].nim;
         cout << " Nama: " << data[i].nama << ") " << endl;
     }
-
-    delete[] data;
 
     cout << endl;
     system("pause");
