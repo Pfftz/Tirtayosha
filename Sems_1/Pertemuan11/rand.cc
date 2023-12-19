@@ -9,14 +9,6 @@ struct mahasiswa
     string nama;
 };
 
-struct compareNim
-{
-    bool operator()(const mahasiswa &a, const mahasiswa &b)
-    {
-        return a.nim > b.nim;
-    }
-};
-
 int main()
 {
     int n;
