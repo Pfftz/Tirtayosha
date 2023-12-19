@@ -99,9 +99,6 @@ void menu3(int *pn)
     system("cls");
 }
 
-#include <vector>
-#include <algorithm> // for std::reverse
-
 void menu4(int *pn)
 {
     cout << " Masukkan nilai n: ";
