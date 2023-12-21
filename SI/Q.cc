@@ -1,5 +1,6 @@
 #include <iostream>
 #include <queue>
+#include <algorithm>
 
 using namespace std;
 
@@ -79,6 +80,29 @@ void view(Node *head)
     {
         if (!temp->namaTeller.empty())
         {
+            // Copy elements from the queue to a vector
+            vector<string> data;
+            queue<string> copy = temp->namaTeller;
+            while (!copy.empty())
+            {
+                data.push_back(copy.front());
+                copy.pop();
+            }
+
+            // Sort the vector
+            sort(data.begin(), data.end());
+
+            // Clear the queue and copy the sorted elements back to the queue
+            while (!temp->namaTeller.empty())
+            {
+                temp->namaTeller.pop();
+            }
+            for (const string &nama : data)
+            {
+                temp->namaTeller.push(nama);
+            }
+
+            // Print the sorted elements
             cout << temp->namaTeller.front() << " ";
         }
         temp = temp->next;
