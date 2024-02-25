@@ -1,12 +1,12 @@
 '''konversi matriks cpp ke py'''
 print('Main Menu')
-print(" 1. Input Nilai Matrix")
-print(" 2. Matrix kali")
-print(" 3. Rata-rata")
-print(" 4. Hilang")
-print(" 5. Keluar")
+print(" 1. Input Nilai Matrix",
+      "2. Matrix kali",
+      "3. Rata-rata",
+      "4. Hilang",
+      "5. Keluar", sep='\n')
 
-while(True):
+while (True):
     pilih = int(input("Pilih Menu: "))
     if pilih == 1:
         baris = int(input("Masukkan jumlah baris: "))
@@ -41,4 +41,3 @@ while(True):
         break
     else:
         print("Menu tidak tersedia")
-        
