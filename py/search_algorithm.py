@@ -51,3 +51,4 @@ elif result2 != -1 or result != -1:
           'using linear search' if result2 != -1 else 'using binary search')
 else:
     print("Element is not present in array")
+
