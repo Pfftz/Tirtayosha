@@ -2,10 +2,20 @@ import random
 import time
 
 
-def simple_search(data_list, x):
-    for i in range(len(data_list)):
-        if data_list[i][0] == x:
-            return i
+def binary_search(data_list, x):
+    low = 0
+    high = len(data_list) - 1
+    mid = 0
+
+    while low <= high:
+        mid = (high + low) // 2
+
+        if data_list[mid][0] < x:
+            low = mid + 1
+        elif data_list[mid][0] > x:
+            high = mid - 1
+        else:
+            return mid
     return -1
 
 
@@ -21,13 +31,16 @@ with open('D:\\Alprot\\Sems_2\\Pertemuan1\\random_numbers.txt', 'r') as file:
 # Menyusun data dengan nilai
 data_nilai = list(zip(names, values))
 
-print("Pertemuan 1 - Simple Search in python\n")
+# Sort the data for binary search
+data_nilai.sort(key=lambda x: x[0])
+
+print("Pertemuan 1 - Binary Search in python\n")
 
 x = input("Cari data = ")  # Keep input as string for name search
 
 start_time = time.perf_counter()
 
-hasil = simple_search(data_nilai, x)
+hasil = binary_search(data_nilai, x)
 
 end_time = time.perf_counter()
 waktu = end_time - start_time
@@ -41,4 +54,4 @@ else:
 
 '''contoh perbandingannya'''
 # Elemen 'yuni' ditemukan pada index 998 dengan nilai 51,
-# Waktu yang dibutuhkan: 0.00029470 detik
+# Waktu yang dibutuhkan: 0.00002700 detik

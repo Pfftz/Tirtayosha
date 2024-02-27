@@ -52,7 +52,12 @@
         "any": "cpp",
         "chrono": "cpp",
         "map": "cpp",
-        "ratio": "cpp"
+        "ratio": "cpp",
+        "charconv": "cpp",
+        "optional": "cpp",
+        "format": "cpp",
+        "span": "cpp",
+        "variant": "cpp"
     },
     "editor.tokenColorCustomizations": {
         "[*Light*]": {
