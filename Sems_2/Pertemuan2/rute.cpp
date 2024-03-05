@@ -352,7 +352,18 @@ int main()
     transJakartaRoute7.addStop("Pecenongan");
     transJakartaRoute7.addStop("HARMONI");
 
+    string opening = R"(   ,     #_
+   ~\_  ####_        Kelompok 3 (Abdul, Yola W., Irza)
+  ~~  \_#####\
+  ~~     \###|
+  ~~       \#/ ___   Rute Transjakarta
+   ~~       V~' '->
+    ~~~         /
+      ~~._.   _/
+         _/ _/
+       _/m/')";
     string start, end;
+    cout << opening << "\n\n";
     cout << "Enter start stop: ";
     getline(cin, start);
     cout << "Enter end stop: ";
