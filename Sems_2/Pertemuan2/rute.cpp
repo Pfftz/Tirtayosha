@@ -84,11 +84,67 @@ public:
 
         if (current == NULL)
         {
-            cout << "End stop not found on the route from the start stop." << endl;
-            return -1;
+            // If endNode was not found after startNode, try the other direction
+            stops = 0;
+            current = startNode;
+            while (current != NULL && current != endNode)
+            {
+                stops++;
+                current = current->prev;
+            }
+
+            if (current == NULL)
+            {
+                cout << "End stop not found on the route from the start stop." << endl;
+                return -1;
+            }
         }
 
         return stops * farePerStop;
+    }
+
+    void printRoute(string start, string end)
+    {
+        Node *startNode = nodeMap[start];
+        Node *endNode = nodeMap[end];
+
+        if (startNode == NULL || endNode == NULL)
+        {
+            cout << "Start or end stop not found." << endl;
+            return;
+        }
+
+        Node *current = startNode;
+        string route = "Route from " + start + " to " + end + ": " + start;
+        while (current != NULL && current != endNode)
+        {
+            current = current->next;
+            if (current != NULL)
+            {
+                route += " -> " + current->data;
+            }
+        }
+
+        if (current == NULL)
+        {
+            // If endNode was not found after startNode, print the route in the other direction
+            current = startNode;
+            route = "Route from " + start + " to " + end + ": " + start;
+            while (current != NULL && current != endNode)
+            {
+                current = current->prev;
+                if (current != NULL)
+                {
+                    route += " -> " + current->data;
+                }
+            }
+        }
+
+        cout << route << endl;
+    }
+    bool isStopInRoute(string stop)
+    {
+        return nodeMap.find(stop) != nodeMap.end();
     }
 };
 
@@ -148,6 +204,7 @@ int main()
     transJakartaRoute2.addStop("RS Sumber Waras");
     transJakartaRoute2.addStop("Harmoni");
     transJakartaRoute2.addStop("Pecenongan");
+    transJakartaRoute2.addStop("Juanda");
     transJakartaRoute2.addStop("Pasar Baru");
 
     // rute abu-abu
@@ -194,30 +251,106 @@ int main()
 
     // rute oren
     LinkedList transJakartaRoute5;
-    transJakartaRoute.addStop("Lebak Bulus");
-    transJakartaRoute.addStop("Pondok Pinang");
-    transJakartaRoute.addStop("Pondok Indah 1");
-    transJakartaRoute.addStop("Pondok Indah 2");
-    transJakartaRoute.addStop("Tamah Kusir Kodim");
-    transJakartaRoute.addStop("Kebayoran Lama Bungur");
-    transJakartaRoute.addStop("Pasar Kebayoran Lama");
-    transJakartaRoute.addStop("Simprug");
-    transJakartaRoute.addStop("Permata Hijau");
-    transJakartaRoute.addStop("Permata Hijau RS Medika");
-    transJakartaRoute.addStop("Pos Pengumben");
-    transJakartaRoute.addStop("Kelapa Dua Sasak");
-    transJakartaRoute.addStop("Kebon Jeruk");
-    transJakartaRoute.addStop("Duri Kepa");
-    transJakartaRoute.addStop("Kedoya Assiddiqiyah");
-    transJakartaRoute.addStop("Kedoya Green Garden");
-    transJakartaRoute.addStop("Indosiar");
-    transJakartaRoute.addStop("Jelambar");
-    transJakartaRoute.addStop("Grogol 2");
-    transJakartaRoute.addStop("Tomang");
-    transJakartaRoute.addStop("Tomang Mandala");
-    transJakartaRoute.addStop("RS Tarakan");
-    transJakartaRoute.addStop("Petojo");
-    transJakartaRoute.addStop("Harmoni");
+    transJakartaRoute5.addStop("Lebak Bulus");
+    transJakartaRoute5.addStop("Pondok Pinang");
+    transJakartaRoute5.addStop("Pondok Indah 1");
+    transJakartaRoute5.addStop("Pondok Indah 2");
+    transJakartaRoute5.addStop("Tamah Kusir Kodim");
+    transJakartaRoute5.addStop("Kebayoran Lama Bungur");
+    transJakartaRoute5.addStop("Pasar Kebayoran Lama");
+    transJakartaRoute5.addStop("Simprug");
+    transJakartaRoute5.addStop("Permata Hijau");
+    transJakartaRoute5.addStop("Permata Hijau RS Medika");
+    transJakartaRoute5.addStop("Pos Pengumben");
+    transJakartaRoute5.addStop("Kelapa Dua Sasak");
+    transJakartaRoute5.addStop("Kebon Jeruk");
+    transJakartaRoute5.addStop("Duri Kepa");
+    transJakartaRoute5.addStop("Kedoya Assiddiqiyah");
+    transJakartaRoute5.addStop("Kedoya Green Garden");
+    transJakartaRoute5.addStop("Indosiar");
+    transJakartaRoute5.addStop("Jelambar");
+    transJakartaRoute5.addStop("Grogol 2");
+    transJakartaRoute5.addStop("Tomang");
+    transJakartaRoute5.addStop("Tomang Mandala");
+    transJakartaRoute5.addStop("RS Tarakan");
+    transJakartaRoute5.addStop("Petojo");
+    transJakartaRoute5.addStop("Harmoni");
+
+    // rute biru (DUKUH ATAS 2-HARMONI)
+    LinkedList transJakartaRoute6;
+    transJakartaRoute6.addStop("DUKUH ATAS 2");
+    transJakartaRoute6.addStop("Pasar Rumput");
+    transJakartaRoute6.addStop("MANGGARAI");
+    transJakartaRoute6.addStop("Matraman");
+    transJakartaRoute6.addStop("Pasar Genjing");
+    transJakartaRoute6.addStop("Utan Kayu");
+    transJakartaRoute6.addStop("Pramuka Lia");
+    transJakartaRoute6.addStop("Pramuka BPKP");
+    transJakartaRoute6.addStop("UNJ");
+    transJakartaRoute6.addStop("Sunan Giri");
+    transJakartaRoute6.addStop("Velodrome");
+    transJakartaRoute6.addStop("Pemuda Rawamangun");
+    transJakartaRoute6.addStop("Layur");
+    transJakartaRoute6.addStop("TU Gas");
+    transJakartaRoute6.addStop("Pasar Pulogadung");
+    transJakartaRoute6.addStop("PULOGADUNG");
+    transJakartaRoute6.addStop("Bermis");
+    transJakartaRoute6.addStop("Pulomas");
+    transJakartaRoute6.addStop("Asmi");
+    transJakartaRoute6.addStop("Pedongkelan");
+    transJakartaRoute6.addStop("Cempaka Timur");
+    transJakartaRoute6.addStop("RS Islam");
+    transJakartaRoute6.addStop("Cempaka Tengah");
+    transJakartaRoute6.addStop("Pasar Cempaka Putih");
+    transJakartaRoute6.addStop("Rawa Selatan");
+    transJakartaRoute6.addStop("Galur");
+    transJakartaRoute6.addStop("Senen");
+    transJakartaRoute6.addStop("Atrium");
+    transJakartaRoute6.addStop("RSPAD");
+    transJakartaRoute6.addStop("DepLu");
+    transJakartaRoute6.addStop("Gambir 1");
+    transJakartaRoute6.addStop("Istiqlal");
+    transJakartaRoute6.addStop("Juanda");
+    transJakartaRoute6.addStop("Pecenongan");
+    transJakartaRoute6.addStop("HARMONI");
+
+    // rute biru (DUKUH ATAS 2-HARMONI)
+    LinkedList transJakartaRoute7;
+    transJakartaRoute7.addStop("DUKUH ATAS 2");
+    transJakartaRoute7.addStop("Pasar Rumput");
+    transJakartaRoute7.addStop("MANGGARAI");
+    transJakartaRoute7.addStop("Matraman");
+    transJakartaRoute7.addStop("Pasar Genjing");
+    transJakartaRoute7.addStop("Utan Kayu");
+    transJakartaRoute7.addStop("Pramuka Lia");
+    transJakartaRoute7.addStop("Pramuka BPKP");
+    transJakartaRoute7.addStop("UNJ");
+    transJakartaRoute7.addStop("Sunan Giri");
+    transJakartaRoute7.addStop("Velodrome");
+    transJakartaRoute7.addStop("Pemuda Rawamangun");
+    transJakartaRoute7.addStop("Layur");
+    transJakartaRoute7.addStop("TU Gas");
+    transJakartaRoute7.addStop("Pasar Pulogadung");
+    transJakartaRoute7.addStop("PULOGADUNG");
+    transJakartaRoute7.addStop("Bermis");
+    transJakartaRoute7.addStop("Pulomas");
+    transJakartaRoute7.addStop("Asmi");
+    transJakartaRoute7.addStop("Pedongkelan");
+    transJakartaRoute7.addStop("Cempaka Timur");
+    transJakartaRoute7.addStop("RS Islam");
+    transJakartaRoute7.addStop("Cempaka Tengah");
+    transJakartaRoute7.addStop("Pasar Cempaka Putih");
+    transJakartaRoute7.addStop("Rawa Selatan");
+    transJakartaRoute7.addStop("Galur");
+    transJakartaRoute7.addStop("Senen");
+    transJakartaRoute7.addStop("Atrium");
+    transJakartaRoute7.addStop("RSPAD");
+    transJakartaRoute7.addStop("DepLu");
+    transJakartaRoute7.addStop("Gambir 1");
+    transJakartaRoute7.addStop("Istiqlal");
+    transJakartaRoute7.addStop("Juanda");
+    transJakartaRoute7.addStop("Pecenongan");
+    transJakartaRoute7.addStop("HARMONI");
 
     string start, end;
     cout << "Enter start stop: ";
@@ -225,16 +358,23 @@ int main()
     cout << "Enter end stop: ";
     getline(cin, end);
 
-    LinkedList *routes[] = {&transJakartaRoute, &transJakartaRoute1, &transJakartaRoute2, &transJakartaRoute3, &transJakartaRoute4, &transJakartaRoute5};
+    LinkedList *routes[] = {&transJakartaRoute, &transJakartaRoute1, &transJakartaRoute2, &transJakartaRoute3, &transJakartaRoute4, &transJakartaRoute5, &transJakartaRoute6, &transJakartaRoute7};
     int numRoutes = sizeof(routes) / sizeof(routes[0]);
 
     for (int i = 0; i < numRoutes; i++)
     {
-        int fare = routes[i]->calculateFare(start, end);
-        if (fare != -1)
+        if (routes[i]->isStopInRoute(start) && routes[i]->isStopInRoute(end))
         {
+            int fare = routes[i]->calculateFare(start, end);
             cout << "The fare from " << start << " to " << end << " is: Rp " << fare << endl;
+            routes[i]->printRoute(start, end); // call printRoute here
+
+            // Print adjacent stops for start and end stops
+            cout << "Adjacent stops for " << start << ": ";
+            routes[i]->printAdjacentStops(start);
+            cout << "Adjacent stops for " << end << ": ";
             routes[i]->printAdjacentStops(end);
+
             return 0;
         }
     }
