@@ -1,4 +1,10 @@
-'''pertemuan 4 sorting'''
+'''pertemuan 4 - Kelompok 12'''
+# Nama: 
+# 1. ABDULHADI MUNTASHIR
+# 2. FATUROHMAN
+# 3. MUJADID AKBAR PARYONO
+
+# Import library
 import time
 import pandas as pd
 # Fungsi untuk selection sort
