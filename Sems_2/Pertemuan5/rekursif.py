@@ -5,14 +5,10 @@ from datetime import datetime
 import pandas as pd
 
 # Function to get the minimum of two values
-
-
 def min_val(x, y):
     return x if x <= y else y
 
 # Recursive function for fibonacci search
-
-
 def fibonacci_search(arr, x, n):
     if n > 0:
         fibMMm2 = 0
@@ -49,8 +45,6 @@ def fibonacci_search(arr, x, n):
         return -1
 
 # Recursive function for recursive search
-
-
 def recursive_search(arr, l, r, x):
     if r >= l:
         mid = l + (r - l) // 2
