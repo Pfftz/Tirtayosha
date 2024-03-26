@@ -52,7 +52,6 @@ def quick_sort(data, low, high):
         quick_sort(data, pi+1, high)
 
 
-# Membuat data acak
 # Read data from CSV file
 df = pd.read_csv('D:\\Alprot\\Sems_2\\Pertemuan4\\tinggi_badannew.csv')
 
