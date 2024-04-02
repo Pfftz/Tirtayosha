@@ -15,6 +15,7 @@ struct film
 void tambahDataAwal(deque<film> &films)
 {
     film nodeBaru;
+    nodeBaru.total = 0; // Initialize total to 0
     cout << " Masukkan kode film: ";
     cin >> nodeBaru.kode;
     cout << " Masukkan nama film: ";
@@ -29,6 +30,7 @@ void tambahDataAwal(deque<film> &films)
 void tambahDataEnd(deque<film> &films)
 {
     film nodeBaru;
+    nodeBaru.total = 0; // Initialize total to 0
     cout << " Masukkan kode film: ";
     cin >> nodeBaru.kode;
     cout << " Masukkan nama film: ";
@@ -178,10 +180,10 @@ int main()
     {
         cout << "\n Peminjaman Film" << endl;
         cout << "+---------------------+" << endl;
-        cout << " 1. Tambah Data" << endl;
-        cout << " 2. Hapus Data" << endl;
-        cout << " 3. Tampil Data" << endl;
-        cout << " 4. Transaksi" << endl;
+        cout << " 1. Tambah Data Film" << endl;
+        cout << " 2. Hapus Data Film" << endl;
+        cout << " 3. Tampil Data Film" << endl;
+        cout << " 4. Transaksi Film" << endl;
         cout << " 0. Exit" << endl;
         cout << "+---------------------+" << endl;
 
@@ -191,15 +193,44 @@ int main()
         switch (menu)
         {
         case 1:
-            tambahDataAwal(films);
-            // tambahDataEnd(films);
+
+            cout << " 1. Tambah data depan" << endl;
+            cout << " 2. Tambah data belakang" << endl;
+            int p;
+            cout << " Masukkan menu: ";
+            cin >> p;
+            switch (p)
+            {
+            case 1:
+                tambahDataAwal(films);
+                break;
+            case 2:
+                tambahDataEnd(films);
+                break;
+            default:
+                break;
+            }
             cout << endl;
             system("pause");
             system("cls");
             break;
         case 2:
-            hapusDataAwal(films);
-            // hapusDataAkhir(films);
+            cout << " 1. Hapus data depan" << endl;
+            cout << " 2. Hapus data belakang" << endl;
+            int p1;
+            cout << " Masukkan menu: ";
+            cin >> p1;
+            switch (p1)
+            {
+            case 1:
+                hapusDataAwal(films);
+                break;
+            case 2:
+                hapusDataAkhir(films);
+                break;
+            default:
+                break;
+            }
             cout << endl;
             system("pause");
             system("cls");
@@ -218,13 +249,6 @@ int main()
             break;
         case 0:
             isMenu = false;
-            cout << "   ______    __          __        ______    " << endl;
-            cout << "  /\" _  \"\\  |\" \\        /\"\"\\      /    \" \\   " << endl;
-            cout << " (: ( \\___) ||  |      /    \\    // ____  \\  " << endl;
-            cout << "  \\/ \\      |:  |     /' /\\  \\  /  /    ) :) " << endl;
-            cout << "  //  \\ _   |.  |    //  __'  \\(: (____/ //  " << endl;
-            cout << " (:   _) \\  /\\  |\\  /   /  \\\\  \\        /   " << endl;
-            cout << "  \\_______)(__\\_|_)(___/    \\___)\"_____/    " << endl;
             break;
         default:
             cout << " Pilihan tdk ada !" << endl;
