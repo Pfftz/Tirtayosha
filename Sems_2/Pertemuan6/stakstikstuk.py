@@ -13,11 +13,22 @@ class RollingBuffer:
     def get(self):
         return list(self.buffer)
 
+    def average(self):
+        if not self.buffer:
+            return 0
+        return sum(self.buffer) / len(self.buffer)
 
-# Initialize a rolling buffer of size 5
-buffer = RollingBuffer(5)
 
-# Add some data to the buffer
-for i in range(10):
-    buffer.add(i)
-    print(buffer.get())  # Output: the last 5 items added
+# Initialize a rolling buffer with size from user input
+buffer_size = int(input("Enter the size of the buffer: "))
+buffer = RollingBuffer(buffer_size)
+
+while True:
+    # Add data to the buffer from user input
+    data = input("Enter a number to add to the buffer (or 'q' to quit): ")
+    if data.lower() == 'q':
+        break
+    buffer.add(int(data))
+    print(f"Buffer: {buffer.get()}")  # Output: the last N items added
+    # Output: average of the last N items
+    print(f"Average: {buffer.average()}")
