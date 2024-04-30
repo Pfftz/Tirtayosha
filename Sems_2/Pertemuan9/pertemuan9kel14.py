@@ -1,5 +1,11 @@
 import numpy as np
+import multiprocessing as mp
 import time
+
+# Create a global Pool object
+pool = None
+if __name__ == '__main__':
+    pool = mp.Pool(processes=7)
 
 
 def normal_matrix_mult(A, B):
@@ -14,12 +20,14 @@ def pad_matrix(A):
 
 
 def strassen_matrix_mult(A, B):
+    if pool is None:
+        return normal_matrix_mult(A, B)
+
     original_shape = A.shape
     A = pad_matrix(A)
     B = pad_matrix(B)
 
-    # Use the standard matrix multiplication method for small matrices
-    if len(A) <= 128:
+    if len(A) <= 64:
         return normal_matrix_mult(A, B)
 
     mid = len(A) // 2
@@ -28,13 +36,16 @@ def strassen_matrix_mult(A, B):
     B11, B12, B21, B22 = B[:mid, :mid], B[:mid,
                                           mid:], B[mid:, :mid], B[mid:, mid:]
 
-    p1 = strassen_matrix_mult(A11 + A22, B11 + B22)
-    p2 = strassen_matrix_mult(A21 + A22, B11)
-    p3 = strassen_matrix_mult(A11, B12 - B22)
-    p4 = strassen_matrix_mult(A22, B21 - B11)
-    p5 = strassen_matrix_mult(A11 + A12, B22)
-    p6 = strassen_matrix_mult(A21 - A11, B11 + B12)
-    p7 = strassen_matrix_mult(A12 - A22, B21 + B22)
+    p1 = pool.apply_async(strassen_matrix_mult, [A11 + A22, B11 + B22])
+    p2 = pool.apply_async(strassen_matrix_mult, [A21 + A22, B11])
+    p3 = pool.apply_async(strassen_matrix_mult, [A11, B12 - B22])
+    p4 = pool.apply_async(strassen_matrix_mult, [A22, B21 - B11])
+    p5 = pool.apply_async(strassen_matrix_mult, [A11 + A12, B22])
+    p6 = pool.apply_async(strassen_matrix_mult, [A21 - A11, B11 + B12])
+    p7 = pool.apply_async(strassen_matrix_mult, [A12 - A22, B21 + B22])
+
+    p1, p2, p3, p4, p5, p6, p7 = p1.get(), p2.get(
+    ), p3.get(), p4.get(), p5.get(), p6.get(), p7.get()
 
     C11 = p1 + p4 - p5 + p7
     C12 = p3 + p5
@@ -48,7 +59,7 @@ def strassen_matrix_mult(A, B):
 def calculate_execution_time(matrix_sizes):
     for size in matrix_sizes:
         A = np.random.rand(size[0], size[1])
-        B = np.random.rand(size[1], size[0])  # Changed this line
+        B = np.random.rand(size[1], size[0])
 
         start = time.time()
         normal_matrix_mult(A, B)
@@ -62,5 +73,6 @@ def calculate_execution_time(matrix_sizes):
               normal_time} seconds, Strassen's algorithm took {strassen_time} seconds")
 
 
-matrix_sizes = [(1000, 1000), (1000, 2000), (1000, 5000), (10000, 100000)]
-calculate_execution_time(matrix_sizes)
+if __name__ == '__main__':
+    matrix_sizes = [(1000, 1000), (1000, 2000), (1000, 5000), (1000, 6000)]
+    calculate_execution_time(matrix_sizes)
