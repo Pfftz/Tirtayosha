@@ -16,11 +16,8 @@ class HashTable:
         for i, kv in enumerate(bucket):
             k, v = kv
             if key == k:
-                update = input(
-                    "Key already exists. Do you want to update it? (yes/no): ")
-                if update.lower() == 'yes':
-                    bucket[i] = ((key, {"name": name, "job": job, "age": age, "sex": sex,
-                                 "eyes": eyes, "hair": hair, "status": status}))
+                bucket[i] = ((key, {"name": name, "job": job, "age": age, "sex": sex,
+                             "eyes": eyes, "hair": hair, "status": status}))
                 return
         bucket.append((key, {"name": name, "job": job, "age": age, "sex": sex,
                              "eyes": eyes, "hair": hair, "status": status}))
@@ -31,15 +28,8 @@ class HashTable:
         for i, kv in enumerate(bucket):
             k, v = kv
             if key == k:
-                header = "\n{:<10} {:<20} {:<15} {:<10} {:<10} {:<10} {:<10} {:<10}".format(
-                    'Key', 'Name', 'Job', 'Age', 'Sex', 'Eyes', 'Hair', 'Status')
-                print(header)
-                print('-' * len(header))
-                print("{:<10} {:<20} {:<15} {:<10} {:<10} {:<10} {:<10} {:<10}".format(
-                    k, v["name"], v["job"], v["age"], v["sex"], v["eyes"], v["hair"], v["status"]))
-                return
-        print("Key not found.")
-        return
+                return v
+        return None
 
     def delete(self, key):
         hash_key = self._hash(key)
@@ -53,7 +43,7 @@ class HashTable:
         if key_exists:
             del bucket[i]
         else:
-            raise KeyError('Key {} not found'.format(key))
+            raise KeyError('ID {} not found'.format(key))
 
 
 def main():
@@ -69,7 +59,7 @@ def main():
         print("\n 1. Insert\n 2. Find\n 3. Delete\n 4. Quit")
         option = input(" Please Choose an option: ")
         if option == '1':
-            key = int(input("\n Enter a key: "))
+            key = int(input("\n Enter an ID: "))
             name = input(" Enter a name: ")
             job = input(" Enter a job: ")
             age = int(input(" Enter an age: "))
@@ -79,12 +69,16 @@ def main():
             status = input(" Enter a status (alive/dead): ")
             vault.insert(key, name, job, age, sex, eyes, hair, status)
         elif option == '2':
-            key = int(input(" Enter a key: "))
-            vault.find(key)
+            key = int(input(" Enter a ID: "))
+            result = vault.find(key)
+            if result is not None:
+                print(" Found: ", result)
+            else:
+                print(" ID not found.")
         elif option == '3':
-            key = int(input(" Enter a key: "))
+            key = int(input(" Enter a ID: "))
             vault.delete(key)
-            print(" Key {} deleted".format(key))
+            print(" ID {} deleted".format(key))
             print(" Employee data has been removed from the database")
         elif option == '4':
             print("""
