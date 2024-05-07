@@ -31,8 +31,15 @@ class HashTable:
         for i, kv in enumerate(bucket):
             k, v = kv
             if key == k:
-                return v
-        return None
+                header = "\n{:<10} {:<20} {:<15} {:<10} {:<10} {:<10} {:<10} {:<10}".format(
+                    'Key', 'Name', 'Job', 'Age', 'Sex', 'Eyes', 'Hair', 'Status')
+                print(header)
+                print('-' * len(header))
+                print("{:<10} {:<20} {:<15} {:<10} {:<10} {:<10} {:<10} {:<10}".format(
+                    k, v["name"], v["job"], v["age"], v["sex"], v["eyes"], v["hair"], v["status"]))
+                return
+        print("Key not found.")
+        return
 
     def delete(self, key):
         hash_key = self._hash(key)
@@ -58,25 +65,27 @@ def main():
         print("              -Server 10-")
         print("\n-Vault 101 Employee Database-")
         print("\nWelcome, Overseer")
-        print("---------------------------------")
-        print("\n1. Insert\n2. Find\n3. Delete\n4. Quit")
-        option = input("Please Choose an option: ")
+        print("=================================")
+        print("\n 1. Insert\n 2. Find\n 3. Delete\n 4. Quit")
+        option = input(" Please Choose an option: ")
         if option == '1':
-            key = int(input("Enter a key: "))
-            name = input("Enter a name: ")
-            job = input("Enter a job: ")
-            age = int(input("Enter an age: "))
-            sex = input("Enter a sex: ")
-            eyes = input("Enter an eye color: ")
-            hair = input("Enter a hair color: ")
-            status = input("Enter a status (alive/dead): ")
+            key = int(input("\n Enter a key: "))
+            name = input(" Enter a name: ")
+            job = input(" Enter a job: ")
+            age = int(input(" Enter an age: "))
+            sex = input(" Enter a sex: ")
+            eyes = input(" Enter an eye color: ")
+            hair = input(" Enter a hair color: ")
+            status = input(" Enter a status (alive/dead): ")
             vault.insert(key, name, job, age, sex, eyes, hair, status)
         elif option == '2':
-            key = int(input("Enter a key: "))
-            print(vault.find(key))
+            key = int(input(" Enter a key: "))
+            vault.find(key)
         elif option == '3':
-            key = int(input("Enter a key: "))
+            key = int(input(" Enter a key: "))
             vault.delete(key)
+            print(" Key {} deleted".format(key))
+            print(" Employee data has been removed from the database")
         elif option == '4':
             print("""
    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
@@ -101,11 +110,13 @@ def main():
    ⠀⠀⠀⠀⠀⠈⠙⠿⣿⣶⣦⣤⣤⣤⣤⣶⣶⣿⠿⠛⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠉⠉⠉⠉⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
             """)
-            print("Thank you for using Vault 101 Employee Database\nGoodbye, Overseer\n")
+            print(
+                " Thank you for using Vault 101 Employee Database\n Goodbye, Overseer\n")
             break
         else:
-            print("Invalid option, please try again.")
+            print(" Invalid option, please try again.")
         # Wait for the user to press Enter before clearing the terminal
+        print("\n=================================")
         input("\nPress Enter to continue...")
 
 
