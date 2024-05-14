@@ -22,7 +22,7 @@ class HashTable:
         return self.count / self.size
 
     def _resize(self):
-        if self._load_factor() > 0.9:
+        if self._load_factor() > 0.75:
             self.size *= 2
             new_table = [None for _ in range(self.size)]
             for node in self.table:
@@ -45,7 +45,7 @@ class HashTable:
             node = node.next
         self.table[hash_key] = Node(key, employee, self.table[hash_key])
         self.count += 1
-        if self._load_factor() > 0.9:
+        if self._load_factor() > 0.75:
             self._resize()
 
     def find(self, key):

@@ -163,5 +163,28 @@ class TestHashTable(unittest.TestCase):
         self.vault.delete(202)
         employee = self.vault.find(202)
         self.assertIsNone(employee)
+
+
+    def test_distribution(self):
+        # Insert a large number of keys into the hash table
+        for i in range(1000):
+            self.vault.insert(i, 'John Doe', 'Engineer', 30,
+                              'Male', 'Blue', 'Black', 'Alive')
+
+        # Calculate the length of the linked list at each slot in the hash table
+        lengths = [0 for _ in range(self.vault.size)]
+        for i in range(self.vault.size):
+            node = self.vault.table[i]
+            while node is not None:
+                lengths[i] += 1
+                node = node.next
+
+        # Calculate the mean and standard deviation of the lengths
+        mean = sum(lengths) / len(lengths)
+        stddev = (sum((x - mean) ** 2 for x in lengths) / len(lengths)) ** 0.5
+
+        print('\nMean:', mean)
+        print('Standard deviation:', stddev)
+        
 if __name__ == "__main__":
     unittest.main()
