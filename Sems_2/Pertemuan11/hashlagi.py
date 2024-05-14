@@ -82,7 +82,7 @@ def main():
         print("\n-Vault 101 Employee Database-")
         print("\nWelcome, Overseer")
         print("=================================")
-        print("\n 1. Insert\n 2. Find\n 3. Delete\n 4. Quit")
+        print("\n 1. Insert\n 2. Find\n 3. Delete\n 4. Output All\n 5. Quit")
         option = input(" Please Choose an option: ")
         try:
             if option == '1':
@@ -107,6 +107,14 @@ def main():
                 vault.delete(key)
                 print(" ID deleted.")
             elif option == '4':
+                if vault.count == 0:
+                    print(" No data in the database.")
+                else:
+                    for index, node in enumerate(vault.table):
+                        while node is not None:
+                            print(f'\n Index: {index}, ID: {node.key}, Employee: {node.val}')
+                            node = node.next
+            elif option == '5':
                 print("\n Thank you for using Vault 101 Employee Database\n\n Goodbye, Overseer\n")
                 break
             else:

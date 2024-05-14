@@ -57,7 +57,7 @@ def main():
         print("\n-Vault 101 Employee Database-")
         print("\nWelcome, Overseer")
         print("=================================")
-        print("\n 1. Insert\n 2. Find\n 3. Delete\n 4. Quit")
+        print("\n 1. Insert\n 2. Find\n 3. Delete\n 4. Output All\n 5. Quit")
         option = input(" Please Choose an option: ")
         if option == '1':
             key = int(input("\n Enter an ID: "))
@@ -82,6 +82,11 @@ def main():
             print(" ID {} deleted".format(key))
             print(" Employee data has been removed from the database")
         elif option == '4':
+            for index, bucket in enumerate(vault.table):
+                for i, kv in enumerate(bucket):
+                    k, v = kv
+                    print(f'Index: {index}, ID: {k}, Employee: {v}')
+        elif option == '5':
             print(
                 " Thank you for using Vault 101 Employee Database\n Goodbye, Overseer\n")
             break
