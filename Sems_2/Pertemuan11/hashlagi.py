@@ -3,10 +3,10 @@ import os
 
 # Node class
 class Node:
-    def __init__(self, key, val, next=None):
+    def __init__(self, key, val, next_node=None):
         self.key = key
         self.val = val
-        self.next = next
+        self.next = next_node
 
 # HashTable class
 class HashTable:
@@ -25,8 +25,7 @@ class HashTable:
         if self._load_factor() > 0.9:
             self.size *= 2
             new_table = [None for _ in range(self.size)]
-            for i in range(len(self.table)):
-                node = self.table[i]
+            for node in self.table:
                 while node is not None:
                     hash_key = self._hash(node.key)
                     new_table[hash_key] = Node(
