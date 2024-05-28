@@ -11,5 +11,14 @@ def matrixChainOrder(p):
                     m[i][j] = q
     return m[1][n - 1]
 
-dimensions = [1, 2, 3, 4, 3]
-print(matrixChainOrder(dimensions))  # Output: 30
+# Example 1
+dimensions1 = [1, 2, 3, 4, 3]
+print('Minimum number of scalar multiplications for dimensions1:', matrixChainOrder(dimensions1))
+
+# Example 2
+dimensions2 = [5, 10, 3, 12, 5, 50, 6]
+print('Minimum number of scalar multiplications for dimensions2:', matrixChainOrder(dimensions2))
+
+# Example 3
+dimensions3 = [4, 2, 3, 1, 3]
+print('Minimum number of scalar multiplications for dimensions3:', matrixChainOrder(dimensions3))
