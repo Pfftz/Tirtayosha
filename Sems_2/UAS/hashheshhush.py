@@ -2,53 +2,53 @@
 import os
 
 
-class HashTable:
+class tabelHashing:
     def __init__(self, size):
         self.size = size
         self.table = [[] for _ in range(self.size)]
 
-    def _hash(self, key):
-        return hash(key) % self.size
+    def _hush(self, key):
+        return hash (key) % self.size
 
 
-    def insert(self, key, name, job, age):
-        hash_key = self._hash(key)
-        bucket = self.table[hash_key]
-        for i, kv in enumerate(bucket):
+    def insertShuju(self, key, xingming, shigoto, age):
+        hush_key = self._hush(key)
+        ember = self.table[hush_key]
+        for i, kv in enumerate(ember):
             k, v = kv
             if key == k:
-                bucket[i] = (key, {"name": name, "job": job, "age": age})
+                ember[i] = (key, {"name": xingming, "job": shigoto, "age": age})
                 return
-        bucket.append((key, {"name": name, "job": job, "age": age}))
+        ember.append((key, {"name": xingming, "job": shigoto, "age": age}))
 
-    def find(self, key):
-        hash_key = self._hash(key)
-        bucket = self.table[hash_key]
-        for i, kv in enumerate(bucket):
+    def findShuju(self, key):
+        hush_key = self._hush(key)
+        ember = self.table[hush_key]
+        for i, kv in enumerate(ember):
             k, v = kv
             if key == k:
                 return v
         return None
 
-    def delete(self, key):
-        hash_key = self._hash(key)
+    def deleteShuju(self, key):
+        hush_key = self._hush(key)
         key_exists = False
-        bucket = self.table[hash_key]
-        for i, kv in enumerate(bucket):
+        ember = self.table[hush_key]
+        for i, kv in enumerate(ember):
             k, v = kv
             if key == k:
                 key_exists = True
                 break
         if key_exists:
-            del bucket[i]
+            del ember[i]
         else:
             raise KeyError('ID {} not found'.format(key))
 
 
 def main():
-    vault = HashTable(111)
+    vault = tabelHashing(111)
     while True:
-        os.system('cls' if os.name == 'nt' else 'clear')  # Clear the terminal
+        os.system('cls' if os.name == 'nt' else 'clear')  # ngeberersihin terminal
         print("\nWelcome to ROBCO Industries (TM) Termlink\n")
         print("  COPYRIGHT 2075-2077 ROBCO INDUSTRIES")
         print("              -Server 10-")
@@ -59,25 +59,25 @@ def main():
         option = input(" Please Choose an option: ")
         if option == '1':
             key = int(input("\n Enter an ID: "))
-            name = input(" Enter a name: ")
-            job = input(" Enter a job: ")
+            xingming = input(" Enter a name: ")
+            shigoto = input(" Enter a job: ")
             age = int(input(" Enter an age: "))
-            vault.insert(key, name, job, age)
+            vault.insertShuju(key, xingming, shigoto, age)
         elif option == '2':
             key = int(input(" Enter a ID: "))
-            result = vault.find(key)
+            result = vault.findShuju(key)
             if result is not None:
                 print(" Found: ", result)
             else:
                 print(" ID not found.")
         elif option == '3':
             key = int(input(" Enter a ID: "))
-            vault.delete(key)
+            vault.deleteShuju(key)
             print(" ID {} deleted".format(key))
             print(" Employee data has been removed from the database")
         elif option == '4':
-            for index, bucket in enumerate(vault.table):
-                for i, kv in enumerate(bucket):
+            for index, ember in enumerate(vault.table):
+                for i, kv in enumerate(ember):
                     k, v = kv
                     print(f'Index: {index}, ID: {k}, Employee: {v}')
         elif option == '5':

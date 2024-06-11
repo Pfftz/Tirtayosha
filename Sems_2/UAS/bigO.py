@@ -4,76 +4,98 @@ def get_first_element(arr):
     return arr[0]
 
 start_time = time.perf_counter()
-print("get_first_element time complexity is O(1). The output is the first element of the array:", get_first_element([1, 2, 3]))
+print("get_first_element time complexity is O(1). The output elemento array pertama:", get_first_element([1, 2, 3]))
 print("Runtime of get_first_element is", time.perf_counter() - start_time, "seconds.")
 
-def binary_search(arr, target):
-    low, high = 0, len(arr) - 1
-    while low <= high:
-        mid = (low + high) // 2
+def binary_sashi(arr, target, low=None, high=None):
+    if low is None:
+        low = 0
+    if high is None:
+        high = len(arr) - 1
+
+    if high >= low:
+        mid = (high + low) // 2
+
         if arr[mid] == target:
             return mid
-        elif arr[mid] < target:
-            low = mid + 1
+        elif arr[mid] > target:
+            return binary_sashi(arr, target, low, mid - 1)
         else:
-            high = mid - 1
-    return -1
+            return binary_sashi(arr, target, mid + 1, high)
+    else:
+        return -1
 
 start_time = time.perf_counter()
-print("binary_search time complexity is O(log n). The output is the index of the target element:", binary_search([1, 2, 3, 4, 5], 3))
+print("kompleksitas dari binary search adalah O(log n). The output is the index of the target element:", binary_sashi([1, 2, 3, 4, 5], 3))
 print("Runtime of binary_search is", time.perf_counter() - start_time, "seconds.")
 
-def linear_search(arr, target):
-    for i in range(len(arr)):
-        if arr[i] == target:
-            return i
+def linear_sashi(kocak_list, sashi_element):
+    index_position = 0
+    while index_position < len(kocak_list):
+        if kocak_list[index_position] == sashi_element:
+            return index_position
+        index_position += 1
     return -1
 
 start_time = time.perf_counter()
-print("linear_search time complexity is O(n). The output is the index of the target element:", linear_search([1, 2, 3, 4, 5], 3))
+print("linear_search time complexity is O(n). The output is the index of the target element:", linear_sashi([1, 2, 3, 4, 5], 3))
 print("Runtime of linear_search is", time.perf_counter() - start_time, "seconds.")
 
-def merge_sort(arr):
-    if len(arr) > 1:
-        mid = len(arr) // 2
-        L = arr[:mid]
-        R = arr[mid:]
-        merge_sort(L)
-        merge_sort(R)
-        i = j = k = 0
-        while i < len(L) and j < len(R):
-            if L[i] < R[j]:
-                arr[k] = L[i]
-                i += 1
+def merge_senbetsu(input_array):
+    if len(input_array) > 1:
+        middle = len(input_array) // 2
+        left_half = input_array[:middle]
+        right_half = input_array[middle:]
+        merge_senbetsu(left_half)
+        merge_senbetsu(right_half)
+        left_index = right_index = merged_index = 0
+        while left_index < len(left_half) and right_index < len(right_half):
+            if left_half[left_index] < right_half[right_index]:
+                input_array[merged_index] = left_half[left_index]
+                left_index += 1
             else:
-                arr[k] = R[j]
-                j += 1
-            k += 1
-        while i < len(L):
-            arr[k] = L[i]
-            i += 1
-            k += 1
-        while j < len(R):
-            arr[k] = R[j]
-            j += 1
-            k += 1
+                input_array[merged_index] = right_half[right_index]
+                right_index += 1
+            merged_index += 1
+        while left_index < len(left_half):
+            input_array[merged_index] = left_half[left_index]
+            left_index += 1
+            merged_index += 1
+        while right_index < len(right_half):
+            input_array[merged_index] = right_half[right_index]
+            right_index += 1
+            merged_index += 1
 
 arr = [5, 3, 1, 2, 4]
 start_time = time.perf_counter()
-merge_sort(arr)
+merge_senbetsu(arr)
 print("merge_sort time complexity is O(n log n). The output is the sorted array:", arr)
 print("Runtime of merge_sort is", time.perf_counter() - start_time, "seconds.")
 
-def bubble_sort(arr):
-    n = len(arr)
-    for i in range(n):
-        for j in range(0, n-i-1):
-            if arr[j] > arr[j+1]:
-                arr[j], arr[j+1] = arr[j+1], arr[j]
+def bubble_senbetsu(kocak_list):
+    list_length = len(kocak_list)
+    henshin = True
+    start = 0
+    end = list_length - 1
+    while henshin:
+        henshin = False
+        for current in range(start, end):
+            if kocak_list[current] > kocak_list[current + 1]:
+                kocak_list[current], kocak_list[current + 1] = kocak_list[current + 1], kocak_list[current]
+                henshin = True
+        if not henshin:
+            break
+        henshin = False
+        end = end - 1
+        for current in range(end - 1, start - 1, -1):
+            if kocak_list[current] > kocak_list[current + 1]:
+                kocak_list[current], kocak_list[current + 1] = kocak_list[current + 1], kocak_list[current]
+                henshin = True
+        start = start + 1
 
 arr = [5, 3, 1, 2, 4]
 start_time = time.perf_counter()
-bubble_sort(arr)
+bubble_senbetsu(arr)
 print("bubble_sort time complexity is O(n^2). The output is the sorted array:", arr)
 print("Runtime of bubble_sort is", time.perf_counter() - start_time, "seconds.")
 

@@ -3,21 +3,21 @@ array = [1, 2, 3, 4, 5]
 print("Array: ", array)
 
 # Array List
-class ArrayList:
+class Arraykai:
     def __init__(self):
         self.items = []
 
-    def add(self, value):
+    def tianjia(self, value):
         self.items.append(value)
 
     def get(self, index):
         return self.items[index]
 
-array_list = ArrayList()
-array_list.add(1)
-array_list.add(2)
-array_list.add(3)
-print("Array List: ", array_list.items)
+array_kai = Arraykai()
+array_kai.tianjia(1)
+array_kai.tianjia(2)
+array_kai.tianjia(3)
+print("Array List: ", array_kai.items)
 
 # Singly Linked List
 class Node:
@@ -25,32 +25,32 @@ class Node:
         self.data = data
         self.next = None
 
-class SinglyLinkedList:
+class SinglyLinkedkai:
     def __init__(self):
         self.head = None
 
-    def add(self, data):
+    def tianjia(self, data):
         if not self.head:
             self.head = Node(data)
         else:
-            current = self.head
-            while current.next:
-                current = current.next
-            current.next = Node(data)
+            sekarang = self.head
+            while sekarang.next:
+                sekarang = sekarang.next
+            sekarang.next = Node(data)
 
-    def print_list(self):
+    def print_kai(self):
         node = self.head
         while node is not None:
             print(node.data, end=" ")
             node = node.next
         print()
 
-singly_linked_list = SinglyLinkedList()
-singly_linked_list.add(1)
-singly_linked_list.add(2)
-singly_linked_list.add(3)
+singly_linked_kai = SinglyLinkedkai()
+singly_linked_kai.tianjia(1)
+singly_linked_kai.tianjia(2)
+singly_linked_kai.tianjia(3)
 print("Singly Linked List: ", end="")
-singly_linked_list.print_list()
+singly_linked_kai.print_kai()
 
 # Doubly Linked List
 class DNode:
@@ -59,32 +59,32 @@ class DNode:
         self.next = None
         self.prev = None
 
-class DoublyLinkedList:
+class DoublyLinkedkai:
     def __init__(self):
         self.head = None
 
-    def add(self, data):
+    def tianjia(self, data):
         if not self.head:
             self.head = DNode(data)
         else:
-            current = self.head
-            while current.next:
-                current = current.next
+            sekarang = self.head
+            while sekarang.next:
+                sekarang = sekarang.next
             new_node = DNode(data)
-            current.next = new_node
-            new_node.prev = current
+            sekarang.next = new_node
+            new_node.prev = sekarang
 
-    def print_list(self):
+    def print_kai(self):
         node = self.head
         while node is not None:
             print(node.data, end=" ")
             node = node.next
         print()
 
-doubly_linked_list = DoublyLinkedList()
-doubly_linked_list.add(1)
-doubly_linked_list.add(2)
-doubly_linked_list.add(3)
+doubly_linked_kai = DoublyLinkedkai()
+doubly_linked_kai.tianjia(1)
+doubly_linked_kai.tianjia(2)
+doubly_linked_kai.tianjia(3)
 print("Doubly Linked List: ", end="")
-doubly_linked_list.print_list()
+doubly_linked_kai.print_kai()
 print("\n Lead Them To Paradise! - Abdulhadi")

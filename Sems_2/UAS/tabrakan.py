@@ -9,13 +9,13 @@ class sigmaNode:
         self.next = next_node
 
 # HashTable class
-class HashTable:
+class tableHashing:
     def __init__(self, size):
         self.size = size
         self.count = 0
-        self.table = [None for _ in range(self.size)]
+        self.tabel = [None for _ in range(self.size)]
 
-    def _hash(self, key):
+    def _hush(self, key):
         return hash(key) % self.size
 
     def _load_factor(self):
@@ -24,32 +24,32 @@ class HashTable:
     def _resize(self):
         if self._load_factor() > 0.75:
             self.size *= 2
-            new_table = [None for _ in range(self.size)]
-            for node in self.table:
+            new_tabel = [None for _ in range(self.size)]
+            for node in self.tabel:
                 while node is not None:
-                    hash_key = self._hash(node.key)
-                    new_table[hash_key] = sigmaNode(
-                        node.key, node.val, new_table[hash_key])
+                    hush_key = self._hush(node.key)
+                    new_tabel[hush_key] = sigmaNode(
+                        node.key, node.val, new_tabel[hush_key])
                     node = node.next
-            self.table = new_table
+            self.tabel = new_tabel
 
     def insert(self, key, name, job, age):
         employee = {"name": name, "job": job, "age": age}
-        hash_key = self._hash(key)
-        node = self.table[hash_key]
+        hush_key = self._hush(key)
+        node = self.tabel[hush_key]
         while node is not None:
             if node.key == key:
                 node.val = employee
                 return
             node = node.next
-        self.table[hash_key] = sigmaNode(key, employee, self.table[hash_key])
+        self.tabel[hush_key] = sigmaNode(key, employee, self.tabel[hush_key])
         self.count += 1
         if self._load_factor() > 0.75:
             self._resize()
 
     def find(self, key):
-        hash_key = self._hash(key)
-        node = self.table[hash_key]
+        hush_key = self._hush(key)
+        node = self.tabel[hush_key]
         while node is not None:
             if node.key == key:
                 return node.val
@@ -57,12 +57,12 @@ class HashTable:
         return None
 
     def delete(self, key):
-        hash_key = self._hash(key)
-        node = self.table[hash_key]
+        hush_key = self._hush(key)
+        node = self.tabel[hush_key]
         if node is None:
             return None
         if node.key == key:
-            self.table[hash_key] = node.next
+            self.tabel[hush_key] = node.next
             return
         while node.next is not None:
             if node.next.key == key:
@@ -72,7 +72,7 @@ class HashTable:
 
 
 def main():
-    vault = HashTable(111)
+    vault = tableHashing(111)
     while True:
         os.system('cls' if os.name == 'nt' else 'clear')  # Clear the terminal
         print("\nWelcome to ROBCO Industries (TM) Termlink\n")
@@ -105,7 +105,7 @@ def main():
                 if vault.count == 0:
                     print(" No data in the database.")
                 else:
-                    for index, node in enumerate(vault.table):
+                    for index, node in enumerate(vault.tabel):
                         while node is not None:
                             print(f'\n Index: {index}, ID: {node.key}, Employee: {node.val}')
                             node = node.next

@@ -2,76 +2,76 @@
 import time
 
 # Function for selection sort
-def selection_sort(data):
-    for i in range(len(data)):
+def selection_senbetsu(BEDUNG):
+    for i in range(len(BEDUNG)):
         min_idx = i
-        for j in range(i+1, len(data)):
-            if data[min_idx] > data[j]:
+        for j in range(i+1, len(BEDUNG)):
+            if BEDUNG[min_idx] > BEDUNG[j]:
                 min_idx = j
-        data[i], data[min_idx] = data[min_idx], data[i]
+        BEDUNG[i], BEDUNG[min_idx] = BEDUNG[min_idx], BEDUNG[i]
 
 # Function for insertion sort
-def insertion_sort(data):
-    for i in range(1, len(data)):
-        key = data[i]
+def insertion_senbetsu(BEDUNG):
+    for i in range(1, len(BEDUNG)):
+        key = BEDUNG[i]
         j = i-1
-        while j >= 0 and key < data[j]:
-            data[j+1] = data[j]
+        while j >= 0 and key < BEDUNG[j]:
+            BEDUNG[j+1] = BEDUNG[j]
             j -= 1
-        data[j+1] = key
+        BEDUNG[j+1] = key
 
-# Function for quick sort
-def partition(data, low, high):
-    i = (low-1)
-    pivot = data[high]
-    for j in range(low, high):
-        if data[j] <= pivot:
+
+def partition(BEDUNG, bawah, atas):
+    i = (bawah-1)
+    pivot = BEDUNG[atas]
+    for j in range(bawah, atas):
+        if BEDUNG[j] <= pivot:
             i = i+1
-            data[i], data[j] = data[j], data[i]
-    data[i+1], data[high] = data[high], data[i+1]
+            BEDUNG[i], BEDUNG[j] = BEDUNG[j], BEDUNG[i]
+    BEDUNG[i+1], BEDUNG[atas] = BEDUNG[atas], BEDUNG[i+1]
     return (i+1)
 
-def quick_sort(data, low, high):
-    if len(data) == 1:
-        return data
-    if low < high:
-        pi = partition(data, low, high)
-        quick_sort(data, low, pi-1)
-        quick_sort(data, pi+1, high)
+def quick_senbetsu(BEDUNG, bawah, atas):
+    if len(BEDUNG) == 1:
+        return BEDUNG
+    if bawah < atas:
+        pi = partition(BEDUNG, bawah, atas)
+        quick_senbetsu(BEDUNG, bawah, pi-1)
+        quick_senbetsu(BEDUNG, pi+1, atas)
 
 
-data = [50, 49, 48, 47, 46, 45, 44, 43, 42, 41, 40, 39, 38, 37, 36, 35, 34, 33, 32, 31, 
+BEDUNG = [50, 49, 48, 47, 46, 45, 44, 43, 42, 41, 40, 39, 38, 37, 36, 35, 34, 33, 32, 31, 
         30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 
         10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
-# Sort data using selection sort and measure the time
+# Sort BEDUNG using selection sort and measure the time
 start = time.perf_counter()
-selection_sort(data)
+selection_senbetsu(BEDUNG)
 end = time.perf_counter()
 print(f"Selection sort time: {end - start}")
-print("Data after selection sort: ", data)
+print("BEDUNG after selection sort: ", BEDUNG)
 
-# Reset data to the unsorted array
-data = [50, 49, 48, 47, 46, 45, 44, 43, 42, 41, 40, 39, 38, 37, 36, 35, 34, 33, 32, 31, 
+# Reset BEDUNG to the unsorted array
+BEDUNG = [50, 49, 48, 47, 46, 45, 44, 43, 42, 41, 40, 39, 38, 37, 36, 35, 34, 33, 32, 31, 
         30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 
         10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
 
-# Sort data using insertion sort and measure the time
+# Sort BEDUNG using insertion sort and measure the time
 start = time.perf_counter()
-insertion_sort(data)
+insertion_senbetsu(BEDUNG)
 end = time.perf_counter()
 print(f"Insertion sort time: {end - start}")
-print("Data after insertion sort: ", data)
+print("BEDUNG after insertion sort: ", BEDUNG)
 
-# Reset data to the unsorted array
-data = [50, 49, 48, 47, 46, 45, 44, 43, 42, 41, 40, 39, 38, 37, 36, 35, 34, 33, 32, 31, 
+# Reset BEDUNG to the unsorted array
+BEDUNG = [50, 49, 48, 47, 46, 45, 44, 43, 42, 41, 40, 39, 38, 37, 36, 35, 34, 33, 32, 31, 
         30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 
         10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
 
-# Sort data using quick sort and measure the time
+# Sort BEDUNG using quick sort and measure the time
 start = time.perf_counter()
-quick_sort(data, 0, len(data)-1)
+quick_senbetsu(BEDUNG, 0, len(BEDUNG)-1)
 end = time.perf_counter()
 print(f"Quick sort time: {end - start}")
-print("Data after quick sort: ", data)
+print("BEDUNG after quick sort: ", BEDUNG)
 
 print("\n Lead Them To Paradise! - Abdulhadi")

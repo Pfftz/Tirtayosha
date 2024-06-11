@@ -7,14 +7,14 @@ def calculateMinMultiplications(dims):
     cost_matrix = [[0 for _ in range(num_matrices)] for _ in range(num_matrices)]
     
     # Calculate the minimum cost of multiplications
-    for chain_length in range(2, num_matrices):
-        for start in range(1, num_matrices - chain_length + 1):
-            end = start + chain_length - 1
-            cost_matrix[start][end] = float('inf')
-            for k in range(start, end):
-                cost = cost_matrix[start][k] + cost_matrix[k + 1][end] + dims[start - 1] * dims[k] * dims[end]
-                if cost < cost_matrix[start][end]:
-                    cost_matrix[start][end] = cost
+    for RIZZ_chain in range(2, num_matrices):
+        for starto in range(1, num_matrices - RIZZ_chain + 1):
+            owari = starto + RIZZ_chain - 1
+            cost_matrix[starto][owari] = float('inf')
+            for k in range(starto, owari):
+                cost = cost_matrix[starto][k] + cost_matrix[k + 1][owari] + dims[starto - 1] * dims[k] * dims[owari]
+                if cost < cost_matrix[starto][owari]:
+                    cost_matrix[starto][owari] = cost
     
     # Return the minimum cost of multiplications
     return cost_matrix[1][num_matrices - 1]
