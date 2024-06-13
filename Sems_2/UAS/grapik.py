@@ -9,21 +9,18 @@ class Grafika:
         self.graph = defaultdict(list)
         self.matrix = np.zeros((num_of_vertices, num_of_vertices))
 
-    def add_edge(self, u, v):
+    def addEdging(self, u, v):
         self.graph[u].append(v)
         self.matrix[u][v] = 1
 
     def BFS_list(self, s):
         visited = [False] * (self.v)
-        queue = deque()
-        queue.append(s)
+        queue = deque([s])
         visited[s] = True
         while queue:
             s = queue.popleft()
-            for i in self.graph[s]:
-                if visited[i] == False:
-                    queue.append(i)
-                    visited[i] = True
+            queue.extend(i for i in self.graph[s] if not visited[i])
+            visited[s] = True
 
     def DFS_list(self, s):
         visited = [False] * (self.v)
@@ -32,21 +29,16 @@ class Grafika:
             s = stack.pop()
             if not visited[s]:
                 visited[s] = True
-                for node in self.graph[s]:
-                    if not visited[node]:
-                        stack.append(node)
+                stack.extend(node for node in self.graph[s] if not visited[node])
 
     def BFS_matrix(self, s):
         visited = [False] * (self.v)
-        queue = deque()
-        queue.append(s)
+        queue = deque([s])
         visited[s] = True
         while queue:
             s = queue.popleft()
-            for i in range(self.v):
-                if self.matrix[s][i] and not visited[i]:
-                    queue.append(i)
-                    visited[i] = True
+            queue.extend(i for i in range(self.v) if self.matrix[s][i] and not visited[i])
+            visited[s] = True
 
     def DFS_matrix(self, s):
         visited = [False] * (self.v)
@@ -55,13 +47,11 @@ class Grafika:
             s = stack.pop()
             if not visited[s]:
                 visited[s] = True
-                for i in range(self.v):
-                    if self.matrix[s][i] and not visited[i]:
-                        stack.append(i)
+                stack.extend(i for i in range(self.v) if self.matrix[s][i] and not visited[i])
 
 g = Grafika(1000)
 for i in range(999):
-    g.add_edge(i, i+1)
+    g.addEdging(i, i+1)
 
 print("Abdulhadi - Graph Traversal Time - Abdulhadi")
 print("Adjency List vs Adjency Matrix")

@@ -1,11 +1,10 @@
-#watermark Admin Hd
+#watermark Abdulhadi
 # Import library
 import time
 
 def val_kecil(x, y):
     return x if x <= y else y
 
-# Recursive function for fibonacci search
 def fibonacci_skibidi(arroy, x, n):
     if n > 0:
         fibMMm2 = 0
@@ -17,16 +16,16 @@ def fibonacci_skibidi(arroy, x, n):
             fibMMm1 = fibM
             fibM = fibMMm2 + fibMMm1
 
-        offset = -1
+        fibonacciaOffset = -1
 
         while (fibM > 1):
-            i = val_kecil(offset+fibMMm2, n-1)
+            i = val_kecil(fibonacciaOffset+fibMMm2, n-1)
 
             if (arroy[i] < x):
                 fibM = fibMMm1
                 fibMMm1 = fibMMm2
                 fibMMm2 = fibM - fibMMm1
-                offset = i
+                fibonacciaOffset = i
             elif (arroy[i] > x):
                 fibM = fibMMm2
                 fibMMm1 = fibMMm1 - fibMMm2
@@ -34,8 +33,8 @@ def fibonacci_skibidi(arroy, x, n):
             else:
                 return i
 
-        if (fibMMm1 and arroy[offset+1] == x):
-            return offset+1
+        if (fibMMm1 and arroy[fibonacciaOffset+1] == x):
+            return fibonacciaOffset+1
 
         return -1
     else:

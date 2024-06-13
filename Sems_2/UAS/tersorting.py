@@ -1,16 +1,14 @@
 # Import library
 import time
 
-# Function for selection sort
 def selection_senbetsu(BEDUNG):
     for i in range(len(BEDUNG)):
-        min_idx = i
+        minimum_idx = i
         for j in range(i+1, len(BEDUNG)):
-            if BEDUNG[min_idx] > BEDUNG[j]:
-                min_idx = j
-        BEDUNG[i], BEDUNG[min_idx] = BEDUNG[min_idx], BEDUNG[i]
+            if BEDUNG[minimum_idx] > BEDUNG[j]:
+                minimum_idx = j
+        BEDUNG[i], BEDUNG[minimum_idx] = BEDUNG[minimum_idx], BEDUNG[i]
 
-# Function for insertion sort
 def insertion_senbetsu(BEDUNG):
     for i in range(1, len(BEDUNG)):
         key = BEDUNG[i]
@@ -22,14 +20,18 @@ def insertion_senbetsu(BEDUNG):
 
 
 def partition(BEDUNG, bawah, atas):
-    i = (bawah-1)
+    pivot_index = bawah
     pivot = BEDUNG[atas]
+
     for j in range(bawah, atas):
         if BEDUNG[j] <= pivot:
-            i = i+1
-            BEDUNG[i], BEDUNG[j] = BEDUNG[j], BEDUNG[i]
-    BEDUNG[i+1], BEDUNG[atas] = BEDUNG[atas], BEDUNG[i+1]
-    return (i+1)
+            BEDUNG[j], BEDUNG[pivot_index] = BEDUNG[pivot_index], BEDUNG[j]
+            pivot_index += 1
+
+    # tukar pivot
+    BEDUNG[atas], BEDUNG[pivot_index] = BEDUNG[pivot_index], BEDUNG[atas]
+
+    return pivot_index
 
 def quick_senbetsu(BEDUNG, bawah, atas):
     if len(BEDUNG) == 1:

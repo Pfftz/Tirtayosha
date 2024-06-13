@@ -24,25 +24,21 @@ class tabelHashing:
     def findShuju(self, key):
         hush_key = self._hush(key)
         ember = self.table[hush_key]
-        for i, kv in enumerate(ember):
-            k, v = kv
-            if key == k:
-                return v
-        return None
+
+        # generator expression untuk mencari key-value pair
+        return next((v for k, v in ember if k == key), None)
 
     def deleteShuju(self, key):
         hush_key = self._hush(key)
-        key_exists = False
         ember = self.table[hush_key]
-        for i, kv in enumerate(ember):
-            k, v = kv
-            if key == k:
-                key_exists = True
+
+        # menggunakan enumerate untuk mendapatkan index
+        for i, (k, v) in enumerate(ember):
+            if k == key:
+                del ember[i]
                 break
-        if key_exists:
-            del ember[i]
         else:
-            raise KeyError('ID {} not found'.format(key))
+            raise KeyError(f'ID {key} not found')
 
 
 def main():

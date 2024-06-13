@@ -1,23 +1,23 @@
-def unique_binary_search(kesaku_list, kensaku_item):
-    lower_bound = 0
-    upper_bound = len(kesaku_list) - 1
+def unique_binary_search(kensaku_list, kensaku_item):
+    batasTerbawah = 0
+    batasTeratas = len(kensaku_list) - 1
 
-    while lower_bound <= upper_bound:
-        middle_point = (lower_bound + upper_bound) // 2
-        if kesaku_list[middle_point] == kensaku_item:
+    while batasTerbawah <= batasTeratas:
+        middle_point = (batasTerbawah + batasTeratas) // 2
+        if kensaku_list[middle_point] == kensaku_item:
             return middle_point  # Returns the index of the found element
-        elif kesaku_list[middle_point] < kensaku_item:
-            lower_bound = middle_point + 1  # Searching in the right half
+        elif kensaku_list[middle_point] < kensaku_item:
+            batasTerbawah = middle_point + 1  # Searching in the right half
         else:
-            upper_bound = middle_point - 1  # Searching in the left half
+            batasTeratas = middle_point - 1  # Searching in the left half
 
     return -1  # Returns a value indicating the element was not found
 
-def unique_simple_search(kesaku_list, kensaku_item):
+def unique_simple_search(kensaku_list, kensaku_item):
     index_position = 0
-    while index_position < len(kesaku_list):
-        if kesaku_list[index_position] == kensaku_item:
-            return index_position  # Returns the index of the found element
+    while index_position < len(kensaku_list):
+        if kensaku_list[index_position] == kensaku_item:
+            return index_position
         index_position += 1
 
     return -1  # Returns a value indicating the element was not found

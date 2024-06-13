@@ -34,37 +34,50 @@ class tableHashing:
             self.tabel = new_tabel
 
     def insert(self, key, name, job, age):
-        employee = {"name": name, "job": job, "age": age}
+        # Membuat dictionary untuk karyawan
+        karyawan = {"name": name, "job": job, "age": age}
         hush_key = self._hush(key)
         node = self.tabel[hush_key]
+
+        # Mencari node dengan kunci yang sama dan mengganti nilainya
         while node is not None:
             if node.key == key:
-                node.val = employee
+                node.val = karyawan
                 return
             node = node.next
-        self.tabel[hush_key] = sigmaNode(key, employee, self.tabel[hush_key])
+
+        # Menambahkan node baru jika tidak ada node dengan kunci yang sama
+        self.tabel[hush_key] = sigmaNode(key, karyawan, self.tabel[hush_key])
         self.count += 1
+
+        # Mengubah ukuran tabel jika faktor beban lebih dari 0.75
         if self._load_factor() > 0.75:
             self._resize()
 
     def find(self, key):
         hush_key = self._hush(key)
         node = self.tabel[hush_key]
+    
+        # Mencari node dengan kunci yang diberikan
         while node is not None:
             if node.key == key:
                 return node.val
             node = node.next
+    
+        # Mengembalikan None jika tidak ada node dengan kunci yang diberikan
         return None
-
+    
     def delete(self, key):
         hush_key = self._hush(key)
         node = self.tabel[hush_key]
-        if node is None:
-            return None
-        if node.key == key:
+    
+        # Menghapus node jika kunci cocok
+        if node and node.key == key:
             self.tabel[hush_key] = node.next
             return
-        while node.next is not None:
+    
+        # Mencari node berikutnya jika kunci tidak cocok
+        while node and node.next:
             if node.next.key == key:
                 node.next = node.next.next
                 return

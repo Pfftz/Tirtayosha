@@ -2,47 +2,46 @@
 array = [1, 2, 3, 4, 5]
 print("Array: ", array)
 
-# Array List
 class Arraykai:
     def __init__(self):
-        self.items = []
+        self.units = []
 
     def tianjia(self, value):
-        self.items.append(value)
+        self.units.append(value)
 
     def get(self, index):
-        return self.items[index]
+        return self.units[index]
 
 array_kai = Arraykai()
 array_kai.tianjia(1)
 array_kai.tianjia(2)
 array_kai.tianjia(3)
-print("Array List: ", array_kai.items)
+print("Array List: ", array_kai.units)
 
 # Singly Linked List
-class Node:
+class singlyNode:
     def __init__(self, data=None):
         self.data = data
-        self.next = None
+        self.selanjutnya = None
 
 class SinglyLinkedkai:
     def __init__(self):
-        self.head = None
+        self.kepala = None
 
     def tianjia(self, data):
-        if not self.head:
-            self.head = Node(data)
+        if not self.kepala:
+            self.kepala = singlyNode(data)
         else:
-            sekarang = self.head
-            while sekarang.next:
-                sekarang = sekarang.next
-            sekarang.next = Node(data)
+            sekarang = self.kepala
+            while sekarang.selanjutnya:
+                sekarang = sekarang.selanjutnya
+            sekarang.selanjutnya = singlyNode(data)
 
     def print_kai(self):
-        node = self.head
+        node = self.kepala
         while node is not None:
             print(node.data, end=" ")
-            node = node.next
+            node = node.selanjutnya
         print()
 
 singly_linked_kai = SinglyLinkedkai()
@@ -52,33 +51,32 @@ singly_linked_kai.tianjia(3)
 print("Singly Linked List: ", end="")
 singly_linked_kai.print_kai()
 
-# Doubly Linked List
 class DNode:
     def __init__(self, data=None):
         self.data = data
-        self.next = None
-        self.prev = None
+        self.selanjutnya = None
+        self.sebelumnya = None
 
 class DoublyLinkedkai:
     def __init__(self):
-        self.head = None
+        self.kepala = None
 
     def tianjia(self, data):
-        if not self.head:
-            self.head = DNode(data)
+        if not self.kepala:
+            self.kepala = DNode(data)
         else:
-            sekarang = self.head
-            while sekarang.next:
-                sekarang = sekarang.next
+            sekarang = self.kepala
+            while sekarang.selanjutnya:
+                sekarang = sekarang.selanjutnya
             new_node = DNode(data)
-            sekarang.next = new_node
-            new_node.prev = sekarang
+            sekarang.selanjutnya = new_node
+            new_node.sebelumnya = sekarang
 
     def print_kai(self):
-        node = self.head
+        node = self.kepala
         while node is not None:
             print(node.data, end=" ")
-            node = node.next
+            node = node.selanjutnya
         print()
 
 doubly_linked_kai = DoublyLinkedkai()
