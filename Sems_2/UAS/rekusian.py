@@ -5,36 +5,36 @@ import time
 def val_kecil(x, y):
     return x if x <= y else y
 
-def fibonacci_skibidi(arroy, x, n):
-    if n > 0:
-        fibMMm2 = 0
-        fibMMm1 = 1
-        fibM = fibMMm2 + fibMMm1
+def fibonacci_skibidi(arrayData, target, panjang):
+    if panjang > 0:
+        fibRizz = 0
+        fibCenat = 1
+        fibTax = fibRizz + fibCenat
 
-        while (fibM < n):
-            fibMMm2 = fibMMm1
-            fibMMm1 = fibM
-            fibM = fibMMm2 + fibMMm1
+        while (fibTax < panjang):
+            fibRizz = fibCenat
+            fibCenat = fibTax
+            fibTax = fibRizz + fibCenat
 
-        fibonacciaOffset = -1
+        fibFanum = -1
 
-        while (fibM > 1):
-            i = val_kecil(fibonacciaOffset+fibMMm2, n-1)
+        while (fibTax > 1):
+            indexian = min(fibFanum + fibRizz, panjang - 1)
 
-            if (arroy[i] < x):
-                fibM = fibMMm1
-                fibMMm1 = fibMMm2
-                fibMMm2 = fibM - fibMMm1
-                fibonacciaOffset = i
-            elif (arroy[i] > x):
-                fibM = fibMMm2
-                fibMMm1 = fibMMm1 - fibMMm2
-                fibMMm2 = fibM - fibMMm1
+            if (arrayData[indexian] < target):
+                fibTax = fibCenat
+                fibCenat = fibRizz
+                fibRizz = fibTax - fibCenat
+                fibFanum = indexian
+            elif (arrayData[indexian] > target):
+                fibTax = fibRizz
+                fibCenat = fibCenat - fibRizz
+                fibRizz = fibTax - fibCenat
             else:
-                return i
+                return indexian
 
-        if (fibMMm1 and arroy[fibonacciaOffset+1] == x):
-            return fibonacciaOffset+1
+        if (fibCenat and arrayData[fibFanum + 1] == target):
+            return fibFanum + 1
 
         return -1
     else:
@@ -68,11 +68,11 @@ for element in search_elements:
     start = time.perf_counter()
     result = fibonacci_skibidi(data, element, len(data))
     end = time.perf_counter()
-    print(f"Fibonacci search for {element} found at index {result} in {end - start} seconds")
+    print(f"Fibonacci search for {element} found at indexian {result} in {end - start} seconds")
 
     start = time.perf_counter()
     result = recursive_cari(data, 0, len(data)-1, element)
     end = time.perf_counter()
-    print(f"Recursive search for {element} found at index {result} in {end - start} seconds")
+    print(f"Recursive search for {element} found at indexian {result} in {end - start} seconds")
     
 print("\n Lead Them To Paradise! - Abdulhadi")
