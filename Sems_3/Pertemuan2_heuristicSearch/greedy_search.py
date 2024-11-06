@@ -71,7 +71,7 @@ def get_successors(state):
 
 # Example usage
 start_state = "A"
-goal_state = "G"
+goal_state = "F"
 path = greedy_search(start_state, goal_state, heuristic_func, get_successors)
 print("Path found:", path)
 
