@@ -1,0 +1,102 @@
+import pandas as pd
+import numpy as np
+from sklearn.model_selection import StratifiedKFold
+from sklearn.neural_network import MLPClassifier
+from sklearn.preprocessing import StandardScaler, LabelEncoder
+from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Load and prepare data
+data = pd.read_csv('Klasifikasi Katarak.csv', header=None, decimal=',')
+data.columns = ['Feature1', 'Feature2', 'Feature3', 'Label']
+
+X = data[['Feature1', 'Feature2', 'Feature3']].values
+y = data['Label'].values
+
+# Encode labels
+le = LabelEncoder()
+y = le.fit_transform(y)
+
+# Scale features
+scaler = StandardScaler()
+X = scaler.fit_transform(X)
+
+# Define BPNN model
+bpnn = MLPClassifier(
+    hidden_layer_sizes=(100, 50),
+    max_iter=6000,
+    learning_rate_init=0.0005,
+    solver='lbfgs',
+    activation='tanh',
+    early_stopping=True,
+    validation_fraction=0.2,
+    n_iter_no_change=20,
+    random_state=42
+)
+
+# Setup cross-validation
+skf = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
+accuracies = []
+reports = []
+cms = []
+all_predictions = []
+all_true_labels = []
+
+# Cross-validation (BPNN only)
+for fold, (train_idx, test_idx) in enumerate(skf.split(X, y), 1):
+    X_train, X_test = X[train_idx], X[test_idx]
+    y_train, y_test = y[train_idx], y[test_idx]
+
+    bpnn.fit(X_train, y_train)
+    bpnn_pred = bpnn.predict(X_test)
+    bpnn_acc = accuracy_score(y_test, bpnn_pred)
+
+    all_predictions.extend(bpnn_pred)
+    all_true_labels.extend(y_test)
+    accuracies.append(bpnn_acc)
+    reports.append(classification_report(y_test, bpnn_pred,
+                   target_names=le.classes_, output_dict=True))
+    cms.append(confusion_matrix(y_test, bpnn_pred))
+
+    print(f"\nFold {fold} Results:")
+    print(f"BPNN Accuracy: {bpnn_acc*100:.2f}%")
+
+# Calculate average metrics
+avg_cm = confusion_matrix(all_true_labels, all_predictions)
+avg_report = classification_report(
+    all_true_labels, all_predictions, target_names=le.classes_, output_dict=True)
+
+print(f"\nMean Accuracy: {np.mean(accuracies)*100:.2f}%")
+print(f"Standard Deviation: {np.std(accuracies)*100:.2f}%")
+
+# Find best fold
+best_fold = np.argmax(accuracies)
+
+# Plot confusion matrices
+fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 12))
+
+sns.heatmap(cms[best_fold], annot=True, fmt='d', cmap='Blues',
+            xticklabels=le.classes_, yticklabels=le.classes_, ax=ax1)
+ax1.set_title(f'Best Fold Confusion Matrix\n(Accuracy: {accuracies[best_fold]:.4f})')
+ax1.set_xlabel('Predicted')
+ax1.set_ylabel('Actual')
+
+sns.heatmap(avg_cm, annot=True, fmt='d', cmap='Blues',
+            xticklabels=le.classes_, yticklabels=le.classes_, ax=ax2)
+ax2.set_title('Average Confusion Matrix\n(Across All Folds)')
+ax2.set_xlabel('Predicted')
+ax2.set_ylabel('Actual')
+
+plt.tight_layout(pad=3.0)
+plt.show()
+
+# Print classification reports
+print("\nBest Fold Classification Report:")
+print(pd.DataFrame(reports[best_fold]).transpose())
+
+print("\nAverage Classification Report (Across All Folds):")
+print(pd.DataFrame(avg_report).transpose())
+
+print("\nBPNN Performance Across All Folds:")
+print(f"BPNN Average: {np.mean(accuracies) *100:.2f}% (±{np.std(accuracies)*100:.2f}%)")
