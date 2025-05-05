@@ -6,7 +6,6 @@
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
 float angle = 0.0f;
-float moonAngle = 0.0f;
 
 void framebuffer_size_callback(GLFWwindow *window, int width, int height)
 {
@@ -67,7 +66,7 @@ int main()
         #version 330 core
         out vec4 FragColor;
         void main() {
-            FragColor = vec4(1.0, 1.0, 0.7, 1.0); // Bright White-Yellow (Sun)
+            FragColor = vec4(1.0, 0.84, 0.0, 1.0); // Keemasan (sun color)
         }
     )";
 
@@ -97,34 +96,7 @@ int main()
         #version 330 core
         out vec4 FragColor;
         void main() {
-            FragColor = vec4(1.0, 0.84, 0.0, 0.4); // Translucent Golden Yellow (Glow) - Increased alpha slightly
-        }
-    )";
-
-    const char *moonVertexShaderSource = R"(
-        #version 330 core
-        layout (location = 0) in vec2 aPos;
-
-        uniform float angle;      // Rotation angle for the moon
-        uniform vec2 moonCenter; // The center position (moonX, moonY) of the moon
-
-        void main() {
-            // 1. Calculate position relative to the moon's center
-            vec2 relativePos = aPos - moonCenter;
-
-            // 2. Create rotation matrix
-            float s = sin(angle);
-            float c = cos(angle);
-            mat2 rotation = mat2(c, -s, s, c);
-
-            // 3. Rotate the relative position
-            vec2 rotatedRelativePos = rotation * relativePos;
-
-            // 4. Translate back to the moon's original position
-            vec2 finalPos = rotatedRelativePos + moonCenter;
-
-            // 5. Set final position
-            gl_Position = vec4(finalPos, 0.0, 1.0);
+            FragColor = vec4(1.0, 0.84, 0.0, 0.3); // Transparan keemasan
         }
     )";
 
@@ -136,48 +108,19 @@ int main()
         }
     )";
 
-    // Helper function/lambda for checking shader compilation
-    auto checkCompileErrors = [](unsigned int shader, std::string type) {
-        int success;
-        char infoLog[1024];
-        if (type != "PROGRAM")
-        {
-            glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
-            if (!success)
-            {
-                glGetShaderInfoLog(shader, 1024, NULL, infoLog);
-                std::cerr << "ERROR::SHADER_COMPILATION_ERROR of type: " << type << "\n"
-                          << infoLog << "\n -- --------------------------------------------------- -- " << std::endl;
-            }
-        }
-        else
-        {
-            glGetProgramiv(shader, GL_LINK_STATUS, &success);
-            if (!success)
-            {
-                glGetProgramInfoLog(shader, 1024, NULL, infoLog);
-                std::cerr << "ERROR::PROGRAM_LINKING_ERROR of type: " << type << "\n"
-                          << infoLog << "\n -- --------------------------------------------------- -- " << std::endl;
-            }
-        }
-    };
-
     // ========== Background Shader Compilation ==========
     unsigned int bgVertexShader = glCreateShader(GL_VERTEX_SHADER);
     glShaderSource(bgVertexShader, 1, &bgVertexShaderSrc, NULL);
     glCompileShader(bgVertexShader);
-    checkCompileErrors(bgVertexShader, "VERTEX");
 
     unsigned int bgFragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
     glShaderSource(bgFragmentShader, 1, &bgFragmentShaderSrc, NULL);
     glCompileShader(bgFragmentShader);
-    checkCompileErrors(bgFragmentShader, "FRAGMENT");
 
     unsigned int bgShaderProgram = glCreateProgram();
     glAttachShader(bgShaderProgram, bgVertexShader);
     glAttachShader(bgShaderProgram, bgFragmentShader);
     glLinkProgram(bgShaderProgram);
-    checkCompileErrors(bgShaderProgram, "PROGRAM");
 
     glDeleteShader(bgVertexShader);
     glDeleteShader(bgFragmentShader);
@@ -186,19 +129,17 @@ int main()
     unsigned int vertexShader = glCreateShader(GL_VERTEX_SHADER);
     glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
     glCompileShader(vertexShader);
-    checkCompileErrors(vertexShader, "VERTEX");
 
     unsigned int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
     glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
     glCompileShader(fragmentShader);
-    checkCompileErrors(fragmentShader, "FRAGMENT");
 
     unsigned int shaderProgram = glCreateProgram();
     glAttachShader(shaderProgram, vertexShader);
     glAttachShader(shaderProgram, fragmentShader);
     glLinkProgram(shaderProgram);
-    checkCompileErrors(shaderProgram, "PROGRAM");
 
+    glDeleteShader(vertexShader);
     glDeleteShader(fragmentShader);
 
     // ========== Octagon Geometry ==========
@@ -273,39 +214,24 @@ int main()
     glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void *)0);
     glEnableVertexAttribArray(0);
 
-    // ========== Glow Shader Compilation ==========
+    // Glow Shader
     unsigned int glowFragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
     glShaderSource(glowFragmentShader, 1, &glowFragmentShaderSource, NULL);
     glCompileShader(glowFragmentShader);
-    checkCompileErrors(glowFragmentShader, "FRAGMENT");
-
     unsigned int glowShaderProgram = glCreateProgram();
-    glAttachShader(glowShaderProgram, vertexShader);
+    glAttachShader(glowShaderProgram, vertexShader); // gunakan vertex shader yg sama
     glAttachShader(glowShaderProgram, glowFragmentShader);
     glLinkProgram(glowShaderProgram);
-    checkCompileErrors(glowShaderProgram, "PROGRAM");
-
     glDeleteShader(glowFragmentShader);
-    glDeleteShader(vertexShader);
 
-    // ========== Moon Shader Compilation ==========
-    unsigned int moonVertexShader = glCreateShader(GL_VERTEX_SHADER);
-    glShaderSource(moonVertexShader, 1, &moonVertexShaderSource, NULL);
-    glCompileShader(moonVertexShader);
-    checkCompileErrors(moonVertexShader, "VERTEX");
-
+    // Moon Shader
     unsigned int moonFragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
     glShaderSource(moonFragmentShader, 1, &moonFragmentShaderSource, NULL);
     glCompileShader(moonFragmentShader);
-    checkCompileErrors(moonFragmentShader, "FRAGMENT");
-
     unsigned int moonShaderProgram = glCreateProgram();
-    glAttachShader(moonShaderProgram, moonVertexShader);
+    glAttachShader(moonShaderProgram, vertexShader); // gunakan vertex shader yg sama
     glAttachShader(moonShaderProgram, moonFragmentShader);
     glLinkProgram(moonShaderProgram);
-    checkCompileErrors(moonShaderProgram, "PROGRAM");
-
-    glDeleteShader(moonVertexShader);
     glDeleteShader(moonFragmentShader);
 
     // ========== Main Loop ==========
@@ -313,21 +239,13 @@ int main()
     {
         glClear(GL_COLOR_BUFFER_BIT);
 
-        if (glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS)
-        {
-            angle += 0.003f;
-            moonAngle += 0.005f;
-        }
-
         // 1. Background
         glUseProgram(bgShaderProgram);
         glBindVertexArray(bgVAO);
         glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 
-        // 2. Moon (Update uniform setting)
+        // 2. Moon
         glUseProgram(moonShaderProgram);
-        glUniform1f(glGetUniformLocation(moonShaderProgram, "angle"), moonAngle);
-        glUniform2f(glGetUniformLocation(moonShaderProgram, "moonCenter"), moonX, moonY);
         glBindVertexArray(moonVAO);
         glDrawArrays(GL_TRIANGLE_FAN, 0, vertexCount);
 
@@ -338,6 +256,7 @@ int main()
         glDrawArrays(GL_TRIANGLE_FAN, 0, vertexCount);
 
         // 4. Octagon
+        angle += 0.003f;
         glUseProgram(shaderProgram);
         glUniform1f(glGetUniformLocation(shaderProgram, "angle"), angle);
         glBindVertexArray(VAO);

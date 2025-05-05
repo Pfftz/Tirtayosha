@@ -7,9 +7,9 @@
 #define STB_IMAGE_IMPLEMENTATION // Define this in exactly one .c or .cpp file
 #include <stb_image.h>           // Include stb_image header for texture loading
 
-#define SDL_MAIN_HANDLED       // Prevent SDL from redefining main
-#include <SDL2/SDL.h>          // Include SDL main header
-#include <SDL2/SDL_mixer.h>    // Include SDL_mixer header
+#define SDL_MAIN_HANDLED    // Prevent SDL from redefining main
+#include <SDL2/SDL.h>       // Include SDL main header
+#include <SDL2/SDL_mixer.h> // Include SDL_mixer header
 
 #include <iostream>
 #include <vector>
